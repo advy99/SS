@@ -19,7 +19,7 @@ printf "Posición objetivo: $objetivo\n"
 printf "Visión del conductor: $vision\n"
 printf "Prob. de sitio ocupado: $prob_ocupado\n"
 
-fichero="../datos/aparcamiento_$num_veces\_$objetivo\_$vision\_$prob_ocupado\.data"
+fichero="../datos/aparcamiento_${num_veces}_${objetivo}_${vision}_${prob_ocupado}.data"
 
 touch $fichero
 
