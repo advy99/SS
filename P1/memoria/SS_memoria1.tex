@@ -173,6 +173,172 @@ Diferentes modelos de simulación.\hspace{0.05cm} }
 
 \section*{Introducción}
 
+En esta primera práctica se nos ha dado tres problemas distintos que debemos resolver mediante simulación. Se nos ha proporcionado un fichero en C++ para cada uno de estos problemas, que simula el sistema que queremos estudiar. Este PDF se encuentra el estudio sobre los distintos sistemas, así como ciertos experimentos de como se comportarían cada sistema si modificamos su funcionamiento, haciendo posible resolver cierto problema sobre estos sistemas sin tener que resolver el problema de forma analítica.
+
+Los distintos sistemas tratan sobre:
+
+\begin{enumerate}
+	\item Aparcamiento más cercano a un objetivo.
+	\item Funcionamiento de radares.
+	\item Lago con dos especies de peces.
+\end{enumerate}
+
+
+\section{Aparcamiento más cercano al objetivo.}
+
+En este caso se nos plantea estudiar un sistema que simula el comportamiento de un conductor buscando aparcamiento. Como nos dice el enunciado, existen dos tipos de conductores, los que aparcan en el primer sitio libre que encuentran, y los que intentan aparcar en el destino. Nuestro programa de simulación simulará miles de veces un conductor que en un punto C decide aparcar en el primer sitio que encuentre, C tomará valores entre 0 (conductor que aparca en el primer sitio libre), hasta la posición de destino (conductor que intenta aparcar en el propio destino), de esta forma podremos estimar que tactica es mejor, y donde está el mejor punto para aparcar.
+
+\subsection{Prueba del sistema con los parámetros por defecto.}
+
+Para un primer análisis utilizaremos los valores dadas por defecto, 100000 simulaciones para evaluar la media, y cada simulación tendrá como destino el punto 100, el conductor tendrá una visión de 2 aparcamientos delante de él y la probabilidad de que un aparcamiento esté libre es del 90\%.
+
+Tras varias ejecuciones vemos que la distancia mínima está al comenzar a buscar aparcamiento sobre la posición 94.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_100_2_0-9.png}
+	\caption{Distancia media al objetivo respecto al punto de partida.}
+	\label{fig:ej4}
+
+\end{figure}
+
+Aunque vemos que la mejor posición para comenzar a buscar aparcamiento está sobre la posición 94, si observamos la desviación típica de esas medias vemos como el mínimo está en 85, con una desviación de 5.5 aproximadamente, mientras que la desviación típica más alta es de 9.6 aproximadamente, y en concreto en el mínimo que hemos encontrado, en el punto 94, de 7.42, por lo que podemos concluir que el mejor punto para comenzar a buscar aparcamiento es entre el 90 y 94, ya que cerca del 90 la media de distancia es más alta, sin embargo la desviación típica es menos, por lo que la media nos da valores más fiables, aunque en el puesto 94 nos de el mejor valor medio es posible que en ocasiones el el valor haya sido muy distinto (para bien o para mal) de dicha media.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_desv_100000_100_2_0-9.png}
+	\caption{Desviación típica de la media de la distancia al objetivo respecto al punto de partida.}
+	\label{fig:ej4}
+\end{figure}
+
+\subsection{Variación de la posición destino.}
+
+En este experimento simularemos el sistema modificando la posición del destino, ya que en el apartado anterior tal vez la posición inicial era tan pequeña que por este motivo las posiciones iniciales.
+
+
+Tras realizar la prueba con valores de destino 125, 150, 175 y 200, además del objetivo inicial en 100, obtenemos los siguientes resultados:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_100_2_0-9.png}
+	\caption{Media de la distancia al objetivo en 100 respecto al punto de partida.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_125_2_0-9.png}
+	\caption{Media de la distancia al objetivo en 125 respecto al punto de partida.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_150_2_0-9.png}
+	\caption{Media de la distancia al objetivo en 150 respecto al punto de partida.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_175_2_0-9.png}
+	\caption{Media de la distancia al objetivo en 175 respecto al punto de partida.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_200_2_0-9.png}
+	\caption{Media de la distancia al objetivo en 200 respecto al punto de partida.}
+	\label{fig:ej4}
+\end{figure}
+
+Vemos como en todos los casos el óptimo se encuentra en unas 6-7 posiciones antes del objetivo, luego con este experimento podríamos llegar a concluir que el mejor punto para comenzar a buscar aparcamiento, con los parámetros fijos que utilizamos, es a unas 6-7 posiciones del objetivo.
+
+
+
+\newpage
+
+\subsection{Variación de la probabilidad de que un sitio este ocupado.}
+
+En este caso probaré con distintos valores, entre ellos valores extremos para comprobar que el sistema se comporta de forma correcta. Probaré con 0.01, es decir, que la probabilidad de que esté ocupado es prácticamente nula, 0.25, 0.75 y por último y como caso extremo, 0.99, donde será muy dificil encontrar un sitio.
+
+Tras lanzar las simulaciones obtenemos las siguientes gráficas:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_100_2_0-01.png}
+	\caption{Media de la distancia al objetivo respecto al punto de partida con una probabilidad del 1\% de que el sitio este ocupado.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_100_2_0-25.png}
+	\caption{Media de la distancia al objetivo respecto al punto de partida con una probabilidad del 25\% de que el sitio este ocupado..}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_100_2_0-50.png}
+	\caption{Media de la distancia al objetivo respecto al punto de partida con una probabilidad del 50\% de que el sitio este ocupado.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_100_2_0-75.png}
+	\caption{Media de la distancia al objetivo respecto al punto de partida con una probabilidad del 75\% de que el sitio este ocupado..}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_100000_100_2_0-99.png}
+	\caption{Media de la distancia al objetivo respecto al punto de partida con una probabilidad del 99\% de que el sitio este ocupado.}
+	\label{fig:ej4}
+\end{figure}
+
+
+En este caso vemos como los casos extremos se comportan como esperabamos, en el caso de que un sitio esta ocupado con probabilidad 1\% podemos aparcar en la puerta con distancia 0, ya que es muy facil encontrar sitio, a medida que subimos el porcentaje se va haciendo más dificil encontrar sitio en el objetivo y comienza a ser buena idea comenzar a buscar sitio un poco antes de llegar, como habíamos visto en apartados anteriores, llegando al caso extremo en el que un sitio esta ocupado con una probabilidad del 99\%, que observamos que la menor distancia la obtenemos al comenzar a buscar apartamiento al principio. Este caso, al ser extremo, voy a estudiarlo también con la desviación típica de la media.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_desv_100000_100_2_0-99.png}
+	\caption{Desv. típica de la media de la distancia al objetivo respecto al punto de partida con una probabilidad del 99\% de que el sitio este ocupado.}
+	\label{fig:ej4}
+\end{figure}
+
+
+Observamos que para este caso el resultado es apenas fiable, ya que la desviación típica es del orden de la propia distancia máxima a recorrer, de entre 70 a 90 de distancia, mientras que en los casos menos extremos, como por ejemplo una probabilidad de ocupación del 90\% nos encontrabamos con una desviación típica de entre 5 y 9.
+
+Este resultado sigue teniendo sentido en nuestro sistema, ya que la probabilidad de encontrar sitio es tan baja, que prácticamente es imposible llegar a un buen resultado comenzando a buscar aparcamiento cerca del objetivo, de ahí que la mejor opción sea encontrar desde el comienzo.
+
+\subsection{Modificando la distancia de visión y la probabilidad de que el sitio esté ocupado}
+
+En este caso, para intentar ver como interaccionan estos dos valores, he realizado la simulación modificando los parámetros, obteniendo la siguiente gráfica.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{aparcamiento_3d.png}
+	\caption{Media de la distancia al objetivo respecto al punto de partida con distintas probabilidades de ocupación y visión del conductor.}
+	\label{fig:ej4}
+\end{figure}
+
+Vemos que como esperabamos, con baja probabilidad la mejor posición es 100, y que con respecto aumentamos esa probabilidad la mejor posición cada vez está más alejada del objetivo, y también podemos observar que si mejoramos la distancia de visión del conductor esa posición también se va acercando al objetivo, aunque no es un factor tan importante como la probabilidad de que un sitio esté ocupado.
+
+
+\section{Funcionamiento de radares.}
+
+\section{Lago con dos especies de peces.}
+
+\newpage
+
 
 \begin{thebibliography}{9}
 
