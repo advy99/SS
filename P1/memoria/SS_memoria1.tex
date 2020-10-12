@@ -396,9 +396,14 @@ Tras realizar varias ejecuciones con distintos tiempos de simulación obtenemos 
 
 En principio estas gráficas pueden ser confusas en su primer valor, sin repuestos, ya que aunque tenemos un 100\% de fallo obtenemos menor número de fallos, pero esto es debido a que todas los radares están fallando, obteniendo el 100\% de fallo, y el número de fallos no puede subir ya que no los radares no pueden volver a fallar si todavía no han sido reparados.
 
-Con respecto al número mínimo de repuestos, aunque en las gráficas no se llega a apreciar, en los resultados observamos que cuanto mayor se va haciendo el tiempo de simulación son necesarios más repuestos para tener un 0\% de tiempo de fallo, aunque es cierto que como muestran las gráficas, a partir de 13 o 14 repuestos es despreciable ya que se trata de valores menores al 0.008\% del tiempo.
+Con respecto al número mínimo de repuestos, aunque en las gráficas no se llega a apreciar, en los resultados observamos que cuanto mayor se va haciendo el tiempo de simulación son necesarios más repuestos para tener menos de un 1\% de tiempo de fallo, aunque es cierto que como muestran las gráficas, a partir de 13 o 14 repuestos es despreciable ya que se trata de valores menores al 1\% del tiempo.
 
 
+\subsection{Influencia del tiempo de fallo de la pieza.}
+
+En este caso estudiaremos la influencia del tiempo de fallo de la pieza en el sistema, es decir, que pasaría si hacemos que la pieza tarde más (o menos) en fallar, manteniendo los tiempos de reparación. Este experimento también nos servirá para evaluar la fiabilidad del sistema, ya que lo normal sería que si mantenemos los tiempos de reparación, si la pieza falla más necesitemos más repuestos, y si falla menos, necesitaremos menos repuestos.
+
+Para este experimento usaré de tiempo de simulación 500, ya que como hemos visto la diferencia entre usar 100, 500 y 1000 apenas es notable.
 
 
 
