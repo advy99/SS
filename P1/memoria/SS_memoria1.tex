@@ -325,7 +325,7 @@ En este caso, para intentar ver como interaccionan estos dos valores, he realiza
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.6]{aparcamiento_3d.png}
+	\includegraphics[scale = 0.55]{aparcamiento_3d.png}
 	\caption{Media de la distancia al objetivo respecto al punto de partida con distintas probabilidades de ocupación y visión del conductor.}
 	\label{fig:ej4}
 \end{figure}
@@ -334,6 +334,73 @@ Vemos que como esperabamos, con baja probabilidad la mejor posición es 100, y q
 
 
 \section{Funcionamiento de radares.}
+
+El sistema a estudiar en este caso trata sobre el funcionamiento de ciertos radares, que cuentan con cierto componente que falla de forma periódica. Se nos pide estudiar el sistema para saber el número mínimo de repuestos, con un número fijo de radares, sabiendo que cada vez que una de estas piezas se rompe, tarda un cierto tiempo en ser reparada, y su repuesto es demasiado caro, haciendo que queramos tener el mínimo número de repuestos, pero siempre y cuando no exista un periodo en el que un radar este sin funcionar.
+
+\subsection{Estudio del funcionamiento con distintos tiempos de simulación.}
+
+En este apartado trataremos de encontrar el número mínimo de repuestos para los parámetros por defecto, 5 radares, con un tiempo de vida de aproximadamente 20 días y en los que cada pieza tarda en repararse entre 15 y 30 días.
+
+Tras realizar varias ejecuciones con distintos tiempos de simulación obtenemos los siguientes resultados:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{radares_1.png}
+	\caption{Número de fallos y porcentaje de tiempo de fallo en función del número de repuestos.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{radares_5.png}
+	\caption{Media de la distancia al objetivo respecto al punto de partida con una probabilidad del 25\% de que el sitio este ocupado..}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{radares_10.png}
+	\caption{Número de fallos y porcentaje de tiempo de fallo en función del número de repuestos.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{radares_50.png}
+	\caption{Número de fallos y porcentaje de tiempo de fallo en función del número de repuestos.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{radares_100.png}
+	\caption{Número de fallos y porcentaje de tiempo de fallo en función del número de repuestos.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{radares_500.png}
+	\caption{Número de fallos y porcentaje de tiempo de fallo en función del número de repuestos.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{radares_1000.png}
+	\caption{Número de fallos y porcentaje de tiempo de fallo en función del número de repuestos.}
+	\label{fig:ej4}
+\end{figure}
+
+
+En principio estas gráficas pueden ser confusas en su primer valor, sin repuestos, ya que aunque tenemos un 100\% de fallo obtenemos menor número de fallos, pero esto es debido a que todas los radares están fallando, obteniendo el 100\% de fallo, y el número de fallos no puede subir ya que no los radares no pueden volver a fallar si todavía no han sido reparados.
+
+Con respecto al número mínimo de repuestos, aunque en las gráficas no se llega a apreciar, en los resultados observamos que cuanto mayor se va haciendo el tiempo de simulación son necesarios más repuestos para tener un 0\% de tiempo de fallo, aunque es cierto que como muestran las gráficas, a partir de 13 o 14 repuestos es despreciable ya que se trata de valores menores al 0.008\% del tiempo.
+
+
+
+
 
 \section{Lago con dos especies de peces.}
 
