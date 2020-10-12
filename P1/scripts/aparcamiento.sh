@@ -35,7 +35,7 @@ output=$(../bin/aparcamiento $num_veces $objetivo $vision $prob_ocupado | grep -
 printf "# Pos. I.\tMedia\tDesv. tipica\n" > $fichero
 
 
-for i in {0..100}; do
+for i in $(seq 0 $objetivo); do
 
 	unica_linea=$(echo $output | grep -e inicial:\ \($i\)\ media\ \[0-9\.\]\*\ desv.tipica\ \[0-9\.\]\* -o)
 
