@@ -465,10 +465,62 @@ Como vemos, en el primer caso dos ambas especies acaban extintas, mientras que e
 
 Comentar también que se llega a conseguir este punto de equilibrio cuando comenzamos tan pocos peces grandes que los peces pequeños pueden llegar a su máximo, ya que esta es la única forma que con todas las otras combinaciones se ha llegado a estabilizar el sistema, esto es importante, ya que también influye el número de ejemplares iniciales de cada especie, con 1500 pequeños la única forma de alcanzar la estabilidad es con 10 peces grandes, mientras que con 20000 peces pequeños podemos llegar a tener inicialmente 100 peces grandes.
 
+Otra cosa que podemos observar es como avanzan el número de peces pequeños en función del número de peces grandes:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{lago_10950_1500_10_peces.png}
+	\caption{Simulación del lago con 1500 peces pequeños y 10 peces grandes.}
+	\label{fig:ej4}
+\end{figure}
+
+Con esta gráfica comprobamos que el funcionamiento del sistema es correcta, vemos como cuando existe un gran número de peces pequeños, el número de peces grandes crece muy rápido mientras que el número de pequeños disminuye, hasta un punto en el que hay pocos pequeños, y los peces grandes comienzan a bajar, haciendo que tras bajar considerablemente, los peces pequeños comiencen a ser capaces de volver a recuperar población, y así repitiendose el ciclo y estabilizandose en el centro de la espiral.
 
 Tras esta simulación podemos asegurar que hay una configuración que con ese número de ejemplares de cada especie ambas poblaciones se estabilizan y conviven, luego podemos seguir la investigación de si es viable realizar campañas de pesca.
 
+
+\newpage
+
+\subsection{Estudio de campañas de pesca.}
+
 Aunque existen varios valores con los que se estabilizan las poblaciones, de ahora en adelante utilizaré 1500 peces pequeños y 10 grandes, ya que una vez se estabiliza el sistema es indiferente.
+
+
+Para estudiar las posibles campañas de pesca he lanzado la simulación con todas las siguientes combinaciones:
+
+\begin{itemize}
+	\item Periodo entre cada pesca: 90, 180, 365, 750, 1400, 2000 y 5000 días.
+	\item Porcentaje de peces grandes pescados: 10, 30, 50, 70 y 90\% de los peces.
+\end{itemize}
+
+De estas combinaciones todas funcionan, ya la disminución de los peces grandes permite que los pequeños crezcan de forma muy rápida, y al no llegar a matar a todos los peces grandes, los restantes, con la comida extra, consiguen recuperarse rápidamente. Si es cierto que llegamos a observar varios escenarios, donde el número de peces es muy bajo, o muy inestable, pero siempre se llega a estabilizar, aunque sea en números muy muy bajos, sin llegar a desaparecer.
+
+Algunos ejemplos de los distintos casos:
+
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{lago_10950_1500_10_0.90_90.png}
+	\caption{Pescas cada 90 días, del 10\% de los peces grandes.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{lago_10950_1500_10_0.90_5000.png}
+	\caption{Pescas cada 5000 días, del 10\% de los peces grandes.}
+	\label{fig:ej4}
+\end{figure}
+
+En la primera gráfica podemos ver que con tiempos de pesca tan seguidos, los peces pequeños se mantienen en su límite superior de población, sin embargo el máximo de peces grandes no supera los 20, mientras que en la segunda gráfica, al hacer pescas tan separadas en el tiempo si nos permite que la población de peces grandes sea mucho mayor y las pescas más grandes.
+
+Como vemos, el principal problema que encontramos en estas gráficas es que el tiempo entre pescas es demasiado pequeño no permitiendo explotar más, o demasiado alto y hay periodos en los que podriamos conseguir mejores pescas.
+
+A continuación muestro la gráfica de todas las combinaciones y como avanza la cantidad de pesca.
+
+
 
 % \begin{thebibliography}{9}
 %
