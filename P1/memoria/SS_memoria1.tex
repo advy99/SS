@@ -429,6 +429,8 @@ Vemos como estos resultados concuerdan y tienen sentido en el sistema, ya que, s
 
 Para este apartado se nos encarga estudiar un sistema que simula el comportamiento e interacción de dos tipos de peces en un lago, una especie la llamaremos pequeños y a la otra grandes. En dicho lago, debido a las condiciones de tamaño, comida, etc, el número máximo de 10000000 peces pequeños y 36000 peces grandes. Otro detalle a tener en cuenta es que los peces pequeños son hervívoros, no necesitan comida extra además de la que se encuentra en el entorno del lago, mientras que los peces grandes son carnívoros y se alimentan de los peces pequeños.
 
+\subsection{Estudio del sistema para encontrar un equilibrio entre las especies.}
+
 En esta simulación trataremos de encontrar un equilibrio entre peces pequeños y peces grandes que permita a ambas especies sobrevivir.
 
 Tras realizar la simulación durante 10 años (3650 días), con todas las combinaciones de los siguientes valores iniciales:
@@ -518,7 +520,39 @@ En la primera gráfica podemos ver que con tiempos de pesca tan seguidos, los pe
 
 Como vemos, el principal problema que encontramos en estas gráficas es que el tiempo entre pescas es demasiado pequeño no permitiendo explotar más, o demasiado alto y hay periodos en los que podriamos conseguir mejores pescas.
 
-A continuación muestro la gráfica de todas las combinaciones y como avanza la cantidad de pesca.
+A continuación muestro la gráfica de todas las combinaciones y como avanza la cantidad de pesca:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.25]{total.png}
+	\caption{Recolección de cada forma de pesca.}
+	\label{fig:ej4}
+\end{figure}
+
+
+Como vemos en la gráfica, debido a la gran cantidad de simulaciones realizadas, no somos capaces de distinguir la mejor, sin embargo vemos que las mejores se realizan en periodos cortos de tiempo:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.25]{total_reducido.png}
+	\caption{Recolección de cada forma de pesca.}
+	\label{fig:ej4}
+\end{figure}
+
+
+Como podemos ver en esta gráfica, vemos como la mejor forma de pesca es pescando el 70\% de los peces grandes cada 90 días:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{lago_10950_1500_10_0.70_90.png}
+	\caption{Pescas cada 90 días, del 70\% de los peces grandes.}
+	\label{fig:ej4}
+\end{figure}
+
+En esta gráfica podemos observar prefectamente como con esta forma de pesca los peces grandes son capaces de recuperarse a niveles muy altos (unos 14000) antes de la próxima pesca, incluso pescando un nivel tan alto como el 70\%, permitiendo la máxima producción.
 
 
 
