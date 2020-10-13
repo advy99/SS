@@ -178,13 +178,13 @@ En esta primera práctica se nos ha dado tres problemas distintos que debemos re
 Los distintos sistemas tratan sobre:
 
 \begin{enumerate}
-	\item Aparcamiento más cercano a un objetivo.
-	\item Funcionamiento de radares.
-	\item Lago con dos especies de peces.
+	\item Modelo de simulación de Monte Carlo: Aparcamiento más cercano a un objetivo.
+	\item Modelo de simulación discreto: Funcionamiento de radares.
+	\item Modelo de simulación continuo: Lago con dos especies de peces.
 \end{enumerate}
 
 
-\section{Aparcamiento más cercano al objetivo.}
+\section{Modelo de simulación de Monte Carlo.}
 
 En este caso se nos plantea estudiar un sistema que simula el comportamiento de un conductor buscando aparcamiento. Como nos dice el enunciado, existen dos tipos de conductores, los que aparcan en el primer sitio libre que encuentran, y los que intentan aparcar en el destino. Nuestro programa de simulación simulará miles de veces un conductor que en un punto C decide aparcar en el primer sitio que encuentre, C tomará valores entre 0 (conductor que aparca en el primer sitio libre), hasta la posición de destino (conductor que intenta aparcar en el propio destino), de esta forma podremos estimar que tactica es mejor, y donde está el mejor punto para aparcar.
 
@@ -333,7 +333,7 @@ En este caso, para intentar ver como interaccionan estos dos valores, he realiza
 Vemos que como esperabamos, con baja probabilidad la mejor posición es 100, y que con respecto aumentamos esa probabilidad la mejor posición cada vez está más alejada del objetivo, y también podemos observar que si mejoramos la distancia de visión del conductor esa posición también se va acercando al objetivo, aunque no es un factor tan importante como la probabilidad de que un sitio esté ocupado.
 
 
-\section{Funcionamiento de radares.}
+\section{Modelo de simulación discreto.}
 
 El sistema a estudiar en este caso trata sobre el funcionamiento de ciertos radares, que cuentan con cierto componente que falla de forma periódica. Se nos pide estudiar el sistema para saber el número mínimo de repuestos, con un número fijo de radares, sabiendo que cada vez que una de estas piezas se rompe, tarda un cierto tiempo en ser reparada, y su repuesto es demasiado caro, haciendo que queramos tener el mínimo número de repuestos, pero siempre y cuando no exista un periodo en el que un radar este sin funcionar.
 
@@ -406,15 +406,73 @@ En este caso estudiaremos la influencia del tiempo de fallo de la pieza en el si
 Para este experimento usaré de tiempo de simulación 500, ya que como hemos visto la diferencia entre usar 100, 500 y 1000 apenas es notable.
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{radares_500_10.png}
+	\caption{Número de fallos y porcentaje de tiempo de fallo en función del número de repuestos con un tiempo de fallo de 10 días.}
+	\label{fig:ej4}
+\end{figure}
 
-\section{Lago con dos especies de peces.}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{radares_500_30.png}
+	\caption{Número de fallos y porcentaje de tiempo de fallo en función del número de repuestos con un tiempo de fallo de 30 días.}
+	\label{fig:ej4}
+\end{figure}
+
+Vemos como estos resultados concuerdan y tienen sentido en el sistema, ya que, si los fallos se producen con más frecuencia es necesario tener más repuestos, mientras que con una menor frecuencia de fallos podemos permitirnos tener menos repuestos, siendo necesarios 22 repuestos en el caso en el que los fallos son más frecuentes y 10 repuestos en el caso de los fallos menos frecuentes.
+
 
 \newpage
 
+\section{Modelo de simulación continuo.}
 
-\begin{thebibliography}{9}
+Para este apartado se nos encarga estudiar un sistema que simula el comportamiento e interacción de dos tipos de peces en un lago, una especie la llamaremos pequeños y a la otra grandes. En dicho lago, debido a las condiciones de tamaño, comida, etc, el número máximo de 10000000 peces pequeños y 36000 peces grandes. Otro detalle a tener en cuenta es que los peces pequeños son hervívoros, no necesitan comida extra además de la que se encuentra en el entorno del lago, mientras que los peces grandes son carnívoros y se alimentan de los peces pequeños.
+
+En esta simulación trataremos de encontrar un equilibrio entre peces pequeños y peces grandes que permita a ambas especies sobrevivir.
+
+Tras realizar la simulación durante 10 años (3650 días), con todas las combinaciones de los siguientes valores iniciales:
+
+\begin{itemize}
+	\item Peces pequeños: 100, 500, 1000, 1500, 3000, 6000, 10000 y 20000.
+	\item Peces grandes: 10, 50, 100, 500, 1000 y 1500.
+\end{itemize}
+
+Encontramos tres posibles casos, dos de ellos muy parecidos:
+
+\begin{enumerate}
+	\item Los peces grandes devoran toda la población de peces pequeños, y al quedarse sin comida estos tambien mueren.
+	\item Se equilibran las poblaciones, el gran número de peces pequeños permite que la población de peces grandes se mantenga, y ese número de peces grandes permite a la especie de peces pequeños reproducirse lo suficiente para evitar extinguirse.
+\end{enumerate}
 
 
-\end{thebibliography}
+Como vemos, en el primer caso dos ambas especies acaban extintas, mientras que en el segundo caso sobreviven, algunas gráficas de este comportamiento son las siguientes:
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{lago_10950_1500_50.png}
+	\caption{Simulación del lago con 1500 peces pequeños y 50 peces grandes.}
+	\label{fig:ej4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.6]{lago_10950_1500_10.png}
+	\caption{Simulación del lago con 1500 peces pequeños y 10 peces grandes.}
+	\label{fig:ej4}
+\end{figure}
+
+Comentar también que se llega a conseguir este punto de equilibrio cuando comenzamos tan pocos peces grandes que los peces pequeños pueden llegar a su máximo, ya que esta es la única forma que con todas las otras combinaciones se ha llegado a estabilizar el sistema, esto es importante, ya que también influye el número de ejemplares iniciales de cada especie, con 1500 pequeños la única forma de alcanzar la estabilidad es con 10 peces grandes, mientras que con 20000 peces pequeños podemos llegar a tener inicialmente 100 peces grandes.
+
+
+Tras esta simulación podemos asegurar que hay una configuración que con ese número de ejemplares de cada especie ambas poblaciones se estabilizan y conviven, luego podemos seguir la investigación de si es viable realizar campañas de pesca.
+
+Aunque existen varios valores con los que se estabilizan las poblaciones, de ahora en adelante utilizaré 1500 peces pequeños y 10 grandes, ya que una vez se estabiliza el sistema es indiferente.
+
+% \begin{thebibliography}{9}
+%
+%
+% \end{thebibliography}
 
 \end{document}
