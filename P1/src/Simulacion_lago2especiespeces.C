@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Definition of additional mathematicals functions 
+// Definition of additional mathematicals functions
 #define sq(X) {int aux=X; (X)*(X); }
 #define dec(X) pow(10, X )
 #define ctg(X) (1.0/tan(X))
@@ -14,14 +14,14 @@ using namespace std;
 #define lgn(X,Y)  (log(Y)/log(X))
 
 
-	// Variables for time control 
+	// Variables for time control
 	double _t = 0.0;
 	double _tinicio = 0.0;
 	double _tfin = 0.0;
 	double _inc_t = 0.0;
 	int _tcom = 1;
 
-	// Variables of Parameters 
+	// Variables of Parameters
 	double __A = 0.0667;
 	double __B = 1.0E7;
 	double __C = 0.0222;
@@ -30,7 +30,7 @@ using namespace std;
 	double __F = 10.0;
 
 
-	// Vectors of model's variables 
+	// Vectors of model's variables
 	double *  __x = new double[1];
 	double *  __y = new double[1];
 
@@ -39,14 +39,14 @@ double *  y_aux = new double[1];
 
 
 
-	// Functions for variables higher derivative calculation 
+	// Functions for variables higher derivative calculation
 
-	// Function for calculation of x's higher derivative 
+	// Function for calculation of x's higher derivative
 	double f1 ( double *  __x, double *  __y, double _t ){
 		return ( ( ( __A ) * ( __x[0] ) ) * ( ( 1.0 ) - ( ( __x[0] ) / ( __B ) ) ) ) - ( ( __F ) * ( __y[0] ) ) ;
 	}
 
-	// Function for calculation of y's higher derivative 
+	// Function for calculation of y's higher derivative
 	double f2 ( double *  __x, double *  __y, double _t ){
 		return ( ( __C ) * ( __y[0] ) ) * ( ( ( __x[0] ) / ( __D ) ) - ( ( __y[0] ) / ( __E ) ) ) ;
 	}
@@ -72,31 +72,31 @@ double *  y_aux = new double[1];
 			k1[0][0] = h * f1( __x, __y,_t );
 			k1[1][0] = h * f2( __x, __y,_t );
 
-// PREVIO CODIGO DE K2 
+// PREVIO CODIGO DE K2
 			__x[0] = (x_aux[0]+k1[0][0] / 2);
 			__y[0] = (y_aux[0]+k1[1][0] / 2);
-			
-// CODIGO DE K2 
+
+// CODIGO DE K2
 			k2[0][0] = h * f1( __x, __y,_t + (h/2) );
 			k2[1][0] = h * f2( __x, __y,_t + (h/2) );
-			
-// PREVIO CODIGO DE K3 
+
+// PREVIO CODIGO DE K3
 			__x[0] = (x_aux[0]+k2[0][0] / 2);
 			__y[0] = (y_aux[0]+k2[1][0] / 2);
-			
-// CODIGO DE K3 
+
+// CODIGO DE K3
 			k3[0][0] = h * f1( __x, __y,_t + (h/2) );
 			k3[1][0] = h * f2( __x, __y,_t + (h/2) );
-			
+
 // PREVIO CODIGO DE K4
 			__x[0] = (x_aux[0]+k3[0][0]);
 			__y[0] = (y_aux[0]+k3[1][0]);
 
-// CODIGO DE K4 
+// CODIGO DE K4
 			k4[0][0] = h * f1( __x, __y,_t + h);
 			k4[1][0] = h * f2( __x, __y,_t + h);
-			
-// CODIGO FINAL 
+
+// CODIGO FINAL
 			__x[0] = x_aux[0];
 			__x[0] += (k1[0][0]+2*k2[0][0]+2*k3[0][0]+k4[0][0])/6;
 			__y[0] = y_aux[0];
@@ -151,22 +151,30 @@ double *  y_aux = new double[1];
 		cerr << " Numero inicial de peces grandes, y(0) => ";
 		cin >> __y[0];
 	//	cout << " y(0) "<< __y[0] << endl;
+		int t_pesca;
+		cerr << " Tiempo entre campaña de pesca => ";
+		cin >> t_pesca;
+
+
+		double p_pesca;
+		cerr << " Porcentaje de peces grandes a pescar [0-1] => ";
+		cin >> p_pesca;
 
 /*
 		cerr << " A_inic => ";
-		cin >> __A; 
+		cin >> __A;
 		cout << " A " << __A << endl;
 
 		cerr << " B_inic => ";
-		cin >> __B; 
+		cin >> __B;
 		cout << " B " << __B << endl;
 
 		cerr << " C_inic => ";
-		cin >> __C; 
+		cin >> __C;
 		cout << " C " << __C << endl;
 
 		cerr << " D_inic => ";
-		cin >> __D; 
+		cin >> __D;
 		cout << " D " << __D << endl;
 
 		cerr << " E_inic => ";
@@ -174,17 +182,23 @@ double *  y_aux = new double[1];
 		cout << " E " << __E << endl;
 
 		cerr << " F_inic => ";
-		cin >> __F; 
+		cin >> __F;
 		cout << " F " << __F << endl;
 */
 		double inc = _inc_t*_tcom;
 		double * aux = new double[2];
-		cout << "\tt\tx\ty" << endl;
-		cout << "\t" << _tinicio << "\t" << __x[0]<< "\t" << __y[0]<< endl;
+		int pesca_grandes = 0;
+		cout << "\tt\tx\ty\tpesca" << endl;
+		cout << "\t" << _tinicio << "\t" << __x[0]<< "\t" << __y[0] << "\t" << pesca_grandes<< endl;
 
 		for(double t=_tinicio ; t < (_tfin-10e-8) ; t += inc ){
+			if ( (int)t % t_pesca == 0 ){
+				int pescados = __y[0] * p_pesca;
+				pesca_grandes += pescados;
+				__y[0] = __y[0] - pescados;
+			}
 			resolver( t, t + inc, aux );
-			cout << "\t" << aux[0]<< "\t" << aux[1]<< "\t" << aux[2]<< endl;
+			cout << "\t" << aux[0]<< "\t" << aux[1]<< "\t" << aux[2] << "\t" << pesca_grandes<< endl;
 		}
 	}
 
