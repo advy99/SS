@@ -41,6 +41,11 @@ int main (int argc, char ** argv) {
 
 	double sum, sum2, ganancia, gananciaesperada, desviaciont;
 
+	std::cout << "# Pedidos" << "\t" << "Ganancia/venta" << "\t"
+				 << "Perdida/no venta" << "\t" << "Repeticiones"
+				 << "\t" << "Distribucion" << "\t" << "Ganancia esperada"
+				 << "\t" << "Desviacion tipica" << std::endl;
+
 	for ( int s = 0; s <= 100; s++ ){
 		sum = sum2 = 0.0;
 		srand(time(NULL));
