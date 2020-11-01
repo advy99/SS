@@ -83,7 +83,7 @@ int main (int argc, char ** argv) {
 
 			} else if ( modificacion == 2 ) {
 				if ( s > demanda )
-					ganancia = demanda * 4;
+					ganancia = demanda * x - std::min(z, (s-demanda) * y);
 				else
 					ganancia = s * x;
 
