@@ -24,8 +24,16 @@ int main (int argc, char ** argv) {
 	distribucion = argv[4][0];
 	modificacion = atoi(argv[5]);
 
-	if (modificacion != 0)
+	if (modificacion != 0) {
+		if ( argc != 7 ) {
+			std::cerr << "Modificacion introducida, pero no asignado valor de z"
+						 << std::endl;
+			exit(-1);
+		}
+
 		z = atoi(argv[6]);
+
+	}
 
 	double * tablademanda;
 
