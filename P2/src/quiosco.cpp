@@ -88,9 +88,9 @@ int main (int argc, char ** argv) {
 		desviaciont = sqrt( (sum2 - veces * gananciaesperada * gananciaesperada) / (veces-1) );
 
 
-		std::cout << s << " " << x << " " << y << " " << veces
-					 << " " << distribucion << " " << gananciaesperada
-					 << " " << desviaciont << std::endl;
+		std::cout << s << "\t" << x << "\t" << y << "\t" << veces
+					 << "\t" << distribucion << "\t" << gananciaesperada
+					 << "\t" << desviaciont << std::endl;
 
 	}
 

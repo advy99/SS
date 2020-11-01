@@ -75,11 +75,11 @@ double * construye_prop_c(int n) {
 	max = n*n/4;
 	temp[0] = 0.0;
 
-	for (i=1;i<(n/2);i++)
-		temp[i] = temp[i-1]+(double)i/max;
+	for ( i =1; i < (n/2); i++)
+		temp[i] = temp[i-1] + (double)i/max;
 
-	for (i=(n/2);i<n;i++)
-		temp[i] = temp[i-1]+(double)(n-i)/max;
+	for (i = (n/2); i < n; i++)
+		temp[i] = temp[i-1] + (double)(n-i)/max;
 
 	return temp;
 }
