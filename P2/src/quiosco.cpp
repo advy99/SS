@@ -107,6 +107,8 @@ int main (int argc, char ** argv) {
 
 	}
 
+	delete [] tablademanda;
+
 	return 0;
 
 }

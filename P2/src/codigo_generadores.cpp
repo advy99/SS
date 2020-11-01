@@ -3,6 +3,7 @@
 #include <time.h>
 #include <cstdlib>
 #include "codigo_generadores.h"
+#include <iostream>
 
 //Genera un número uniformemente distribuido en el
 //intervalo [0,1) a partir de uno de los generadores
@@ -20,10 +21,11 @@ double uniforme() {
 //la demanda del apartado (a).
 double * construye_prop_a(int n) {
 	int i;
-	double* temp;
+	double * temp = new double[n];
 
-	if ((temp = (double*) malloc(n*sizeof(double))) == NULL) {
-		fputs("Error reservando memoria para generador uniforme\n",stderr);
+	if ( temp == nullptr ) {
+		std::cerr << "Error reservando memoria para generador uniforme" << std::endl;
+
 		exit(1);
 	}
 
@@ -42,10 +44,11 @@ double * construye_prop_a(int n) {
 
 double * construye_prop_b(int n) {
 	int i, max;
-	double* temp;
+	double * temp = new double[n];
 
-	if ((temp = (double*) malloc(n*sizeof(double))) == NULL) {
-		fputs("Error reservando memoria para generador proporcional\n",stderr);
+	if ( temp == nullptr ) {
+		std::cerr << "Error reservando memoria para generador uniforme" << std::endl;
+
 		exit(1);
 	}
 
@@ -65,10 +68,11 @@ double * construye_prop_b(int n) {
 //la demanda del apartado (c).
 double * construye_prop_c(int n) {
 	int i, max;
-	double* temp;
+	double * temp = new double[n];
 
-	if ((temp = (double*) malloc(n*sizeof(double))) == NULL) {
-		fputs("Error reservando memoria para generador triangular\n",stderr);
+	if ( temp == nullptr ) {
+		std::cerr << "Error reservando memoria para generador uniforme" << std::endl;
+
 		exit(1);
 	}
 
