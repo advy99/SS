@@ -4,6 +4,7 @@ mkdir -p ../datos
 mkdir -p ../datos/prob_a/
 mkdir -p ../datos/prob_b/
 mkdir -p ../datos/prob_c/
+mkdir -p ../graficos/
 
 for distribucion in a b c; do
 	for veces in 100 1000 5000 10000 100000 150000; do
