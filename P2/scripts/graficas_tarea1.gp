@@ -17,13 +17,13 @@ do for[dist in distribuciones] {
 		set term pngcairo dashed size 1400,1050
 		set output "../graficas/prob_".dist."/datos_".n_veces.".png"
 
-		stats "../datos/prob_".dist."/datos_10_1_".n_veces."_".dist."_0.dat" using 1:6 name "A"
+		stats "../datos/prob_".dist."/datos_10_1_".n_veces."_".dist."_0.dat" using 1:6 name "A" nooutput
 
-		stats "../datos/prob_".dist."/datos_10_5_".n_veces."_".dist."_0.dat" using 1:6 name "B"
+		stats "../datos/prob_".dist."/datos_10_5_".n_veces."_".dist."_0.dat" using 1:6 name "B" nooutput
 
-		stats "../datos/prob_".dist."/datos_10_10_".n_veces."_".dist."_0.dat" using 1:6 name "C"
+		stats "../datos/prob_".dist."/datos_10_10_".n_veces."_".dist."_0.dat" using 1:6 name "C" nooutput
 
-		stats "../datos/prob_".dist."/datos_10_15_".n_veces."_".dist."_0.dat" using 1:6 name "D"
+		stats "../datos/prob_".dist."/datos_10_15_".n_veces."_".dist."_0.dat" using 1:6 name "D" nooutput
 
 
 		set print "tmp.txt"
