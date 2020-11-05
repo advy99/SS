@@ -21,7 +21,7 @@ unsigned long int congruencia2_lineal_real_corregido(unsigned long int & semilla
 unsigned long int congruencia1_lineal_real_fmod(unsigned long int & semilla);
 unsigned long int congruencia2_lineal_real_fmod(unsigned long int & semilla);
 
-int obtener_longitud_generador(unsigned long int semilla, unsigned long int (*generador)(unsigned long int &) );
+std::pair<int, int> obtener_longitud_generador(unsigned long int (*generador)(unsigned long int &) );
 
 
 #endif
