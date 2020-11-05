@@ -6,7 +6,7 @@ mkdir -p ../datos/tiempos_mejoras/
 mkdir -p ../datos/tiempos_mejoras/mejora1/
 mkdir -p ../datos/tiempos_mejoras/mejora2/
 mkdir -p ../datos/tiempos_mejoras/mejora3/
-mkdir -p ../graficos
+mkdir -p ../graficas/
 
 
 for num_mejora in 1 2 3; do
