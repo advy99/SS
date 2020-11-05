@@ -82,6 +82,7 @@ unsigned long int congruencia2_lineal_real_fmod(unsigned long int & semilla) {
 std::pair<int, int> obtener_longitud_generador(unsigned long int (*generador)(unsigned long int &) ) {
 
 	unsigned long int mayor_longitud = 0;
+	int semilla_mayor = 0;
 
 	unsigned long int i = 0;
 
@@ -109,12 +110,13 @@ std::pair<int, int> obtener_longitud_generador(unsigned long int (*generador)(un
 
 		if ( mayor_longitud < generados.size() ) {
 			mayor_longitud = generados.size();
+			semilla_mayor = i;
 		}
 
 		i++;
 	}
 
-	return std::make_pair(mayor_longitud, i-1);
+	return std::make_pair(mayor_longitud, semilla_mayor);
 
 }
 
