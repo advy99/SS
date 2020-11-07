@@ -15,7 +15,7 @@ OBJETIVOS =  $(BIN)/quiosco $(BIN)/mejora1_generadores \
 all: $(OBJETIVOS)
 
 $(BIN)/quiosco: $(SRC)/quiosco.cpp $(OBJ)/codigo_generadores.o
-	g++ $(CXXFLAGS) $^ -o $@
+	g++ -O2 $(CXXFLAGS) $^ -o $@
 
 $(BIN)/mejora1_generadores: $(SRC)/mejora1_generadores.cpp \
 								 	 $(OBJ)/codigo_generadores.o
