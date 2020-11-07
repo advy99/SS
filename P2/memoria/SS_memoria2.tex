@@ -173,7 +173,16 @@ Modelos de Monte Carlo. Generadores de datos.\hspace{0.05cm} }
 
 \section*{Introducción}
 
+En esta práctica continuaremos con la implementación de modelos de Montecarlo, así como comenzar a trabajar e implementar con generadores de datos.
+
+Esta práctica consta de dos partes, una primera parte centrada en la implementación de un modelo de Montecarlo que utilizará tres generadores de datos distintos, todos ellos basados en el método de tablas de búsqueda, sin embargo cada generador seguirá una distribución distinta.
+
+La segunda parte se centrará en los propios generadores de datos. En esta parte mejoraremos el comportamiento de los generadores utilizados en la primera parte, además de implementar nuestros propios generadores de datos, que a pesar de implementar generadores simples, servirá como introducción al funcionamiento y uso de generadores de datos, principalmente en su importancia y como construir generadores de datos eficientes.
+
+
 \section{Mi segundo modelo de simulación de Montecarlo}
+
+Para este segundo modelo de simulación de Montecarlo nos centraremos en el problema de quioscos de periódicos. Cierto establecimiento se abastece diariamente de un producto que vende diariamente, por ejemplo un quiosco que vende periodicos, sin embargo, el número de periódicos que compra diariamente a la editorial se establece en un contrato a largo plazo y no puede ser modificado. El establecimiento, por cada venta, obtiene una ganancia de $x$ euros, sin embargo también obtiene una pérdida de $y$ por cada unidad no vendida en el día. El establecimiento también conoce la distribución de probabilidad con la que vende periódicos. Con estos datos, este sistema estudiará el valor óptimo de periódicos $s$ que han de contratarse para que el quiosco tenga una ganancia máxima.
 
 \subsection{Construcción del modelo}
 
