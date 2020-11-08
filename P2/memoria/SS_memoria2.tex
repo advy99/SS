@@ -12,6 +12,7 @@
 \usepackage{multirow}
 \usepackage{float}
 \usepackage{chngpage}
+\usepackage{enumitem}
 
 \usepackage{amsfonts}
 
@@ -184,47 +185,512 @@ La segunda parte se centrará en los propios generadores de datos. En esta parte
 
 Para este segundo modelo de simulación de Montecarlo nos centraremos en el problema de quioscos de periódicos. Cierto establecimiento se abastece diariamente de un producto que vende diariamente, por ejemplo un quiosco que vende periodicos, sin embargo, el número de periódicos que compra diariamente a la editorial se establece en un contrato a largo plazo y no puede ser modificado. El establecimiento, por cada venta, obtiene una ganancia de $x$ euros, sin embargo también obtiene una pérdida de $y$ por cada unidad no vendida en el día. El establecimiento también conoce la distribución de probabilidad con la que vende periódicos. Con estos datos, este sistema estudiará el valor óptimo de periódicos $s$ que han de contratarse para que el quiosco tenga una ganancia máxima.
 
+En todo momento la simulación tendrá en cuenta valores de demanda de entre 0 y 100 periódicos.
+
+\subsection{Distribuciones de la demanda diaria}
+
+Para estudiar este sistema se nos proponen tres distribuciones de probabilidad distintas:
+
+\begin{enumerate}[label=\alph*]
+	\item Distribución uniforme: La probabilidad de que se venda una cantidad $d$ de periódicos es la misma para cualquier $d$.
+	\item Distribución proporcional: La probabilidad de que se venda una cantidad $d$ de periódicos es proporcional a $100 - d$
+	\item Distribución triangular: La probabilidad de que se venda una cantidad $d$ de periódicos es proporcional a $d$ si $0 \leq d < 50$ y proporcional a $100 - d$ si $50 \leq d < 100$
+
+\end{enumerate}
+
+
+
 \subsection{Construcción del modelo}
+
+De cara a estudiar el problema, construiremos un modelo de Montecarlo que, para todos los posibles valores de periódicos a contratadar ($s$ de 0 a 100), generen un número de veces una demanda a partir de la distribución que estemos estudiando, y con ese valor obtener la ganancia, con el objetivo de, tras un gran número de ejecuciones, realizar una buena estimación del valor óptimo.
+
+
+Para probar el modelo se han realizado distintas ejecuciones, con distintos número de veces de generación de demanda. En concreto he realizado pruebas para $x = 10$ e $y = 1, y = 5, y = 10, y = 15$, con distintos valores de repetición, 100, 1000, 5000, 10000, 100000, 150000.
+
+Tras realizar las distintas ejecuciones, obtenemos estos resultados:
+
 
 \subsubsection{Resultados obtenidos con la distribución a}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_100.png}
+	\caption{Con 100 repeticiones y la distribución a.}
+	\label{fig:ej1_a_100}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_1000.png}
+	\caption{Con 1000 repeticiones y la distribución a.}
+	\label{fig:ej1_a_1000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_5000.png}
+	\caption{Con 5000 repeticiones y la distribución a.}
+	\label{fig:ej1_a_5000}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_10000.png}
+	\caption{Con 10000 repeticiones y la distribución a.}
+	\label{fig:ej1_a_10000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_100000.png}
+	\caption{Con 100000 repeticiones y la distribución a.}
+	\label{fig:ej1_a_100000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_150000.png}
+	\caption{Con 150000 repeticiones y la distribución a.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
+
+En estas gráficas vemos como al ejecutar con distinto número de repeticiones, a mayor número de repeticiones se acerca más al óptimo calculado en el guión de la práctica hasta alcanzarlo, además de que en todas las gráficas, a una mayor perdida por unidad no vendida la ganancia máxima va siendo más baja y el óptimo de periódicos a contratar se acerca a cero, por lo que es el comportamiento esperado del sistema.
+
+En este caso, en el que cualquier valor de demanda tiene la misma probabilidad de aparecer, vemos como solo llegan a producirse perdidas en los casos más extremos en los que por cada periódico vendido se pierde lo mismo o más que lo que ganamos por el periódico, por lo que esta es una situación favorable ya que esto casi nunca ocurre.
 
 
 \subsubsection{Resultados obtenidos con la distribución b}
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_100.png}
+	\caption{Con 100 repeticiones y la distribución b.}
+	\label{fig:ej1_a_100}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_1000.png}
+	\caption{Con 1000 repeticiones y la distribución b.}
+	\label{fig:ej1_a_1000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_5000.png}
+	\caption{Con 5000 repeticiones y la distribución b.}
+	\label{fig:ej1_a_5000}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_10000.png}
+	\caption{Con 10000 repeticiones y la distribución b.}
+	\label{fig:ej1_a_10000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_100000.png}
+	\caption{Con 100000 repeticiones y la distribución b.}
+	\label{fig:ej1_a_100000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_150000.png}
+	\caption{Con 150000 repeticiones y la distribución b.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
+
 
 \subsubsection{Resultados obtenidos con la distribución c}
 
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_100.png}
+	\caption{Con 100 repeticiones y la distribución c.}
+	\label{fig:ej1_a_100}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_1000.png}
+	\caption{Con 1000 repeticiones y la distribución c.}
+	\label{fig:ej1_a_1000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_5000.png}
+	\caption{Con 5000 repeticiones y la distribución c.}
+	\label{fig:ej1_a_5000}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_10000.png}
+	\caption{Con 10000 repeticiones y la distribución c.}
+	\label{fig:ej1_a_10000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_100000.png}
+	\caption{Con 100000 repeticiones y la distribución c.}
+	\label{fig:ej1_a_100000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_150000.png}
+	\caption{Con 150000 repeticiones y la distribución c.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
 
 
 \subsection{Modificación 1 del modelo}
 
 \subsubsection{Resultados obtenidos con la distribución a}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_100_1.png}
+	\caption{Con 100 repeticiones, la distribución a y la modificación 1.}
+	\label{fig:ej1_a_100}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_1000_1.png}
+	\caption{Con 1000 repeticiones, la distribución a y la modificación 1.}
+	\label{fig:ej1_a_1000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_5000_1.png}
+	\caption{Con 5000 repeticiones, la distribución a y la modificación 1.}
+	\label{fig:ej1_a_5000}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_10000_1.png}
+	\caption{Con 10000 repeticiones, la distribución a y la modificación 1.}
+	\label{fig:ej1_a_10000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_100000_1.png}
+	\caption{Con 100000 repeticiones, la distribución a y la modificación 1.}
+	\label{fig:ej1_a_100000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_150000_1.png}
+	\caption{Con 150000 repeticiones, la distribución a y la modificación 1.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
+
 
 
 \subsubsection{Resultados obtenidos con la distribución b}
 
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_100_1.png}
+	\caption{Con 100 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_100}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_1000_1.png}
+	\caption{Con 1000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_1000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_5000_1.png}
+	\caption{Con 5000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_5000}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_10000_1.png}
+	\caption{Con 10000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_10000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_100000_1.png}
+	\caption{Con 100000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_100000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_150000_1.png}
+	\caption{Con 150000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
+
 \subsubsection{Resultados obtenidos con la distribución c}
 
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_100_1.png}
+	\caption{Con 100 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_100}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_1000_1.png}
+	\caption{Con 1000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_1000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_5000_1.png}
+	\caption{Con 5000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_5000}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_10000_1.png}
+	\caption{Con 10000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_10000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_100000_1.png}
+	\caption{Con 100000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_100000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_150000_1.png}
+	\caption{Con 150000 repeticiones, la distribución b y la modificación 1.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
 
 \subsection{Modificación 2 del modelo}
 
 \subsubsection{Resultados obtenidos con la distribución a}
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_100_2.png}
+	\caption{Con 100 repeticiones, la distribución a y la modificación 2.}
+	\label{fig:ej1_a_100}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_1000_2.png}
+	\caption{Con 1000 repeticiones, la distribución a y la modificación 2.}
+	\label{fig:ej1_a_1000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_5000_2.png}
+	\caption{Con 5000 repeticiones, la distribución a y la modificación 2.}
+	\label{fig:ej1_a_5000}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_10000_2.png}
+	\caption{Con 10000 repeticiones, la distribución a y la modificación 2.}
+	\label{fig:ej1_a_10000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_100000_2.png}
+	\caption{Con 100000 repeticiones, la distribución a y la modificación 2.}
+	\label{fig:ej1_a_100000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_a/datos_a_150000_1.png}
+	\caption{Con 150000 repeticiones, la distribución a y la modificación 1.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
+
 
 \subsubsection{Resultados obtenidos con la distribución b}
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_100_2.png}
+	\caption{Con 100 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_100}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_1000_2.png}
+	\caption{Con 1000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_1000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_5000_2.png}
+	\caption{Con 5000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_5000}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_10000_2.png}
+	\caption{Con 10000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_10000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_100000_2.png}
+	\caption{Con 100000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_100000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_b/datos_b_150000_2.png}
+	\caption{Con 150000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
 
 \subsubsection{Resultados obtenidos con la distribución c}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_100_2.png}
+	\caption{Con 100 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_100}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_1000_2.png}
+	\caption{Con 1000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_1000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_5000_2.png}
+	\caption{Con 5000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_5000}
+
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_10000_2.png}
+	\caption{Con 10000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_10000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_100000_2.png}
+	\caption{Con 100000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_100000}
+
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{prob_c/datos_c_150000_2.png}
+	\caption{Con 150000 repeticiones, la distribución b y la modificación 2.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
 
 
 
@@ -235,11 +701,35 @@ Para este segundo modelo de simulación de Montecarlo nos centraremos en el prob
 
 \subsubsection{Reordenación de la tabla de búsqueda}
 
-\subsubsection{Implementación de la búsqueda local}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{t_mejora1.png}
+	\caption{Reordenando la tabla de búsqueda.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
+
+
+\subsubsection{Implementación de la búsqueda binaria}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{t_mejora2.png}
+	\caption{Aplicando una búsqueda binaria en lugar de secuencial.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
 
 \subsubsection{Ejecución en tiempo constante para la distribución a}
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.3]{t_mejora3.png}
+	\caption{Ejecución en tiempo constante para la distribución a.}
+	\label{fig:ej1_a_150000}
+
+\end{figure}
 
 \subsection{Implementación de generadores de datos básicos}
 
