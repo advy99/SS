@@ -212,9 +212,11 @@ Tras realizar las distintas ejecuciones, obtenemos estos resultados:
 
 \subsubsection{Resultados obtenidos con la distribución a}
 
+La distribución a se basa en una distribución de probabilidad uniforme, es decir, todos los valores de demanda tienen las mismas probabilidades de aparecer.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_100.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_100.png}
 	\caption{Con 100 repeticiones y la distribución a.}
 	\label{fig:ej1_a_100}
 
@@ -222,7 +224,7 @@ Tras realizar las distintas ejecuciones, obtenemos estos resultados:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_1000.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_1000.png}
 	\caption{Con 1000 repeticiones y la distribución a.}
 	\label{fig:ej1_a_1000}
 
@@ -230,7 +232,7 @@ Tras realizar las distintas ejecuciones, obtenemos estos resultados:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_5000.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_5000.png}
 	\caption{Con 5000 repeticiones y la distribución a.}
 	\label{fig:ej1_a_5000}
 
@@ -239,7 +241,7 @@ Tras realizar las distintas ejecuciones, obtenemos estos resultados:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_10000.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_10000.png}
 	\caption{Con 10000 repeticiones y la distribución a.}
 	\label{fig:ej1_a_10000}
 
@@ -247,7 +249,7 @@ Tras realizar las distintas ejecuciones, obtenemos estos resultados:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_100000.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_100000.png}
 	\caption{Con 100000 repeticiones y la distribución a.}
 	\label{fig:ej1_a_100000}
 
@@ -255,7 +257,7 @@ Tras realizar las distintas ejecuciones, obtenemos estos resultados:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_150000.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_150000.png}
 	\caption{Con 150000 repeticiones y la distribución a.}
 	\label{fig:ej1_a_150000}
 
@@ -268,10 +270,11 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \subsubsection{Resultados obtenidos con la distribución b}
 
+La distribución b se basa en una distribución de probabilidad proporcional siguiendo $100 - d$, es decir, los valores más pequeños de d tendrán más probabilidades de aparecer.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_100.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_100.png}
 	\caption{Con 100 repeticiones y la distribución b.}
 	\label{fig:ej1_a_100}
 
@@ -279,7 +282,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_1000.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_1000.png}
 	\caption{Con 1000 repeticiones y la distribución b.}
 	\label{fig:ej1_a_1000}
 
@@ -287,7 +290,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_5000.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_5000.png}
 	\caption{Con 5000 repeticiones y la distribución b.}
 	\label{fig:ej1_a_5000}
 
@@ -296,7 +299,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_10000.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_10000.png}
 	\caption{Con 10000 repeticiones y la distribución b.}
 	\label{fig:ej1_a_10000}
 
@@ -304,7 +307,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_100000.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_100000.png}
 	\caption{Con 100000 repeticiones y la distribución b.}
 	\label{fig:ej1_a_100000}
 
@@ -312,20 +315,24 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_150000.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_150000.png}
 	\caption{Con 150000 repeticiones y la distribución b.}
 	\label{fig:ej1_a_150000}
 
 \end{figure}
 
 
+Vemos como en este caso, en comparación con el caso a, los valores óptimos se encuentran mucho más a la izquierda en el eje X ya que es menos probable el que neceitemos una demanda alta, además de que las pérdidas son mucho mayores en valores altos, ya que casi nunca necesitaremos tantos periódicos, por lo que podemos intuir que el funcionamiento es correcto y se acerca a lo esperado.
+
+
 \subsubsection{Resultados obtenidos con la distribución c}
 
 
+La distribución c se basa en una distribución de probabilidad triangular, en la que los valores cercanos a 0 y 100 tienen la menor probabilidad a aparecer y los valores cercanos a 50 son más probables.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_100.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_100.png}
 	\caption{Con 100 repeticiones y la distribución c.}
 	\label{fig:ej1_a_100}
 
@@ -333,7 +340,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_1000.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_1000.png}
 	\caption{Con 1000 repeticiones y la distribución c.}
 	\label{fig:ej1_a_1000}
 
@@ -341,7 +348,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_5000.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_5000.png}
 	\caption{Con 5000 repeticiones y la distribución c.}
 	\label{fig:ej1_a_5000}
 
@@ -350,7 +357,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_10000.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_10000.png}
 	\caption{Con 10000 repeticiones y la distribución c.}
 	\label{fig:ej1_a_10000}
 
@@ -358,7 +365,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_100000.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_100000.png}
 	\caption{Con 100000 repeticiones y la distribución c.}
 	\label{fig:ej1_a_100000}
 
@@ -366,7 +373,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_150000.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_150000.png}
 	\caption{Con 150000 repeticiones y la distribución c.}
 	\label{fig:ej1_a_150000}
 
@@ -379,7 +386,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_100_1.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_100_1.png}
 	\caption{Con 100 repeticiones, la distribución a y la modificación 1.}
 	\label{fig:ej1_a_100}
 
@@ -387,7 +394,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_1000_1.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_1000_1.png}
 	\caption{Con 1000 repeticiones, la distribución a y la modificación 1.}
 	\label{fig:ej1_a_1000}
 
@@ -395,7 +402,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_5000_1.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_5000_1.png}
 	\caption{Con 5000 repeticiones, la distribución a y la modificación 1.}
 	\label{fig:ej1_a_5000}
 
@@ -404,7 +411,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_10000_1.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_10000_1.png}
 	\caption{Con 10000 repeticiones, la distribución a y la modificación 1.}
 	\label{fig:ej1_a_10000}
 
@@ -412,7 +419,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_100000_1.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_100000_1.png}
 	\caption{Con 100000 repeticiones, la distribución a y la modificación 1.}
 	\label{fig:ej1_a_100000}
 
@@ -420,7 +427,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_150000_1.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_150000_1.png}
 	\caption{Con 150000 repeticiones, la distribución a y la modificación 1.}
 	\label{fig:ej1_a_150000}
 
@@ -434,7 +441,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_100_1.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_100_1.png}
 	\caption{Con 100 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_100}
 
@@ -442,7 +449,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_1000_1.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_1000_1.png}
 	\caption{Con 1000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_1000}
 
@@ -450,7 +457,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_5000_1.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_5000_1.png}
 	\caption{Con 5000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_5000}
 
@@ -459,7 +466,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_10000_1.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_10000_1.png}
 	\caption{Con 10000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_10000}
 
@@ -467,7 +474,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_100000_1.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_100000_1.png}
 	\caption{Con 100000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_100000}
 
@@ -475,7 +482,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_150000_1.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_150000_1.png}
 	\caption{Con 150000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_150000}
 
@@ -487,7 +494,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_100_1.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_100_1.png}
 	\caption{Con 100 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_100}
 
@@ -495,7 +502,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_1000_1.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_1000_1.png}
 	\caption{Con 1000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_1000}
 
@@ -503,7 +510,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_5000_1.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_5000_1.png}
 	\caption{Con 5000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_5000}
 
@@ -512,7 +519,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_10000_1.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_10000_1.png}
 	\caption{Con 10000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_10000}
 
@@ -520,7 +527,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_100000_1.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_100000_1.png}
 	\caption{Con 100000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_100000}
 
@@ -528,7 +535,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_150000_1.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_150000_1.png}
 	\caption{Con 150000 repeticiones, la distribución b y la modificación 1.}
 	\label{fig:ej1_a_150000}
 
@@ -541,7 +548,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_100_2.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_100_2.png}
 	\caption{Con 100 repeticiones, la distribución a y la modificación 2.}
 	\label{fig:ej1_a_100}
 
@@ -549,7 +556,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_1000_2.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_1000_2.png}
 	\caption{Con 1000 repeticiones, la distribución a y la modificación 2.}
 	\label{fig:ej1_a_1000}
 
@@ -557,7 +564,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_5000_2.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_5000_2.png}
 	\caption{Con 5000 repeticiones, la distribución a y la modificación 2.}
 	\label{fig:ej1_a_5000}
 
@@ -566,7 +573,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_10000_2.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_10000_2.png}
 	\caption{Con 10000 repeticiones, la distribución a y la modificación 2.}
 	\label{fig:ej1_a_10000}
 
@@ -574,7 +581,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_100000_2.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_100000_2.png}
 	\caption{Con 100000 repeticiones, la distribución a y la modificación 2.}
 	\label{fig:ej1_a_100000}
 
@@ -582,7 +589,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_a/datos_a_150000_1.png}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_150000_1.png}
 	\caption{Con 150000 repeticiones, la distribución a y la modificación 1.}
 	\label{fig:ej1_a_150000}
 
@@ -594,7 +601,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_100_2.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_100_2.png}
 	\caption{Con 100 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_100}
 
@@ -602,7 +609,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_1000_2.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_1000_2.png}
 	\caption{Con 1000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_1000}
 
@@ -610,7 +617,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_5000_2.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_5000_2.png}
 	\caption{Con 5000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_5000}
 
@@ -619,7 +626,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_10000_2.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_10000_2.png}
 	\caption{Con 10000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_10000}
 
@@ -627,7 +634,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_100000_2.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_100000_2.png}
 	\caption{Con 100000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_100000}
 
@@ -635,7 +642,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_b/datos_b_150000_2.png}
+	\includegraphics[scale = 0.2]{prob_b/datos_b_150000_2.png}
 	\caption{Con 150000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_150000}
 
@@ -645,7 +652,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_100_2.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_100_2.png}
 	\caption{Con 100 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_100}
 
@@ -653,7 +660,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_1000_2.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_1000_2.png}
 	\caption{Con 1000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_1000}
 
@@ -661,7 +668,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_5000_2.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_5000_2.png}
 	\caption{Con 5000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_5000}
 
@@ -670,7 +677,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_10000_2.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_10000_2.png}
 	\caption{Con 10000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_10000}
 
@@ -678,7 +685,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_100000_2.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_100000_2.png}
 	\caption{Con 100000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_100000}
 
@@ -686,7 +693,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{prob_c/datos_c_150000_2.png}
+	\includegraphics[scale = 0.2]{prob_c/datos_c_150000_2.png}
 	\caption{Con 150000 repeticiones, la distribución b y la modificación 2.}
 	\label{fig:ej1_a_150000}
 
@@ -703,7 +710,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{t_mejora1.png}
+	\includegraphics[scale = 0.2]{t_mejora1.png}
 	\caption{Reordenando la tabla de búsqueda.}
 	\label{fig:ej1_a_150000}
 
@@ -714,7 +721,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{t_mejora2.png}
+	\includegraphics[scale = 0.2]{t_mejora2.png}
 	\caption{Aplicando una búsqueda binaria en lugar de secuencial.}
 	\label{fig:ej1_a_150000}
 
@@ -725,7 +732,7 @@ En este caso, en el que cualquier valor de demanda tiene la misma probabilidad d
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.3]{t_mejora3.png}
+	\includegraphics[scale = 0.2]{t_mejora3.png}
 	\caption{Ejecución en tiempo constante para la distribución a.}
 	\label{fig:ej1_a_150000}
 
