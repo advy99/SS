@@ -46,24 +46,31 @@ int main (int argc, char ** argv) {
 				 << "\t" << "Distribucion" << "\t" << "Ganancia esperada"
 				 << "\t" << "Desviacion tipica" << std::endl;
 
+
+	// las tablas son siempre las mismas, no tenemos porque generarlas en cada
+	// iteracion de s
+	if ( distribucion == 'a' ) {
+		tablademanda = construye_prop_a(100);
+
+	} else if ( distribucion == 'b' ) {
+		tablademanda = construye_prop_b(100);
+
+	} else if ( distribucion == 'c' ) {
+		tablademanda = construye_prop_c(100);
+
+	} else {
+		std::cerr << "Distribucion incorrecta, debe ser a, b o c" << std::endl;
+		exit(-2);
+	}
+
+
+
 	for ( int s = 0; s <= 100; s++ ){
 		sum = sum2 = 0.0;
+
+		// en cada iteracion de s restauramos la semilla a otra aleatoria
+		// para generar demandas distintas en cada iteracion
 		srand(time(NULL));
-
-		if ( distribucion == 'a' ) {
-			tablademanda = construye_prop_a(100);
-
-		} else if ( distribucion == 'b' ) {
-			tablademanda = construye_prop_b(100);
-
-		} else if ( distribucion == 'c' ) {
-			tablademanda = construye_prop_c(100);
-
-		} else {
-			std::cerr << "Distribucion incorrecta, debe ser a, b o c" << std::endl;
-			exit(-2);
-		}
-
 
 		for ( int i = 0; i < veces; i++ ) {
 			demanda = genera_demanda(tablademanda, 100);

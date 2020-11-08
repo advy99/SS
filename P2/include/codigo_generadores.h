@@ -1,5 +1,5 @@
-#ifndef CODGEN
-#define CODGEN
+#ifndef CODIGO_GENERADORES
+#define COGIDO_GENERADORES
 
 struct tabla_demanda {
 	int posicion;
