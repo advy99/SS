@@ -785,6 +785,10 @@ Observamos como esta mejora produce una ventaja sustancial en el tiempo de ejecu
 
 \subsubsection{Implementación de la búsqueda binaria}
 
+Como he comentado en el apartado anterior, la búsqueda en la implementación original se realiza de forma secuencial, que en el peor de los casos es de orden $O(n)$, sin embargo, como vimos en la asignatura de algorítmica, podemos implementar una búsqueda binaria que supondría un orden $O(log n)$, mejorando el tiempo de ejecución.
+
+Esta mejora valdría sobre todas las distribuciones, ya que no depende de la forma de construir la tabla, si no de como recorrerla. El resultado sería el siguiente:
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.2]{t_mejora2.png}
@@ -793,8 +797,13 @@ Observamos como esta mejora produce una ventaja sustancial en el tiempo de ejecu
 
 \end{figure}
 
+Como vemos, se mejoran los tiempos para todos los casos.
+
 \subsubsection{Ejecución en tiempo constante para la distribución a}
 
+Por último se nos pide implementar un método en el que la ejecución para la distribución a sea constante. Realmente, la distribución a, al ser una distribución uniforme, no es necesario implementar una tabla de búsqueda, ya que cada valor de la tabla de búsqueda corresponderá a $\frac{i}{n}$, siendo $i$ la posición en la tabla y $n$ el tamaño de la tabla. Por este motivo, en lugar de generar un número uniforme entre 0 y 1 y buscarlo en la tabla, podemos utilizar directamente $u * n$, siendo $u$ el número aleatorio uniforme entre 0 y 1. Por ejemplo, en nuestro caso, con una tabla de tamaño 100, si el uniforme obtenido es 0.66, buscaríamos en la tabla hasta encontrar ese elemento, pero es que sabemos que ese elemento está en la posición 66, ya que es $\frac{66}{100}$.
+
+Tras esta mejora, el resultado es el siguiente:
 
 \begin{figure}[H]
 	\centering
