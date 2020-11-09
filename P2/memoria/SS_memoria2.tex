@@ -324,6 +324,10 @@ La distribución b se basa en una distribución de probabilidad proporcional sig
 
 Vemos como en este caso, en comparación con el caso a, los valores óptimos se encuentran mucho más a la izquierda en el eje X ya que es menos probable el que neceitemos una demanda alta, además de que las pérdidas son mucho mayores en valores altos, ya que casi nunca necesitaremos tantos periódicos, por lo que podemos intuir que el funcionamiento es correcto y se acerca a lo esperado.
 
+Observamos que en el peor de los casos las pérdidas son mucho mayores que en el caso a, ya que es muy probable vender pocas unidades, por lo que si contratamos muchas, gran parte de estas no las conseguiremos vender, lo que supondrá un mayor coste.
+
+En definitiva, si el modelo real sige esta probabilidad sería recomendable ser austero ya que un gran número de material contratado no sería viable venderlo en su mayoría.
+
 
 \subsubsection{Resultados obtenidos con la distribución c}
 
@@ -380,9 +384,20 @@ La distribución c se basa en una distribución de probabilidad triangular, en l
 \end{figure}
 
 
+En este caso vemos como al inicio en todos los casos la ganancia es similar, ya que es poco probable que se vendan pocos periódicos, haciendo que hasta los 25 periódicos aproximadamente la ganancia sea equivalente al venderlos siempre todos, llegano a alcanzar el máximo entre las 45 y 59 unidades en los distintos casos de penalización por periódico no vendido, hasta el óptimo en 79 si la penalización es muy baja.
+
+Podemos ver que las perdidas que podemos llegar a alcanzar son similares a las del caso de la distribución a, porque en este caso es igual de probable que no se vendan ninguna unidad a muchas unidades, por lo que aunque contratemos una gran cantidad, se equilibra con las ventas, aunque en el caso extremo de unas pérdidas mayores que ganancias por periódico si nos generaría grandes pérdidas totales.
+
+Si el modelo real sigue esta distribución sería el caso más favorable si la penalización por no vender un periódico es muy grande, ya que nos aseguraríamos que una cantidad sustancial de periódicos vendidos. Sin embargo, en casos en los que la penalización no es tan grande, la distribución a nos ofrece buenos resultados.
+
 \subsection{Modificación 1 del modelo}
 
+Tras la experimentación anterior se nos pide incluir un nuevo modelo de funcionamiento en nuestro modelo, en el que en lugar de tener un gasto por cada unidad no vendida, se cobrará un único gasto fijo $z$ como devolución, por lo que si vendemos todas las unidades no se pagará nada, pero si no se vende alguna unidad, indiferentemente del número de unidades sin vender, se pagarán $z$ euros por la devolución.
+
+Estudiaremos esta modificación con unos valores de $z = 10, 50, 100, 500$ y para las tres distribuciones de probabilidad.
+
 \subsubsection{Resultados obtenidos con la distribución a}
+
 
 \begin{figure}[H]
 	\centering
@@ -432,6 +447,13 @@ La distribución c se basa en una distribución de probabilidad triangular, en l
 	\label{fig:ej1_a_150000}
 
 \end{figure}
+
+
+Vemos como en las ejecuciones con pocas repeticiones la curva se hace más dificil de interpretar, por lo que de nuevo me centraré en las ejecuciones con más repeticiones.
+
+Obervamos como en este caso la caida de las curvas es mucho más suave, haciendo que solo tengamos un caso de perdidas si el precio de la devolución es de 500 euros.
+
+En este caso, podemos ver que claramente la ganancia es mayor que sin la modificación, ya que cuando no se llega a vender una unidad, es indiferente el número de unidades no vendidas.
 
 
 
@@ -488,6 +510,11 @@ La distribución c se basa en una distribución de probabilidad triangular, en l
 
 \end{figure}
 
+
+En este caso la naturaleza de como funciona esta modificación se ve mucho más clara. Al tener mayor probabilidad una demanda baja, cuando nos acercamos a muchas unidades pedidas, se estanca el valor de la ganancia ya que aunque no se vendan las unidades, el precio a pagar es siempre el mismo, por lo que a partir de las 70 unidades vendidas, vemos como es extraño vender más unidades, pero el vender alguna unidad extra nos supone una mayor ventaja que comprar 20 unidades pero quedarnos sin material a vender, ya que supone mayor riesgo el comprar menos y que se quede una única sin vender, rebajaría la ganancia.
+
+También observamos que en el caso $z = 500$ el precio de devolución es tan alto que es mejor no contratar ninguna unidad, ya que por alta que sea la probabilidad de venderla, si una unidad no es vendida las perdidas serían mucho mayores.
+
 \subsubsection{Resultados obtenidos con la distribución c}
 
 
@@ -540,6 +567,10 @@ La distribución c se basa en una distribución de probabilidad triangular, en l
 	\label{fig:ej1_a_150000}
 
 \end{figure}
+
+En esta situación observamos que solventamos el problema que teniamos sin la modificación, ya que la distribución triangular nos permite tener altas ganancias hasta llegar a la mitad de unidades máximas, y a partir de ese punto mantenernos como en el caso de la distribución b, sin embargo esta distribución nos permite contratar más unidades para obtener una mayor ganancia ya que los valores mayores que 70 siguen teniendo una probabilidad alta en comparación con la distribución b.
+
+El único problema sería en el caso de que el coste de devolución sea muy alto, en el que rebajaría mucho la ganancia obtenida, sin embargo es el caso más opimista de todos los estudiados, ya que incluso siendo bastante pesimista y alto el coste de no vender un único periódico no llegaría a producir pérdidas en ningún caso.
 
 \subsection{Modificación 2 del modelo}
 
