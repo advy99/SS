@@ -572,7 +572,13 @@ En esta situación observamos que solventamos el problema que teniamos sin la mo
 
 El único problema sería en el caso de que el coste de devolución sea muy alto, en el que rebajaría mucho la ganancia obtenida, sin embargo es el caso más opimista de todos los estudiados, ya que incluso siendo bastante pesimista y alto el coste de no vender un único periódico no llegaría a producir pérdidas en ningún caso.
 
+
+
 \subsection{Modificación 2 del modelo}
+
+De nuevo se nos pide una última modificación, en este caso se permite escoger si asumir el gasto por unidad vendida o si realizar un único pago como devolución, por lo tanto el coste de devolución será el mínimo entre las unidades no vendidas por el coste de no vender una unidad y el pago del precio fijo $z$.
+
+Experimentaremos con los mismos valores de $z$ y de $y$ que en el apartado sin modificaciones y en el anterior.
 
 \subsubsection{Resultados obtenidos con la distribución a}
 
@@ -620,12 +626,15 @@ El único problema sería en el caso de que el coste de devolución sea muy alto
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale = 0.2]{prob_a/datos_a_150000_1.png}
-	\caption{Con 150000 repeticiones, la distribución a y la modificación 1.}
+	\includegraphics[scale = 0.2]{prob_a/datos_a_150000_2.png}
+	\caption{Con 150000 repeticiones, la distribución a y la modificación 2.}
 	\label{fig:ej1_a_150000}
 
 \end{figure}
 
+Con esta nueva modificación vemos que para esta distribución nunca se realizan pérdidas, ya que el poder elegir entre si pagar por cada unidad no vendida o si un único pago, haciendo que en los casos que queden muchas unidades sin vender, no se llegue a pagar tanto como para entrar en pérdidas.
+
+También observamos qeue mantenemos unos óptimos de unidades que nos aportan bastantes ganancias, incluso en los casos que nos suponen un mayor coste de devolución.
 
 \subsubsection{Resultados obtenidos con la distribución b}
 
@@ -679,12 +688,17 @@ El único problema sería en el caso de que el coste de devolución sea muy alto
 
 \end{figure}
 
+
+En esta ocasión, al utilizar la distribución proporcional, vemos como en los peores casos donde las unidades contratadas son tan altas y la demanda es muy poco probable en esos rangos, que si la penalización por unidades y el pago único es muy alto si nos puede llegar a tener pérdidas, sin emgargo eso solo ocurre en los casos extremos.
+
+En la mayoría de los casos nos permite estabilizarnos a partir de las 50 unidades, y como en la mayoría de las situaciones anteriores, se nos sugiere ser más austeros si las penalizaciones son grandes y poder dar más margen si las penalizaciones son más bajas. La ventaja de este modelo es que tenemos dos vías de que la penalización sea baja, dando más posibilidad de encontrar un óptimo alto.
+
 \subsubsection{Resultados obtenidos con la distribución c}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.2]{prob_c/datos_c_100_2.png}
-	\caption{Con 100 repeticiones, la distribución b y la modificación 2.}
+	\caption{Con 100 repeticiones, la distribución c y la modificación 2.}
 	\label{fig:ej1_a_100}
 
 \end{figure}
@@ -692,7 +706,7 @@ El único problema sería en el caso de que el coste de devolución sea muy alto
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.2]{prob_c/datos_c_1000_2.png}
-	\caption{Con 1000 repeticiones, la distribución b y la modificación 2.}
+	\caption{Con 1000 repeticiones, la distribución c y la modificación 2.}
 	\label{fig:ej1_a_1000}
 
 \end{figure}
@@ -700,7 +714,7 @@ El único problema sería en el caso de que el coste de devolución sea muy alto
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.2]{prob_c/datos_c_5000_2.png}
-	\caption{Con 5000 repeticiones, la distribución b y la modificación 2.}
+	\caption{Con 5000 repeticiones, la distribución c y la modificación 2.}
 	\label{fig:ej1_a_5000}
 
 \end{figure}
@@ -709,7 +723,7 @@ El único problema sería en el caso de que el coste de devolución sea muy alto
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.2]{prob_c/datos_c_10000_2.png}
-	\caption{Con 10000 repeticiones, la distribución b y la modificación 2.}
+	\caption{Con 10000 repeticiones, la distribución c y la modificación 2.}
 	\label{fig:ej1_a_10000}
 
 \end{figure}
@@ -717,7 +731,7 @@ El único problema sería en el caso de que el coste de devolución sea muy alto
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.2]{prob_c/datos_c_100000_2.png}
-	\caption{Con 100000 repeticiones, la distribución b y la modificación 2.}
+	\caption{Con 100000 repeticiones, la distribución c y la modificación 2.}
 	\label{fig:ej1_a_100000}
 
 \end{figure}
@@ -725,12 +739,14 @@ El único problema sería en el caso de que el coste de devolución sea muy alto
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.2]{prob_c/datos_c_150000_2.png}
-	\caption{Con 150000 repeticiones, la distribución b y la modificación 2.}
+	\caption{Con 150000 repeticiones, la distribución c y la modificación 2.}
 	\label{fig:ej1_a_150000}
 
 \end{figure}
 
+De nuevo se repite una situación similar a la modificación 1. Como esta distribución nos asegura un número relativamente alto de unidades vendidas, vemos como obtenemos grandes beneficios en cada óptimo, e incluso nos permite arriesgarnos sin llegar a tener pérdidas.
 
+En resumen, el permitir tener dos vías de devolución nos añade la ventaja de poder cambiar entre una y otra, minimizando la pérdida y obteniendo unos óptimos de unidades a pedir mayores, y con mayor beneficio.
 
 
 \section{Generadores de datos}
