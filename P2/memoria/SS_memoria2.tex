@@ -751,9 +751,28 @@ En resumen, el permitir tener dos vías de devolución nos añade la ventaja de 
 
 \section{Generadores de datos}
 
+En este apartado de la práctica trabajaremos con generadores de datos. Desde la mejora de los generadores utilizado hasta ahora en la práctica, como el estudio e implementación de generadores de datos propio, aunque sean básicos.
+
 \subsection{Mejoras de los generadores de datos}
 
+En este apartado estudiaremos los generadores de datos dados. Estos generadores han sido implementados aplicando directamente el método de tablas de búsqueda, sin embargo no se han tenido en cuenta diversos aspectos que permitan una mejor ejecución.
+
+Se nos proponen tres mejoras a los generadores de datos proporcionados:
+
 \subsubsection{Reordenación de la tabla de búsqueda}
+
+En esta primera mejora nos basamos en que para buscar en la tabla de búsqueda esta búsqueda se hace de forma secuencial, parando la búsqueda cuando encontramos el primer elemento que cumple la condición. Por este motivo, podemos intuir que si ordenamos la tabla de forma que se comprueben primero los valores con mayor probabilidad, se encontrará en menor tiempo el objetivo, por lo que se necesitará un tiempo menor.
+
+Aun así, esta mejora solo funcionará en la distribución de probabilidad c, ya que la distribución a todos los valores tienen la misma probabilidad, por lo que es imposible ordenar algo que es equivalente para todos los valores, y en el caso de la distribución b ya esta ordenada de forma decrediente, ya que al ser proporcional a la demanda, la probabilidad va decreciendo según aumentamos el valor.
+
+
+El caso en el que funcionará es la distribución de probabilidad c, ya que los valores más probables están en el centro de la tabla, mientras que los menos probables en los extremos.
+
+Para implementar esta mejora en el código he utilizado una estructura propia, que cada instancia contiene la posición que le correspondería en la tabla original, y la probabilidad acumulada. De esta forma podemos poner en la primera posición de la tabla el valor que estaría en la mitad (el 50 en nuestro caso), con su correspondiente probabilidad, e ir rellenando la tabla del centro a los extremos, decrementando poco a poco la probabilidad de que aparezcan los elementos segun nos alejamos del centro. De esta forma obtendremos una tabla ordenada con los valores más probables al principio, en nuestro caso correspondería con una tabla que en la posición 0 tendría el elemento que estaría en la posición 50 en la original, en la 1 el 49, en la 2 el 51, y así sucesivamente.
+
+Es importante almacenar el indice que le correspondería en la tabla original, ya que ese sería el valor de la demanda correspondiente.
+
+Observamos como esta mejora produce una ventaja sustancial en el tiempo de ejecución:
 
 \begin{figure}[H]
 	\centering
