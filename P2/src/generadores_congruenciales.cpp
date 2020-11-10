@@ -86,6 +86,8 @@ std::pair<int, int> obtener_longitud_generador(unsigned long int (*generador)(un
 
 	unsigned long int i = 0;
 
+	// ponemos la condicion de salida, para no tener que probar con
+	// todos los valores, sabemos que el primer generador es de periodo máximo
 	while (i < MODULO && mayor_longitud < MODULO) {
 
 		unsigned long int semilla = i;
@@ -97,17 +99,21 @@ std::pair<int, int> obtener_longitud_generador(unsigned long int (*generador)(un
 
 		bool encontrado_periodo = false;
 
+		// mientras no encuentre un valor repetido, insertamos y seguimos
 		while ( !encontrado_periodo ) {
 			nuevo_valor = generador(semilla);
 
 			generados.insert(nuevo_valor);
 
+			// si al hacer el insert no se modifica el tamaño, es que ya estaba
+			// el elemento (el set no permite elementos repetidos)
 			encontrado_periodo = tam_anterior == generados.size();
 
 			tam_anterior = generados.size();
 
 		}
 
+		// si la nueva semilla tiene mayor longitud actualizamos
 		if ( mayor_longitud < generados.size() ) {
 			mayor_longitud = generados.size();
 			semilla_mayor = i;
