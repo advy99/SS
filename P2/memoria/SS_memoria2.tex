@@ -813,9 +813,40 @@ Tras esta mejora, el resultado es el siguiente:
 
 \end{figure}
 
+
+
+\newpage
+
 \subsection{Implementación de generadores de datos básicos}
 
+En esta sección se nos pide implementar dos generadores de datos congruenciales utilizando cuatro métodos distintos.
+
+Como se explicó en teoría, el método se basa en una formula del estilo:
+
+\[ x_{n+1} = f(x_{n}) \]
+
+En concreto:
+
+\[ x_{n+1} = (a \cdot x_{n} + c) \mod m \]
+
+Donde $a$ es el multiplicador, $c$ el incremento, y $m$ el módulo.
+
+Este tipo de generadores de datos ciclarán ya que solo dispone de un número finito de números. Al conjunto de números que cicla lo llamaremos periodo del generador, y nos interesará utilizar generadores con grandes periodos.
+
+Para esta sección se nos pide crear dos generadores de datos congruenciales con las siguientes características:
+
+\begin{enumerate}
+	\item $a = 2061$, $c = 4321$ y $m = 10000$
+	\item $a = 2060$, $c = 4321$ y $m = 10000$
+
+\end{enumerate}
+
+
+También se nos pide implementarlo utilizando cuatro tipos distintos de aritméticas.
+
 \subsubsection{Utilizando aritmética entera}
+
+En este caso para implementar el generador utilizaremos el operador $\%$ de C/C++.
 
 
 \subsubsection{Utilizando aritmética real}
