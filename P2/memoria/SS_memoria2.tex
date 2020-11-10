@@ -827,7 +827,7 @@ Como se explicó en teoría, el método se basa en una formula del estilo:
 
 En concreto:
 
-\[ x_{n+1} = (a \cdot x_{n} + c) \mod m \]
+\[ x_{n+1} = (a \cdot x_{n} + c) mod m \]
 
 Donde $a$ es el multiplicador, $c$ el incremento, y $m$ el módulo.
 
@@ -841,6 +841,16 @@ Para esta sección se nos pide crear dos generadores de datos congruenciales con
 
 \end{enumerate}
 
+Vemos como la única diferencia es el multiplicador. En este caso, el módulo al ser de $10000$ el periodo máximo, el número máximo de números aleatorios que puede llegar generar es de $10000$.
+
+Como vemos en el incremento y el módulo, son primos relativos, cumpliendo la primera condición que vimos en teoría para que un generador tenga periodo máximo.
+
+La segunda condición se trataba de que $a - 1$ ha de ser múltiplo de todos los primos que dividan a $m$. En este caso, $10000$ es tiene al $2$ y al $5$ como primos que lo dividen, y que como vemos, $2061 - 1$ si es divisible por $2$ y por $5$, pero $2060 - 1$ no lo cumple, luego ya sabemos que el segundo generador no llegará a tener un periodo máximo.
+
+Por último, para que el primer generador sea de periodo máximo se debe cumplir que $a - 1$ sea múltiplo de $4$ siempre que $m$ lo sea también, que en este caso tanto $10000$ como $2061 - 1$ si son múltiplos de $4$.
+
+Con esto obtenemos que el primer generador será de periodo máximo, mientras que el segundo no lo será.
+
 
 También se nos pide implementarlo utilizando cuatro tipos distintos de aritméticas.
 
@@ -848,15 +858,32 @@ También se nos pide implementarlo utilizando cuatro tipos distintos de aritmét
 
 En este caso para implementar el generador utilizaremos el operador $\%$ de C/C++.
 
+Tras probar esta versión obtenemos el periodo máximo con el primer generador en la primera semilla que probamos, la 0, y es que si tenemos un generador de periodo máximo, la semilla inicial no influye en que el periodo sea máximo o no, como vamos a generar todos los números, es indiferente desde cual comencemos.
+
+Sin embargo, en el segundo generador probando con todas las semillas posibles de cara a encontrar la longitud más grande la encontramos con la semilla 0, y una secuencia de tan solo 5 números, que como vemos es bastante mala, por lo tanto el generador deja mucho que desear y no sería recomendable utilizarlo.
 
 \subsubsection{Utilizando aritmética real}
+
+Esta modificación es un intento de mejorar la primera implementación, de cara a intentar que el segundo generador consiga una longitud un poco más grande al realizar los cálculos con números con coma flotante y así permitir que las pequeñas variaciones de los decimales permitan aumentar la longitud de la secuencia.
+
+Para realizar implementar este generador calcularemos la división de $(a \cdot x + c)$ entre $m$, y luego restaremos el resultado con la parte entera del resultado y lo multiplicaremos por $x$. Debido a que no podemos realizar comparaciones con números reales en un lenguaje de programación ya que el error de redondeo haría que todos los números sean distintos pero en realidad los valores generados seán los mismos, por lo tanto de cara a realizar las comprobaciones de si se ha generado un número o no solo se tendrá en cuenta la parte entera.
+
+Con esta implementación obtenemos una longitud de secuencia de tan solo $542$ números con el generador 1 utilizando como semilla el valor 4387, que en principio debería tener una longitud de secuencia máxima y generar $m$ números, sin embargo se ha mejorado el resultado del generador 2, pasando de $5$ números distintos generados a $14$ números distintos generados con la semilla 2.
+
+Este comportamiento se debe a que los errores de redondeo hacen que se repita un número antes de lo esperado haciendo que se corte la secuencia antes de lo esperado, aunque en el caso del segundo generador esto nos favorece, ya que esos errores de redondeo hace cambiar la cadena, y que esta sea un poco más larga.
 
 
 \subsubsection{Utilizando aritmética real corregida}
 
+Para resolver el problema del redondeo, aplicaremos una aritmética real corregida, en la que tendrémos en cuenta el redondeo, y por lo tanto al resultado de la aritmética real original le sumaremos $0.5$ y nos quedaremos con la parte entera, corrigiendo el redondeo.
+
+Tras esto, volvemos a a la misma situación que con la aritmética entera, en la que el generador 1 obtiene la longitud máxima de secuencia, mientras que el segundo generador sigue consiguiendo $5$ como secuencia con más números distintos, y es que al aplicar la corrección se obtienen las mismas secuencias que con la aritmética entera.
+
 
 
 \subsubsection{Utilizando aritmética real con fmod}
+
+Por último se pide utilizar la función fmod para ver en que forma modifica el resultado, sin embargo esta función nos devuelve el módulo redondeando con cero, luego como es de esperar obtenemos el mismo resultado que con la aritmética corregida, en la que el generador 1 obtiene la longitud máxima de secuencia, mientras que el segundo generador sigue consiguiendo $5$ como secuencia con más números distintos, ya que se trata de la misma operación.
 
 % \begin{thebibliography}{9}
 %
