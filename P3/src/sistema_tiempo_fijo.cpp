@@ -1,18 +1,24 @@
 #include <iostream>
 #include <cstdlib>
+#include <chrono>
 #include <cmath>
 
-using namespace std;
 
 // bin/sistema_tiempo_fijo hayrepuesto tfallo trepar tiempodeparar
 int generar(float media){
+
 	float u = (float) random();
+
 	u = (float) (u/(RAND_MAX+1.0));
+
 	float n = (-media * log(1-u));
+
 	int ent = ceil(n);
+
 	if (ent == 0){
 		ent++;
 	}
+
 	return ent;
 }
 
@@ -36,88 +42,88 @@ int main(int argc, char ** argv){
 	int tiempodeparar;
 
 	if( argc != 5 ){
-		cerr << "Numero incorrecto de argumentos" << endl;
-		cerr << "bin/sistema_tiempo_fijo repuesto tfallo trepar tiempodeparar" << endl;
-		exit(1);
+		std::cerr << "Numero incorrecto de argumentos" << std::endl;
+		std::cerr << "bin/sistema_tiempo_fijo repuesto tfallo trepar tiempodeparar" << std::endl;
+		exit(-1);
+
 	} else {
-		if(atoi(argv[1]) == 0){
-			hayrepuesto = false;
-		} else if(atoi(argv[1]) == 1){
-			hayrepuesto = true;
-		} else {
-			cerr << "Repuesto solo puede ser 0 o 1" << endl;
-			exit(1);
-		}
+		hayrepuesto = atoi(argv[1]) != 0;
 		tfallo = atoi(argv[2]);
 		trepar = atoi(argv[3]);
 		tiempodeparar = atoi(argv[4]);
 	}
 
+	auto tiempo_inicio = std::chrono::system_clock::now();
+
 	int tiempofallomaquina = reloj + generar(tfallo);
 
 	while (reloj <= tiempodeparar){
-/*
-		cout << "Reloj "<< reloj << endl;
-		cout << "Tiempofallomaquina " << tiempofallomaquina << endl;
-		cout << "Tiempofinreparacion " << tiempofinreparacion << endl;
-		cout << "Reparadorlibre " << reparadorlibre << endl;
-		cout << "Maquinaesperando " << maquinaesperando << endl;
-		cout << "Hayrepuesto " << hayrepuesto << endl;
-		cout << "Fallo " << fallo << endl;
-		cout << "Durfallos " << durfallos << endl;
-		cout << "Numfallos " << numfallos << endl;
-		cout << "------" << endl;
-*/
+
 		if(reloj == tiempofallomaquina){
+
 			if(reparadorlibre){
 				reparadorlibre = false;
 				tiempofinreparacion = reloj + generar(trepar);
+
 			} else {
+
 				maquinaesperando = true;
 			}
+
+
 			if(hayrepuesto){
 				hayrepuesto = false;
 				tiempofallomaquina = reloj + generar(tfallo);
+
 			} else if(!fallo){
 				fallo = true;
 				comienzofallo = reloj;
 				numfallos++;
 				tiempofallomaquina = 1000000000;
 			}
+
 		}
+
+
 		if(reloj == tiempofinreparacion){
+
 			if(maquinaesperando){
 				maquinaesperando = false;
 				tiempofinreparacion = reloj + generar(trepar);
+
 			} else {
 				reparadorlibre = true;
 				tiempofinreparacion = 1000000000;
+
 			}
+
+
 			if(!fallo){
 				hayrepuesto = true;
 			} else {
+
 				tiempofallomaquina = reloj + generar(tfallo);
 				durfallos += reloj - comienzofallo;
 				fallo = false;
+
 			}
+
 		}
+
 		reloj++;
-/*
-		cout << "Tiempofallomaquina " << tiempofallomaquina << endl;
-		cout << "Tiempofinreparacion " << tiempofinreparacion << endl;
-		cout << "Reparadorlibre " << reparadorlibre << endl;
-		cout << "Maquinaesperando " << maquinaesperando << endl;
-		cout << "Hayrepuesto " << hayrepuesto << endl;
-		cout << "Fallo " << fallo << endl;
-		cout << "Durfallos " << durfallos << endl;
-		cout << "Numfallos " << numfallos << endl;
-		cout << "-----------------------------------------" << endl;
-*/
 	}
+
 	if(fallo){
 		durfallos += reloj - comienzofallo;
 	}
-	cout << "Duración de los fallos: " << durfallos << endl;
-	cout << "Número de fallos: " << numfallos << endl;
-	cout << "Duración media de los fallos: " << durfallos/numfallos << endl;
+
+	auto tiempo_fin = std::chrono::system_clock::now();
+
+	std::chrono::duration<double> t_ejecucion = tiempo_fin - tiempo_inicio;
+
+	std::cout << "D. fallos: " << durfallos << std::endl;
+	std::cout << "N. Fallos: " << numfallos << std::endl;
+	std::cout << "D. media fallos: " << durfallos/numfallos << std::endl;
+	std::cout << "T. ejecucion simulación: " << t_ejecucion.count() << std::endl;
+
 }
