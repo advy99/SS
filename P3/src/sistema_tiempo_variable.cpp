@@ -4,36 +4,36 @@
 #include <cmath>
 
 
-float generar(float media){
+double generar(double media){
 
-	float u = (float) random();
+	double u = (double) random();
 
-	u = (float) (u/(RAND_MAX+1.0));
+	u = (double) (u/(RAND_MAX+1.0));
 
 	return (-media * log(1-u));
 }
 
-bool comparar_reales( const float a, const float b, const float epsilon = 0.00005 ) {
+bool comparar_reales( const double a, const double b, const double epsilon = 0.00000005 ) {
 	return fabs(a - b) < epsilon;
 }
 
 int main(int argc, char ** argv){
 
-	srandom(time(NULL));
-	//srandom(1);
+	//srandom(time(NULL));
+	srandom(1);
 
-	float reloj = 0.0;
+	double reloj = 0.0;
 	bool fallo = false;
 	bool reparadorlibre = true;
 	bool maquinaesperando = false;
-	float numfallos = 0.0;
-	float durfallos = 0.0;
-	float tiempofinreparacion = 10e30;
-	float comienzofallo = 0.0;
+	double numfallos = 0.0;
+	double durfallos = 0.0;
+	double tiempofinreparacion = 10e30;
+	double comienzofallo = 0.0;
 	bool hayrepuesto;
-	float tfallo;
-	float trepar;
-	float tiempodeparar;
+	double tfallo;
+	double trepar;
+	double tiempodeparar;
 
 	if( argc != 5 ){
 		std::cerr << "Numero incorrecto de argumentos" << std::endl;
@@ -48,15 +48,15 @@ int main(int argc, char ** argv){
 		tiempodeparar = atoi(argv[4]);
 	}
 
-	auto tiempo_inicio = std::chrono::system_clock::now();
+	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
-	float tiempofallomaquina = reloj + generar(tfallo);
+	double tiempofallomaquina = reloj + generar(tfallo);
 
 	while (reloj <= tiempodeparar){
 
 		reloj = std::min(tiempofallomaquina, tiempofinreparacion);
 
-		if( comparar_reales(reloj, tiempofallomaquina) ){
+		if( comparar_reales(reloj, tiempofallomaquina) ) {
 
 			if(reparadorlibre){
 				reparadorlibre = false;
@@ -81,7 +81,7 @@ int main(int argc, char ** argv){
 		}
 
 
-		if( comparar_reales(reloj, tiempofinreparacion)) {
+		if( comparar_reales(reloj, tiempofinreparacion) ) {
 
 			if(maquinaesperando){
 				maquinaesperando = false;
@@ -108,9 +108,9 @@ int main(int argc, char ** argv){
 		durfallos += reloj - comienzofallo;
 	}
 
-	auto tiempo_fin = std::chrono::system_clock::now();
+	auto tiempo_fin = std::chrono::high_resolution_clock::now();
 
-	std::chrono::duration<double> t_ejecucion = tiempo_fin - tiempo_inicio;
+	std::chrono::duration<double> t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
 	std::cout << "Duración de los fallos: " << durfallos << std::endl;
 	std::cout << "Número de fallos: " << numfallos << std::endl;
