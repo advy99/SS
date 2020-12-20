@@ -188,7 +188,7 @@ int main(int argc, char *argv[]) {
 
 	if (argc != 7) {
 		printf("\n\nFormato Argumentos -> totalMaq maqRepuesto reparadores trepar tfallo tparada\n\n");
-		exit(1);
+		exit(-1);
 	}
 
 	n = atoi(argv[1]);
