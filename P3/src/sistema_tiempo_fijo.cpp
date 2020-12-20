@@ -25,8 +25,8 @@ int generar(float media){
 
 int main(int argc, char ** argv){
 
-	srandom(time(NULL));
-	//srandom(1);
+	//srandom(time(NULL));
+	srandom(1);
 
 	int reloj = 0;
 	bool fallo = false;
@@ -53,7 +53,7 @@ int main(int argc, char ** argv){
 		tiempodeparar = atoi(argv[4]);
 	}
 
-	auto tiempo_inicio = std::chrono::system_clock::now();
+	auto tiempo_inicio = std::chrono::high_resolution_clock::now();
 
 	int tiempofallomaquina = reloj + generar(tfallo);
 
@@ -117,9 +117,9 @@ int main(int argc, char ** argv){
 		durfallos += reloj - comienzofallo;
 	}
 
-	auto tiempo_fin = std::chrono::system_clock::now();
+	auto tiempo_fin = std::chrono::high_resolution_clock::now();
 
-	std::chrono::duration<double> t_ejecucion = tiempo_fin - tiempo_inicio;
+	std::chrono::duration<double> t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
 	std::cout << "D. fallos: " << durfallos << std::endl;
 	std::cout << "N. Fallos: " << numfallos << std::endl;
