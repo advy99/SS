@@ -90,9 +90,12 @@ void inicializacion()
 	nodo.suceso = SUCESO_LLEGADA_BARCO;
 	nodo.tiempo = reloj+genera_barco(tllegmin,tllegmax);
 	insertar_lsuc(nodo);
-	nodo.suceso = SUCESO_COMIENZO_TORMENTA;
-	nodo.tiempo = reloj+genera_tormenta(tentre_tormentas);
-	insertar_lsuc(nodo);
+
+	if ( afectan_tormentas ){
+		nodo.suceso = SUCESO_COMIENZO_TORMENTA;
+		nodo.tiempo = reloj+genera_tormenta(tentre_tormentas);
+		insertar_lsuc(nodo);
+	}
 
 	parar=false;
 }
@@ -333,7 +336,7 @@ void comienzo_tormenta(){
 	nodo.reg_cola = reg_cola_null;
 	insertar_lsuc(nodo);
 	//busca si existe un suceso de ese tipo, si existe lo extrae y si no devuelve null
-	if ( afectan_tormentas && busca_suceso(SUCESO_FIN_VIAJE_AT_BO)){
+	if ( busca_suceso(SUCESO_FIN_VIAJE_AT_BO)){
 		tmediavuelta = tviajevacio-nodo.tiempo+reloj;
 		nodo.suceso = SUCESO_FIN_VIAJE_BO_AT;
 		nodo.tiempo = reloj+tmediavuelta;
@@ -540,6 +543,7 @@ int generador_discreto(){
 }
 
 
+#include <iostream>
 /* Programa principal */
 int main(int argc, char *argv[]){
 	int i, simulaciones;
