@@ -47,6 +47,9 @@ suc nodo;
 registro reg_cola_null;
 registro reg_cola;
 
+
+bool afectan_tormentas = true;
+
 /* Contadores estadisticos */
 float acum_lleg;
 float acum_sal;
@@ -63,7 +66,7 @@ int cont_simu;
 
 /* Parametros de entrada */
 int remolcadores = 1;
-int num_atraques = 3;
+int num_atraques;
 float tllegmin = 4.0;
 float tllegmax = 18.0;
 float tviajevacio = 0.25;
@@ -83,6 +86,13 @@ float tiempo_carga1max = 20.0;
 float tiempo_carga2max = 27.0;
 float tiempo_carga3max = 40.0;
 float tparada = 8760.0;
+
+long unsigned int carga_total = 0;
+long unsigned int carga1 = 1000;
+long unsigned int carga2 = 2000;
+long unsigned int carga3 = 3000;
+
+bool cuento_cargas;
 
 /* Funciones y procedimientos */
 void inicializacion();

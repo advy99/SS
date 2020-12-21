@@ -196,6 +196,17 @@ void fin_atraque(){
 	atraques_libres --;
 	nodo.suceso = SUCESO_FIN_CARGA;
 	nodo.tiempo = reloj+genera_tiempocarga(nodo.reg_cola.tipo);
+
+	if ( cuento_cargas ) {
+		if ( nodo.reg_cola.tipo == 0 ) {
+			carga_total += carga1;
+		} else if ( nodo.reg_cola.tipo == 1 ) {
+			carga_total += carga2;
+		} else {
+			carga_total += carga3;
+		}
+	}
+
 	insertar_lsuc(nodo); //programa la finalizacin de la operacion de carga
 	if (tormenta == false){
 		if (encola_sal > 0){
@@ -322,7 +333,7 @@ void comienzo_tormenta(){
 	nodo.reg_cola = reg_cola_null;
 	insertar_lsuc(nodo);
 	//busca si existe un suceso de ese tipo, si existe lo extrae y si no devuelve null
-	if (busca_suceso(SUCESO_FIN_VIAJE_AT_BO)){
+	if ( afectan_tormentas && busca_suceso(SUCESO_FIN_VIAJE_AT_BO)){
 		tmediavuelta = tviajevacio-nodo.tiempo+reloj;
 		nodo.suceso = SUCESO_FIN_VIAJE_BO_AT;
 		nodo.tiempo = reloj+tmediavuelta;
@@ -451,7 +462,13 @@ void generador_informes(int simulaciones){
 	printf("\nPorcentaje de tiempo remolcador remolcando barcos: media(%f), dt(%f)",media[7],dt[7]);
 	printf("\nPorcentaje de tiempo puntos de atraque libres: media(%f), dt(%f)",media[8],dt[8]);
 	printf("\nPorcentaje de tiempo puntos de atraque ocupados sin cargar: media(%f), dt(%f)",media[9],dt[9]);
-	printf("\nPorcentaje de tiempo puntos de atraque ocupados cargando: media(%f), dt(%f)\n\n",media[10],dt[10]);
+	printf("\nPorcentaje de tiempo puntos de atraque ocupados cargando: media(%f), dt(%f)",media[10],dt[10]);
+
+	if ( cuento_cargas ){
+		printf("\nCarga tota: %lu\n\n", carga_total);
+	} else {
+		printf("\n\n");
+	}
 }
 
 
@@ -527,12 +544,17 @@ int generador_discreto(){
 int main(int argc, char *argv[]){
 	int i, simulaciones;
 
-	if(argc != 2){
-		printf("\n\nFormato Argumentos -> <numero_simulaciones>\n\n");
+	if(argc != 6){
+		printf("\n\nFormato Argumentos -> <numero_simulaciones> <num_atraques> <afectan_tormentas> <tviajevacio> <cuento_cargas>\n\n");
 		exit(1);
 	}
 
 	sscanf(argv[1],"%d",&simulaciones);
+	num_atraques = atoi(argv[2]);
+
+	afectan_tormentas = atoi(argv[3]) != 0;
+	tviajevacio = atof(argv[4]);
+	cuento_cargas = atoi(argv[5]) != 0;
 
 	informe = (float **) malloc (simulaciones*sizeof(float *));
 	for(i=0; i<simulaciones; i++){
