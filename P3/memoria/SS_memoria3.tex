@@ -237,6 +237,39 @@ Vemos que el sistema de tiempo fijo, como era de esperar, se comporta peor que e
 
 \section{Sucesos y grafos de sucesos: Estructura de un programa de simulación dinámico y discreto}
 
+En este apartado trabajaremos con un sistema similar al anterior, pero en este caso nos centraremos en como funciona su grafo de sucesos, así como en sus parámetros óptimos.
+
+Para este modelo, el número de máquinas y repuestos será variable y nos centraremos en probar distintas configuraciones de cara a comparar si es mejor un sistema con varios reparadores o un único reparador.
+
+
+Para realizar esta tarea he fijado el número de máquinas a diez y el número de repuestos a dos, es decir, en total doce máquinas, mientras que el tiempo de reparación será de un día y seis horas, y el tiempo de fallo será de un día.
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\multicolumn{6}{|c|}{\textbf{Comparación del sistema variando el número de reparadores}}                                                                                                                                                                                          \\ \hline
+\textbf{N. reparadores} & \textbf{D. media fallos} & \textbf{T. medio entre fallos} & \textbf{\begin{tabular}[c]{@{}c@{}}N. medio maquinas \\ en reparación\end{tabular}} & \textbf{P. tiempo ocio} & \textbf{\begin{tabular}[c]{@{}c@{}}P. duración total\\ fallos\end{tabular}} \\ \hline
+1                       & 364.638                  & 0                              & 11.140                                                                              & 0.038                   & 99.901                                                                      \\ \hline
+2                       & 364.868                  & 0                              & 10.250                                                                              & 0.011                   & 99.964                                                                      \\ \hline
+3                       & 364.868                  & 0                              & 9.526                                                                               & 0.019                   & 99.964                                                                      \\ \hline
+4                       & 90.872                   & 0.460                          & 8.622                                                                               & 0.339                   & 99.595                                                                      \\ \hline
+5                       & 24.181                   & 0.154                          & 7.760                                                                               & 1.708                   & 99.374                                                                      \\ \hline
+6                       & 14.459                   & 0.141                          & 7.302                                                                               & 5.431                   & 99.034                                                                      \\ \hline
+7                       & 16.449                   & 0.142                          & 6.677                                                                               & 12.531                  & 99.147                                                                      \\ \hline
+8                       & 7.624                    & 0.142                          & 6.548                                                                               & 21.254                  & 98.177                                                                      \\ \hline
+9                       & 10.908                   & 0.151                          & 6.412                                                                               & 29.160                  & 98.620                                                                      \\ \hline
+10                      & 12.944                   & 0.091                          & 6.536                                                                               & 34.707                  & 99.293                                                                      \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+
+
 \subsection{Modificación del modelo original}
 
 \section{Mi tercer modelo de simulación discreto}
