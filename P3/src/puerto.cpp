@@ -1,4 +1,6 @@
 #include "puerto.h"
+#include <chrono>
+#include <thread>
 
 
 bool compare(const suc &s1, const suc &s2){
@@ -565,7 +567,8 @@ int main(int argc, char *argv[]){
 		informe[i] = (float *) malloc (11*sizeof(float));
 	}
 
-	srandom(time(NULL));
+	auto t = chrono::high_resolution_clock::now().time_since_epoch();
+	srandom(t.count());
 	//srandom(123456);
 
 	for(cont_simu=0; cont_simu<simulaciones; cont_simu++){
