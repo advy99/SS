@@ -30,3 +30,6 @@ $(BIN)/reparadores_mantenimiento: $(SRC)/reparadores_mantenimiento.cpp
 $(BIN)/puerto: $(SRC)/puerto.cpp
 	g++ $(CXXFLAGS) $^ -o $@
 
+clean:
+	-rm $(BIN)/*
+	-rm $(OBJ)/*
