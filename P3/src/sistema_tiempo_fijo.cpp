@@ -121,9 +121,15 @@ int main(int argc, char ** argv){
 
 	std::chrono::duration<double> t_ejecucion = std::chrono::duration_cast<std::chrono::microseconds>(tiempo_fin - tiempo_inicio);
 
+
+
+	float durfallos_t = (trepar * tiempodeparar ) / (tfallo + trepar);
+	float numfallos_t = tiempodeparar / (trepar + tfallo);
+
 	std::cout << "D. fallos: " << durfallos << std::endl;
 	std::cout << "N. Fallos: " << numfallos << std::endl;
 	std::cout << "D. media fallos: " << durfallos/numfallos << std::endl;
 	std::cout << "T. ejecucion simulación: " << t_ejecucion.count() << std::endl;
+	std::cout << "D. media obtenida de forma teórica: " << durfallos_t/numfallos_t*1.0 << std::endl;
 
 }
