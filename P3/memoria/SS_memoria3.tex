@@ -283,6 +283,23 @@ Además, en el script adjunto a la práctica aparecerán más configuraciones qu
 
 \subsection{Modificación del modelo original}
 
+También se nos pide realizar una modificación al sistema, de forma que se añada un suceso de mantenimiento (con su respectivo fin de mantenimiento), de cara a que si hay algún reparador libre, revise las máquinas para que tarden más en estropearse.
+
+De cara a desarrollar y comprobar este apartado simplemente se han añadido dichos estados al código, con sus respectivas funciones que realizan lo indicado en el grafo de sucesos del guión, y se ha ejecutado con los mismos parámetros que el apartado anterior, añadiendo un tiempo de revisión de un día, y un tiempo de reparación uniforme entre dos horas y media y veinte horas.
+
+Con esto obtenemos los siguientes resultados:
+
+\begin{lstlisting}
+Con 1 repuestos y 2 reparadores se ha conseguido que el porcentaje total de fallos esté por debajo de un 88.890 por ciento
+\end{lstlisting}
+
+Que como vemos, ha mejorado el anterior, necesitando un reparador menos. Además tambien podemos ver que con la misma cantidad de reparadores, se obtiene un resultado mucho mejor:
+
+\begin{lstlisting}
+Con 1 repuestos y 3 reparadores se ha conseguido que el porcentaje total de fallos esté por debajo de un 38.880 por ciento
+\end{lstlisting}
+
+
 
 \section{Mi tercer modelo de simulación discreto}
 
