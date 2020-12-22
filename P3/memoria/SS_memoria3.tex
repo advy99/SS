@@ -366,7 +366,54 @@ Por último, para realizar la comparación, se nos pide utilizar una nueva medid
 
 En este caso, debido a que los tipos de barcos son aleatorios y no se sabe a priori que tipo de barco es, esta medida no es muy fiable, ya que como hemos visto antes, aunque haya menos barcos esperando, dependiendo del tipo de barco se sumará un peso u otro y esto es totalmente aleatorio.
 
+
+\newpage
+
 \section{Análisis de salidas y experimentación}
+
+En este último apartado se nos pide analizar las salidas para experimentar el número de simulaciones necesarias.
+
+\subsection{Número de simulaciones}
+
+Hasta este punto, todas las ejecuciones del puerto se han ejecutado con una simulación. Ahora vamos a comprobar la importancia de realizar distintas simulaciones, y para eso vamos a comparar el modelo original con el modelo con el remolcador al que no afectan las tormentas.
+
+Para realizar esta comparación, ejecutaremos ambos modelos cien veces, y obtendremos un porcentaje de veces que es preferible un modelo frente a otro con 1, 5, 10, 25 y 50 simulaciones en cada ejecución, obteniendo los siguientes resultados:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Comparación de los sistemas A y B}}                                  \\ \hline
+\textbf{Simulaciones} & \textbf{Porcentaje A es preferible} & \textbf{Porcentaje B es preferible} \\ \hline
+1                     & 39                                  & 61                                  \\ \hline
+5                     & 14                                  & 86                                  \\ \hline
+10                    & 20                                  & 80                                  \\ \hline
+25                    & 4                                   & 96                                  \\ \hline
+50                    & 2                                   & 98                                  \\ \hline
+\end{tabular}
+\end{table}
+
+
+Como vemos, el número de simulaciones es muy importante, ya que al ser modelos probabilísticos puede ser que en ciertas simulaciones no salga el resultado esperado.
+
+
+También se nos pide comparar el sistema A y C, obteniendo los siguientes resultados:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Comparación de los sistemas A y C}}                                  \\ \hline
+\textbf{Simulaciones} & \textbf{Porcentaje A es preferible} & \textbf{Porcentaje C es preferible} \\ \hline
+1                     & 46                                  & 54                                  \\ \hline
+5                     & 42                                  & 58                                  \\ \hline
+10                    & 56                                  & 44                                  \\ \hline
+25                    & 49                                  & 51                                  \\ \hline
+50                    & 41                                  & 59                                  \\ \hline
+\end{tabular}
+\end{table}
+
+En este caso no vemos la distinción tan clara, y es que como vimos en apartados anteriores, estos sistemas erán más similares y no existía tanta diferencia.
 
 % \begin{thebibliography}{9}
 %
