@@ -312,6 +312,60 @@ Con 1 repuestos y 3 reparadores se ha conseguido que el porcentaje total de fall
 
 \section{Mi tercer modelo de simulación discreto}
 
+En este apartado trabajaremos con un sistema de simulación de un puerto. Dicho puerto dispone de un remolcador que puede remolcar hasta tres petroleros y es el encargado de llevar los barcos al puerto.
+
+Aunque el sistema ya se nos proporciona con la implementación correspondiente al grafo que aparece en el guión de prácticas se nos pide implementar ciertas modificaciones.
+
+\subsection{Aumentar los puntos de atraque}
+
+En principio el remolcador puede cargar con tres petroleros. Se nos pide que este número sea variable, entre tres, cuatro y cinco. Para implementar este cambio simplemente he modificado el programa, de forma que se proporcione como parámetro el número de puntos de atraque.
+
+\subsection{Remolcador al que no le afectan las tormentas}
+
+Como nos explica el guión, si durante la operación del remolcador se produce una tormenta, este tiene que volver al puerto, esperar a que acabe la tormenta, y seguir operando una vez pase. Esta modificación se basa en que el remolcador no tiene problema en operarar durante una tormenta.
+
+Para implementar esta modifiación simplemente he añadido un parámetro de entrada, que si vale cero no le afectan las tormentas, y si es distinto de cero si que le afectan. De cara a que no le afecten las tormentas, en la inicialización, al generar el primer suceso de tormenta, si no le afectan las tormentas este suceso no se añade, de forma que nunca va a ocurrir una tormenta (ni por lo tanto fin de tormenta, ya que este estado era creado por la tormenta).
+
+\subsection{Remolcador más rápido}
+
+Esta cambio simplemente es modificar la velocidad del remolcador. Estaba fijado en el programa, lo he añadido como parámetro de entrada de cara a controlarlo.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\multicolumn{3}{|c|}{\textbf{Comparación de las tres modificaciones}}                                                                                                                                                                                  \\ \hline
+\textbf{Modificación}                                             & \textbf{\begin{tabular}[c]{@{}c@{}}N. medio barcos \\ en cola de llegadas\end{tabular}} & \textbf{\begin{tabular}[c]{@{}c@{}}N. medio barcos \\ en la cola de salida\end{tabular}} \\ \hline
+3 atraques                                                        & 1.542977                                                                                & 0.033080                                                                                 \\ \hline
+4 atraques                                                        & 0.088477                                                                                & 0.027314                                                                                 \\ \hline
+5 atraques                                                        & 0.048014                                                                                & 0.027638                                                                                 \\ \hline
+\begin{tabular}[c]{@{}c@{}}No le afectan\\ tormentas\end{tabular} & 0.694968                                                                                & 0.009782                                                                                 \\ \hline
+\begin{tabular}[c]{@{}c@{}}Remolcador\\ más rápido\end{tabular}   & 0.931084                                                                                & 0.028482                                                                                 \\ \hline
+\end{tabular}
+\end{table}
+
+
+Vemos como la mejor modificación es la de tener un mayor número de puntos de atraque, ya que permite vaciar rápidamente la cola de entrada, de forma que no haya barcos esperando, seguida de la posibilidad de que no le afecten las tormentas, permitiendo que aun con menos puntos de atraque pueda utilizar el tiempo de las tormentas, y finalmente el que el barco sea más rápido, ya que aunque sea más rápido, sigue sin poder cargar tantos petroleros y le siguen afectando las tormentas. Aun así, todas las mejoras (como cabia esperar), son preferibles al sistema original.
+
+
+Por último, para realizar la comparación, se nos pide utilizar una nueva medida de rendimiento. Dependiendo del tipo de petrolero, tendrá asociado un numero de toneladas cargadas. Debemos investigar cual de las tres alternativas es mejor desde este punto de vista.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Comparación de las tres modificaciones}}                                                                                       \\ \hline
+\textbf{Modificación}                                             & \textbf{\begin{tabular}[c]{@{}c@{}}Carga total transportada\end{tabular}} \\ \hline
+3 atraques                                                        & 1814000                                                                                 \\ \hline
+4 atraques                                                        & 1873000                                                                                 \\ \hline
+5 atraques                                                        & 1766000                                                                                 \\ \hline
+\begin{tabular}[c]{@{}c@{}}No le afectan\\ tormentas\end{tabular} & 1761000                                                                                 \\ \hline
+\begin{tabular}[c]{@{}c@{}}Remolcador\\ más rápido\end{tabular}   & 1777000                                                                                 \\ \hline
+\end{tabular}
+\end{table}
+
+En este caso, debido a que los tipos de barcos son aleatorios y no se sabe a priori que tipo de barco es, esta medida no es muy fiable, ya que como hemos visto antes, aunque haya menos barcos esperando, dependiendo del tipo de barco se sumará un peso u otro y esto es totalmente aleatorio.
+
 \section{Análisis de salidas y experimentación}
 
 % \begin{thebibliography}{9}
