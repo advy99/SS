@@ -188,28 +188,30 @@ De esta forma, este sistema se basa en gestionar los estados en los que falla un
 Tras desarrollar ambos modelos he realizado las pruebas pedidas en el guión de prácticas, de cara a comparar las ejecuciones, obteniendo los siguientes resultados:
 
 \begin{table}[H]
-\begin{tabular}{cccccc}
-\multicolumn{6}{c}{\textbf{Sistema de tiempo fijo}}                                          \\
-T. reparacion & T. fallo & D. fallos & N. fallos & D. media fallos & D. media fallos teorica \\
-0.5           & 1        & 0         & 4091      & 0               & 0                       \\
-2             & 1        & 4441      & 2905      & 1.52874         & 2                       \\
-12            & 24       & 1251      & 113       & 11.0708         & 12.0325                 \\
-48            & 24       & 5559      & 107       & 51.9533         & 48.3043                 \\
-720           & 1440     & 584       & 1         & 584             & 833.25                  \\
-2880          & 1440     & 1118      & 1         & 1118            & 3333
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\multicolumn{6}{|c|}{\textbf{Sistema de tiempo fijo}}                                          \\ \hline
+T. reparacion & T. fallo & D. fallos & N. fallos & D. media fallos & D. media fallos teorica \\ \hline
+0.5           & 1        & 0         & 4091      & 0               & 0                       \\ \hline
+2             & 1        & 4441      & 2905      & 1.52874         & 2                       \\ \hline
+12            & 24       & 1251      & 113       & 11.0708         & 12.0325                 \\ \hline
+48            & 24       & 5559      & 107       & 51.9533         & 48.3043                 \\ \hline
+720           & 1440     & 584       & 1         & 584             & 833.25                  \\ \hline
+2880          & 1440     & 1118      & 1         & 1118            & 3333							\\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[H]
-\begin{tabular}{cccccc}
-\multicolumn{6}{c}{\textbf{Sistema de tiempo variable}}                                      \\
-T. reparacion & T. fallo & D. fallos & N. fallos & D. media fallos & D. media fallos teorica \\
-0.5           & 1        & 0         & 0         & 0               & 0                       \\
-2             & 1        & 5684.44   & 2864      & 1.98479         & 2                       \\
-12            & 24       & 1297.14   & 105       & 12.3537         & 12                      \\
-48            & 24       & 5570.06   & 110       & 50.637          & 48                      \\
-720           & 1440     & 584.044   & 1         & 584.044         & 720                     \\
-2880          & 1440     & 1118.76   & 2         & 559.381         & 2880
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\multicolumn{6}{|c|}{\textbf{Sistema de tiempo variable}}                                      \\ \hline
+T. reparacion & T. fallo & D. fallos & N. fallos & D. media fallos & D. media fallos teorica \\ \hline
+0.5           & 1        & 0         & 0         & 0               & 0                       \\ \hline
+2             & 1        & 5684.44   & 2864      & 1.98479         & 2                       \\ \hline
+12            & 24       & 1297.14   & 105       & 12.3537         & 12                      \\ \hline
+48            & 24       & 5570.06   & 110       & 50.637          & 48                      \\ \hline
+720           & 1440     & 584.044   & 1         & 584.044         & 720                     \\ \hline
+2880          & 1440     & 1118.76   & 2         & 559.381         & 2880							\\ \hline
 \end{tabular}
 \end{table}
 
@@ -219,9 +221,18 @@ Vemos como en general el sistema que utiliza la variación de tiempo variable se
 También vemos que si utilizamos medidas más precisas de tiempo, este problema se va solucionando, y es que el espacio de muestreo del reloj fijo es mayor, evitando el problema, ya que, por ejemplo, si usamos un día, pasará de un día a otro, cuando un evento puede ocurrir al inicio del día, mientras que al usar horas o minutos, puede gestionar el suceso en ese espacio muestral más amplio.
 
 
-
-
 \subsection{Comparación de eficiencia entre ambos modelos}
+
+Por último, comprobaremos que sistema es más rápido a la hora de la ejecución. Probando con un gran número de días se ha obtenido lo siguiente:
+
+\begin{figure}[H]
+  \centering
+      \includegraphics[width=\textwidth]{t1_eficiencia.png}
+ 		\caption{Comparación de tiempo de ejecución entre el sistema que usa tiempo fijo contra el de tiempo variable.}
+\end{figure}
+
+
+Vemos que el sistema de tiempo fijo, como era de esperar, se comporta peor que el sistema de tiempo variable, y es que el sistema de tiempo fijo en el tiempo que no tiene ningún evento tiene que seguir actualizando su reloj, mientras que el sistema de tiempo variable salta al siguiente evento directamente, evitandose esos ciclos que unicamente incrementa el reloj.
 
 
 \section{Sucesos y grafos de sucesos: Estructura de un programa de simulación dinámico y discreto}
