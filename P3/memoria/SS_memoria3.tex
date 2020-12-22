@@ -183,6 +183,46 @@ Este sistema necesita que cierto número de máquinas estén siempre en funciona
 De esta forma, este sistema se basa en gestionar los estados en los que falla una máquina, se repara, y vuelve de la reparación, de forma que tendremos como parámetros el número de máquinas, el número de reparadores del taller, el tiempo de reparación y el tiempo de fallo, estos dos últimos siguiento una distribución de probabilidad exponencial.
 
 
+\subsection{Prueba de los dos modelos implementados}
+
+Tras desarrollar ambos modelos he realizado las pruebas pedidas en el guión de prácticas, de cara a comparar las ejecuciones, obteniendo los siguientes resultados:
+
+\begin{table}[H]
+\begin{tabular}{cccccc}
+\multicolumn{6}{c}{\textbf{Sistema de tiempo fijo}}                                          \\
+T. reparacion & T. fallo & D. fallos & N. fallos & D. media fallos & D. media fallos teorica \\
+0.5           & 1        & 0         & 4091      & 0               & 0                       \\
+2             & 1        & 4441      & 2905      & 1.52874         & 2                       \\
+12            & 24       & 1251      & 113       & 11.0708         & 12.0325                 \\
+48            & 24       & 5559      & 107       & 51.9533         & 48.3043                 \\
+720           & 1440     & 584       & 1         & 584             & 833.25                  \\
+2880          & 1440     & 1118      & 1         & 1118            & 3333
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{cccccc}
+\multicolumn{6}{c}{\textbf{Sistema de tiempo variable}}                                      \\
+T. reparacion & T. fallo & D. fallos & N. fallos & D. media fallos & D. media fallos teorica \\
+0.5           & 1        & 0         & 0         & 0               & 0                       \\
+2             & 1        & 5684.44   & 2864      & 1.98479         & 2                       \\
+12            & 24       & 1297.14   & 105       & 12.3537         & 12                      \\
+48            & 24       & 5570.06   & 110       & 50.637          & 48                      \\
+720           & 1440     & 584.044   & 1         & 584.044         & 720                     \\
+2880          & 1440     & 1118.76   & 2         & 559.381         & 2880
+\end{tabular}
+\end{table}
+
+
+Vemos como en general el sistema que utiliza la variación de tiempo variable se ajusta mejor a los resultados que teoricamente deberíamos obtener, ya que a diferencia del sistema de incremento fijo, se mueve al punto exacto donde ocurre el suceso, mientras que si en el sistema de tiempo fijo ocurre un suceso en el intervalo en el que no se modifica el reloj, no se gestiona hasta el siguiente avance del reloj.
+
+También vemos que si utilizamos medidas más precisas de tiempo, este problema se va solucionando, y es que el espacio de muestreo del reloj fijo es mayor, evitando el problema, ya que, por ejemplo, si usamos un día, pasará de un día a otro, cuando un evento puede ocurrir al inicio del día, mientras que al usar horas o minutos, puede gestionar el suceso en ese espacio muestral más amplio.
+
+
+
+
+\subsection{Comparación de eficiencia entre ambos modelos}
+
 
 \section{Sucesos y grafos de sucesos: Estructura de un programa de simulación dinámico y discreto}
 
