@@ -39,7 +39,7 @@ SIR::SIR(const int argc,  char ** argv){
 
 void SIR::integracion() {
 
-	//std::cout << (*this);
+	std::cout << (*this);
 
 	estado = (*puntero_funcion_paso)(estado, t_actual, intervalo_calculo);
 
@@ -140,7 +140,7 @@ std::ostream & operator << ( std::ostream & os, const SIR & modelo ){
 	os << "# Infectados \t Supceptibles \t Recuperados" << std::endl;
 
 	for ( int i = 0; i < SIR::NUM_EQ; i++ ){
-		os << modelo << "\t";
+		os << modelo.estado[i] << "\t";
 	}
 
 	os << std::endl;
