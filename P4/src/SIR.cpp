@@ -26,3 +26,24 @@ SIR::SIR(const int argc, const char ** argv){
 
 }
 
+
+std::istream & operator >> ( std::istream & is, SIR & modelo ){
+
+	is >> modelo.capacidad_infeccion_enfermedad;
+	is >> modelo.tiempo_duracion_infeccion;
+	is >> modelo.intervalo_calculo;
+ 	is >> modelo.intervalo_comunicacion;
+ 	is >> modelo.t_inicio;
+ 	is >> modelo.t_fin;
+ 	is >> modelo.estado_inicial.infectados;
+ 	is >> modelo.estado_inicial.supceptibles;
+ 	is >> modelo.estado_inicial.recuperados;
+
+	modelo.estados.clear();
+
+	modelo.estados.push_back(modelo.estado_inicial);
+
+	return is;
+
+}
+
