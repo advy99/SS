@@ -34,6 +34,7 @@ class SIR {
 
 
 	public:
+		SIR();
 		SIR(const int argc, const char ** argv);
 
 		void integracion();
@@ -41,7 +42,8 @@ class SIR {
 		void one_step_euler();
 		void derivacion();
 
-		friend std::ostream & operator << (std::ostream & os, const SIR * modelo);
+		friend std::istream & operator >> (std::istream & is, SIR & modelo);
+		friend std::ostream & operator << (std::ostream & os, const SIR & modelo);
 
 
 };
