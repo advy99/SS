@@ -4,20 +4,14 @@
 #include <iostream>
 #include <vector>
 
-struct estado{
-	unsigned long int infectados;
-	unsigned long int supceptibles;
-	unsigned long int recuperados;
-};
-
 class SIR {
 	private:
 
 		// a en el guion
-		double capacidad_infeccion_enfermedad;
+		static double capacidad_infeccion_enfermedad;
 
 		// b en el guion
-		double tiempo_duracion_infeccion;
+		static double tiempo_duracion_infeccion;
 
 		// intervalo calculo: dt en el guion
 		double intervalo_calculo;
@@ -26,25 +20,23 @@ class SIR {
 		double t_inicio;
 		double t_fin;
 
-		estado estado_inicial;
-
-		std::vector<estado> estados;
-
 		double t_actual;
+
+		std::vector<double> estado;
 
 
 		void integracion();
-		std::vector<double> one_step_runge_kutta(const std::vector<double> & estado);
-		std::vector<double> one_step_euler(const std::vector<double> & estado);
-		std::vector<double> derivacion(const std::vector<double> & estado);
+		static std::vector<double> one_step_runge_kutta(const std::vector<double> & estado, const double tiempo, const double interv_calculo);
+		static std::vector<double> one_step_euler(const std::vector<double> & estado, const double tiempo, const double interv_calculo);
+		static std::vector<double> derivacion(const std::vector<double> & estado);
 		void salida();
 
-		std::vector<double> (SIR::*puntero_funcion_paso)(const std::vector<double> &) = &SIR::one_step_euler;
+		std::vector<double> (*puntero_funcion_paso)(const std::vector<double> & estado, const double tiempo, const double interv_calculo) = &SIR::one_step_euler;
 
 
 	public:
 		SIR();
-		SIR(const int argc, const char ** argv);
+		SIR(const int argc,  char ** argv);
 
 		void simular();
 
