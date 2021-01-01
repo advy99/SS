@@ -4,9 +4,9 @@
 
 
 
-SIR::SIR(const int argc, const char ** argv){
+SIR::SIR(const int argc,  char ** argv){
 
-	if ( argc != 10) {
+	if ( argc != 11) {
 		std::cerr << "Error: Número inesperado de argumentos." << std::endl
 					 << "\t Uso: " << argv[0] << " <a> <b> <dt> <dcomunicacion> <tinic> <tfin> <I0> <S0> <R0> <f_paso>" << std::endl;
 		exit(-1);
@@ -18,11 +18,12 @@ SIR::SIR(const int argc, const char ** argv){
  	intervalo_comunicacion = atof(argv[4]);
  	t_inicio = atof(argv[5]);
  	t_fin = atof(argv[6]);
- 	estado_inicial.infectados = atoi(argv[7]);
- 	estado_inicial.supceptibles = atoi(argv[8]);
- 	estado_inicial.recuperados = atoi(argv[9]);
 
-	estados.push_back(estado_inicial);
+	estado.resize(NUM_EQ);
+
+ 	estado[0] = atof(argv[7]);
+ 	estado[1] = atof(argv[8]);
+ 	estado[2] = atof(argv[9]);
 
 	std::string funcion_paso = std::string(argv[10]);
 
@@ -37,11 +38,11 @@ SIR::SIR(const int argc, const char ** argv){
 
 
 void SIR::integracion() {
-	salida();
 
-	estado_anterior = estado;
+	//std::cout << (*this);
 
-	one_step()
+	estado = (*puntero_funcion_paso)(estado, t_actual, intervalo_calculo);
+
 }
 
 
@@ -54,7 +55,7 @@ void SIR::simular() {
 }
 
 
-std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado){
+std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado, const double tiempo_act, const double interv_calculo){
 
 	std::vector<double> resultado = estado;
 	std::vector<double> derivadas;
@@ -63,7 +64,7 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 	std::vector<std::vector<double> > matriz_k(NUM_EQ);
 
 	double incremento;
-	int tiempo = t_actual;
+	int tiempo = tiempo_act;
 
 	// y cada fila tiene tamaño 4
 	// haciendo la matriz 3x4
@@ -79,15 +80,15 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 		}
 
 		if ( j < 2 ){
-			incremento = intervalo_calculo / 2.0;
+			incremento = interv_calculo / 2.0;
 		} else {
-			incremento = intervalo_calculo;
+			incremento = interv_calculo;
 		}
 
-		tiempo = t_actual + incremento;
+		tiempo = tiempo_act + incremento;
 
 		for ( int i = 0; i < NUM_EQ; i++ ){
-			resultado[i] = estado[i] + intervalo_calculo / 6 * (matriz_k[i][0] + 2 * matriz_k[i][1] + 2 * matriz_k[i][2] + matriz_k[i][3]);
+			resultado[i] = estado[i] + interv_calculo / 6 * (matriz_k[i][0] + 2 * matriz_k[i][1] + 2 * matriz_k[i][2] + matriz_k[i][3]);
 		}
 
 	}
@@ -95,12 +96,12 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 	return resultado;
 }
 
-std::vector<double> SIR::one_step_euler(const std::vector<double> & estado){
+std::vector<double> SIR::one_step_euler(const std::vector<double> & estado, const double tiempo, const double interv_calculo){
 	std::vector<double> resultado(NUM_EQ);
 	std::vector<double> derivadas = derivacion(estado);
 
 	for ( int i = 0; i < NUM_EQ; i++ ) {
-		resultado[i] = estado[i] + intervalo_calculo * derivadas[i];
+		resultado[i] = estado[i] + interv_calculo * derivadas[i];
 	}
 
 	return resultado;
@@ -110,7 +111,7 @@ std::vector<double> SIR::derivacion(const std::vector<double> & estado){
 	std::vector<double> resultado = estado;
 
 	resultado[0] = capacidad_infeccion_enfermedad * estado[0] * estado[1] - tiempo_duracion_infeccion * estado[0];
-	resultado[1] = - capacidad_infeccion_enfermedad * estado[0] * estado[1];
+	resultado[1] = -capacidad_infeccion_enfermedad * estado[0] * estado[1];
 	resultado[2] = tiempo_duracion_infeccion * estado[0];
 
 	return resultado;
@@ -125,15 +126,29 @@ std::istream & operator >> ( std::istream & is, SIR & modelo ){
  	is >> modelo.intervalo_comunicacion;
  	is >> modelo.t_inicio;
  	is >> modelo.t_fin;
- 	is >> modelo.estado_inicial.infectados;
- 	is >> modelo.estado_inicial.supceptibles;
- 	is >> modelo.estado_inicial.recuperados;
-
-	modelo.estados.clear();
-
-	modelo.estados.push_back(modelo.estado_inicial);
+ 	is >> modelo.estado[0];
+ 	is >> modelo.estado[1];
+ 	is >> modelo.estado[2];
 
 	return is;
 
 }
+
+
+std::ostream & operator << ( std::ostream & os, const SIR & modelo ){
+
+	os << "# Infectados \t Supceptibles \t Recuperados" << std::endl;
+
+	for ( int i = 0; i < SIR::NUM_EQ; i++ ){
+		os << modelo << "\t";
+	}
+
+	os << std::endl;
+
+	return os;
+}
+
+
+double SIR::capacidad_infeccion_enfermedad;
+double SIR::tiempo_duracion_infeccion;
 
