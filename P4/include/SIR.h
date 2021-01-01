@@ -33,14 +33,22 @@ class SIR {
 		double t_actual;
 
 
+		void integracion();
+		std::vector<double> one_step_runge_kutta(const std::vector<double> & estado);
+		std::vector<double> one_step_euler(const std::vector<double> & estado);
+		std::vector<double> derivacion(const std::vector<double> & estado);
+		void salida();
+
+		std::vector<double> (SIR::*puntero_funcion_paso)(const std::vector<double> &) = &SIR::one_step_euler;
+
+
 	public:
 		SIR();
 		SIR(const int argc, const char ** argv);
 
-		void integracion();
-		void one_step_runge_kutta();
-		void one_step_euler();
-		void derivacion();
+		void simular();
+
+		static const int NUM_EQ = 3;
 
 		friend std::istream & operator >> (std::istream & is, SIR & modelo);
 		friend std::ostream & operator << (std::ostream & os, const SIR & modelo);
