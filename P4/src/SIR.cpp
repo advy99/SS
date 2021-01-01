@@ -57,15 +57,50 @@ void SIR::simular() {
 std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado){
 
 	std::vector<double> resultado = estado;
+	std::vector<double> derivadas;
 
+	// tamaño = NUM_EQ, en este caso 3
+	std::vector<std::vector<double> > matriz_k(NUM_EQ);
+
+	double incremento;
 	int tiempo = t_actual;
+
+	// y cada fila tiene tamaño 4
+	// haciendo la matriz 3x4
+	for (unsigned i = 0; i < matriz_k.size(); i++){
+		matriz_k[i].resize(NUM_EQ);
+	}
+
 	for ( int j = 0; j < 4; j++ ){
-		derivacion();
+		derivadas = derivacion(resultado);
 
-		for ( int k = 0; k < 2; k++ ){
-
+		for ( int k = 0; k < NUM_EQ; k++ ){
+			matriz_k[k][j] = derivadas[j];
 		}
 
+		if ( j < 2 ){
+			incremento = intervalo_calculo / 2.0;
+		} else {
+			incremento = intervalo_calculo;
+		}
+
+		tiempo = t_actual + incremento;
+
+		for ( int i = 0; i < NUM_EQ; i++ ){
+			resultado[i] = estado[i] + intervalo_calculo / 6 * (matriz_k[i][0] + 2 * matriz_k[i][1] + 2 * matriz_k[i][2] + matriz_k[i][3]);
+		}
+
+	}
+
+	return resultado;
+}
+
+std::vector<double> SIR::one_step_euler(const std::vector<double> & estado){
+	std::vector<double> resultado(NUM_EQ);
+	std::vector<double> derivadas = derivacion(estado);
+
+	for ( int i = 0; i < NUM_EQ; i++ ) {
+		resultado[i] = estado[i] + intervalo_calculo * derivadas[i];
 	}
 
 	return resultado;
