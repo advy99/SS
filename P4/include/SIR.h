@@ -8,10 +8,10 @@ class SIR {
 	private:
 
 		// a en el guion
-		static double capacidad_infeccion_enfermedad;
+		double capacidad_infeccion_enfermedad;
 
 		// b en el guion
-		static double tiempo_duracion_infeccion;
+		double tiempo_duracion_infeccion;
 
 		// intervalo calculo: dt en el guion
 		double intervalo_calculo;
@@ -23,15 +23,14 @@ class SIR {
 		double t_actual;
 
 		std::vector<double> estado;
+		std::string funcion_paso;
 
 
 		void integracion();
-		static std::vector<double> one_step_runge_kutta(const std::vector<double> & estado, const double tiempo, const double interv_calculo);
-		static std::vector<double> one_step_euler(const std::vector<double> & estado, const double tiempo, const double interv_calculo);
-		static std::vector<double> derivacion(const std::vector<double> & estado);
+		std::vector<double> one_step_runge_kutta(const std::vector<double> & estado, const double tiempo, const double interv_calculo);
+		std::vector<double> one_step_euler(const std::vector<double> & estado, const double interv_calculo);
+		std::vector<double> derivacion(const std::vector<double> & estado);
 		void salida();
-
-		std::vector<double> (*puntero_funcion_paso)(const std::vector<double> & estado, const double tiempo, const double interv_calculo) = &SIR::one_step_euler;
 
 
 	public:
