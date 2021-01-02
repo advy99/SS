@@ -137,7 +137,8 @@ std::istream & operator >> ( std::istream & is, SIR & modelo ){
 
 std::ostream & operator << ( std::ostream & os, const SIR & modelo ){
 
-	os << "# Infectados \t Supceptibles \t Recuperados" << std::endl;
+	os << "# T. actual \t Infectados \t Supceptibles \t Recuperados" << std::endl;
+	os << modelo.t_actual << "\t";
 
 	for ( int i = 0; i < SIR::NUM_EQ; i++ ){
 		os << modelo.estado[i] << "\t";
