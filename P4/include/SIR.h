@@ -27,7 +27,7 @@ class SIR {
 
 
 		void integracion();
-		std::vector<double> one_step_runge_kutta(const std::vector<double> & estado, const double tiempo, const double interv_calculo);
+		std::vector<double> one_step_runge_kutta(const std::vector<double> & estado, const double interv_calculo);
 		std::vector<double> one_step_euler(const std::vector<double> & estado, const double interv_calculo);
 		std::vector<double> derivacion(const std::vector<double> & estado);
 		void salida();

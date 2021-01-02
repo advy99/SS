@@ -39,7 +39,7 @@ void SIR::integracion() {
 	if ( funcion_paso == "euler" ){
 		estado = one_step_euler(estado, intervalo_calculo);
 	} else {
-		estado = one_step_runge_kutta(estado, t_actual, intervalo_calculo);
+		estado = one_step_runge_kutta(estado, intervalo_calculo);
 	}
 
 }
@@ -54,7 +54,7 @@ void SIR::simular() {
 }
 
 
-std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado, const double tiempo_act, const double interv_calculo){
+std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado, const double interv_calculo){
 
 	std::vector<double> resultado = estado;
 	std::vector<double> derivadas;
@@ -63,7 +63,6 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 	std::vector<std::vector<double> > matriz_k(NUM_EQ);
 
 	double incremento;
-	int tiempo = tiempo_act;
 
 	// y cada fila tiene tamaño 4
 	// haciendo la matriz 3x4
@@ -84,14 +83,15 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 			incremento = interv_calculo;
 		}
 
-		tiempo = tiempo_act + incremento;
-
 		for ( int i = 0; i < NUM_EQ; i++ ){
-			resultado[i] = estado[i] + interv_calculo / 6 * (matriz_k[i][0] + 2 * matriz_k[i][1] + 2 * matriz_k[i][2] + matriz_k[i][3]);
+			resultado[i] = estado[i] + matriz_k[i][j] * incremento;
 		}
 
 	}
 
+	for ( int i = 0; i < NUM_EQ; i++ ){
+		resultado[i] = estado[i] + interv_calculo / 6 * (matriz_k[i][0] + 2 * matriz_k[i][1] + 2 * matriz_k[i][2] + matriz_k[i][3]);
+	}
 	return resultado;
 }
 
