@@ -66,8 +66,8 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 
 	// y cada fila tiene tamaño 4
 	// haciendo la matriz 3x4
-	for (unsigned i = 0; i < matriz_k.size(); i++){
-		matriz_k[i].resize(NUM_EQ);
+	for (unsigned i = 0; i < NUM_EQ; i++){
+		matriz_k[i].resize(4);
 	}
 
 	for ( int j = 0; j < 4; j++ ){
