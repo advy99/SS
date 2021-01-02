@@ -25,13 +25,8 @@ SIR::SIR(const int argc,  char ** argv){
  	estado[1] = atof(argv[8]);
  	estado[2] = atof(argv[9]);
 
-	std::string funcion_paso = std::string(argv[10]);
+	funcion_paso = std::string(argv[10]);
 
-	if ( funcion_paso == "euler" ){
-		puntero_funcion_paso = &SIR::one_step_euler;
-	} else {
-		puntero_funcion_paso = &SIR::one_step_runge_kutta;
-	}
 
 }
 
@@ -41,7 +36,11 @@ void SIR::integracion() {
 
 	std::cout << (*this);
 
-	estado = (*puntero_funcion_paso)(estado, t_actual, intervalo_calculo);
+	if ( funcion_paso == "euler" ){
+		estado = one_step_euler(estado, intervalo_calculo);
+	} else {
+		estado = one_step_runge_kutta(estado, t_actual, intervalo_calculo);
+	}
 
 }
 
@@ -96,7 +95,7 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 	return resultado;
 }
 
-std::vector<double> SIR::one_step_euler(const std::vector<double> & estado, const double tiempo, const double interv_calculo){
+std::vector<double> SIR::one_step_euler(const std::vector<double> & estado, const double interv_calculo){
 	std::vector<double> resultado(NUM_EQ);
 	std::vector<double> derivadas = derivacion(estado);
 
@@ -129,6 +128,7 @@ std::istream & operator >> ( std::istream & is, SIR & modelo ){
  	is >> modelo.estado[0];
  	is >> modelo.estado[1];
  	is >> modelo.estado[2];
+	is >> modelo.funcion_paso;
 
 	return is;
 
@@ -148,7 +148,4 @@ std::ostream & operator << ( std::ostream & os, const SIR & modelo ){
 	return os;
 }
 
-
-double SIR::capacidad_infeccion_enfermedad;
-double SIR::tiempo_duracion_infeccion;
 
