@@ -74,7 +74,7 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 		derivadas = derivacion(resultado);
 
 		for ( int k = 0; k < NUM_EQ; k++ ){
-			matriz_k[k][j] = derivadas[j];
+			matriz_k[k][j] = derivadas[k];
 		}
 
 		if ( j < 2 ){
