@@ -6,6 +6,8 @@
 *.log
 *.gz
 *.out
+*.txt
+*.dat
 
 bin/
 datos/
