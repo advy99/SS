@@ -37,9 +37,9 @@ void SIR::integracion() {
 	std::cout << (*this);
 
 	if ( funcion_paso == "euler" ){
-		estado = one_step_euler(estado, intervalo_calculo);
+		estado = one_step_euler(estado);
 	} else {
-		estado = one_step_runge_kutta(estado, intervalo_calculo);
+		estado = one_step_runge_kutta(estado);
 	}
 
 }
@@ -54,7 +54,7 @@ void SIR::simular() {
 }
 
 
-std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado, const double interv_calculo){
+std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado){
 
 	std::vector<double> resultado = estado;
 	std::vector<double> derivadas;
@@ -70,17 +70,24 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 		matriz_k[i].resize(4);
 	}
 
+	// inicializamos la matriz a cero, por si acaso
+	for (unsigned i = 0; i < NUM_EQ; i++){
+		for ( unsigned j = 0; j < 4; j++ ){
+			matriz_k[i][j] = 0.0;
+		}
+	}
+
 	for ( int j = 0; j < 4; j++ ){
 		derivadas = derivacion(resultado);
 
-		for ( int k = 0; k < NUM_EQ; k++ ){
-			matriz_k[k][j] = derivadas[k];
+		for ( int i = 0; i < NUM_EQ; i++ ){
+			matriz_k[i][j] = derivadas[i];
 		}
 
 		if ( j < 2 ){
-			incremento = interv_calculo / 2.0;
+			incremento = intervalo_calculo / 2.0;
 		} else {
-			incremento = interv_calculo;
+			incremento = intervalo_calculo;
 		}
 
 		for ( int i = 0; i < NUM_EQ; i++ ){
@@ -90,24 +97,24 @@ std::vector<double> SIR::one_step_runge_kutta(const std::vector<double> & estado
 	}
 
 	for ( int i = 0; i < NUM_EQ; i++ ){
-		resultado[i] = estado[i] + interv_calculo / 6 * (matriz_k[i][0] + 2 * matriz_k[i][1] + 2 * matriz_k[i][2] + matriz_k[i][3]);
+		resultado[i] = estado[i] + intervalo_calculo / 6 * (matriz_k[i][0] + 2 * matriz_k[i][1] + 2 * matriz_k[i][2] + matriz_k[i][3]);
 	}
 	return resultado;
 }
 
-std::vector<double> SIR::one_step_euler(const std::vector<double> & estado, const double interv_calculo){
+std::vector<double> SIR::one_step_euler(const std::vector<double> & estado){
 	std::vector<double> resultado(NUM_EQ);
 	std::vector<double> derivadas = derivacion(estado);
 
 	for ( int i = 0; i < NUM_EQ; i++ ) {
-		resultado[i] = estado[i] + interv_calculo * derivadas[i];
+		resultado[i] = estado[i] + intervalo_calculo * derivadas[i];
 	}
 
 	return resultado;
 }
 
 std::vector<double> SIR::derivacion(const std::vector<double> & estado){
-	std::vector<double> resultado = estado;
+	std::vector<double> resultado(NUM_EQ, 0.0);
 
 	resultado[0] = capacidad_infeccion_enfermedad * estado[0] * estado[1] - tiempo_duracion_infeccion * estado[0];
 	resultado[1] = -capacidad_infeccion_enfermedad * estado[0] * estado[1];
