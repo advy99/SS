@@ -272,13 +272,49 @@ Esta gráfica nos muestra como cuando todos los individuos son supceptibles no t
 
 \section{Variación de los parámetros del sistema}
 
+En este apartado comprobaremos el significado antes comentado de los parámetros $a$ y $b$. Como he comentado en los apartados anteriores, la $a$ está relacionada con la capacidad de infección y $b$ está relacionada con el tiempo de duración de la enfermedad.
+
+Dentro de este apartado veremos en profundidad como afectan esas variables al sistema.
+
 \subsection{Menor a (disminución de contactos)}
+
+Una reducción del parámetro $a$ supondrá una disminución de los contactos, por lo que en este caso es de esperar que aunque el tamaño de la población es el mismo, aunque al no modificar el parámetro $b$ la duración de la enfermedad es igual, el disminuir los contactos hará que sea más dificil propagar la enfermedad. Para este apartado he reducido a la mitad el valor de $a$:
+
+\begin{figure}[H]
+  \centering
+      \includegraphics[width=\textwidth]{SIR_menor_a.png}
+ 		\caption{Simulación con $a = 0.0005$.}
+\end{figure}
+
+En este caso vemos como la curva de infectados es mucho más plana que en la simulación original, tal y como esperabamos, se producen menos infecciones e incluso no se llega a infectar a toda la población ya que en el momento que quedan pocos individuos supceptibles la disminución de contactos hace que la enfermedad desaparezca antes de poder seguir contagiando a la poca gente que queda supceptible.
 
 \subsection{Mayor b (mejores tratamientos)}
 
+Una aumento del parámetro $b$ supondrá una disminución de la duración de la enfermedad, por lo que en este caso es de esperar que aunque la capacidad de infección es la misma al no modificar el parámetro $a$, la duración de la enfermedad sea menor al aumentar el valor de $b$. Para este apartado he reducido a la mitad el valor de $b$:
+
+\begin{figure}[H]
+	 \centering
+	 \includegraphics[width=\textwidth]{SIR_mayor_b.png}
+		\caption{Simulación con $b = 0.250$.}
+\end{figure}
+
+En este apartado ocurre igual que en el apartado anterior, aunque hay una diferencia clave, los infectados ocurren en mucho menor tiempo. Al mantener la infectividad de la enfermedad, pero tener un plazo menor de enfermedad, no se suaviza la curva inicial de infectados, pero si que es más dificil mantenerla como en el apartado inicial, ya que los individuos se recuperan mucho más fácilmente. Por este motivo, aunque no se llega a infectar toda la población debido a que el periodo de enfermedad es más bajo, la curva es mucho más estrecha en tiempo.
+
+\subsection{Aplicar ambos cambios: Menor a (menor capacidad de infección) y mayor b (mejores tratamientos)}
+
+Tras ver los resultados de los apartados anteriores, si aplicamos ambas mejoras a la vez solo cabe suponer que la curva de infectados será mucho más plana. Además de que la capacidad de infección es menor, si la enfermedad se prolonga menos en el tiempo el número de infectados se dilatará en el tiempo, ya que para la enfermedad será mucho más dificil de propagarse.
+
+\begin{figure}[H]
+  \centering
+      \includegraphics[width=\textwidth]{SIR_menor_a_mayor_b.png}
+ 		\caption{Simulación con $a = 0.0005$ y $b = 0.250$.}
+\end{figure}
+
+Como suponiamos, la enfermedad tarda mucho más en crecer con el tiempo siendo esta ejecución la de menor número infectados y la que más aplanada está dicha curva.
 
 
 \section{Modificación del número inicial de infectados o inmunes: Inmunidad de grupo}
+
 
 \section{Comparación entre el método de Euler y el método de Runge-Kutta}
 
