@@ -207,10 +207,26 @@ Una vez realizada la entrada de datos, el modelo tendrá un único método publi
 
 \section{Pruebas del sistema}
 
+De cara a realizar las distintas pruebas del sistema utilizaremos el método de integración de Runge-Kutta con un intervalo de cálculo de $0.1$, a excepción de la comparación enter el método de Euler y el método de Runge-Kutta donde compararemos ambos métodos con distintos valores para el intervalo de cálculo.
+
 \subsection{Prueba básica de funcionamiento}
+
+Para comprobar el funcionamiento del sistema he lanzado la simulación como nos dice en el enunciado, con los parámetros $a = 0.001$ y $b = 0.125$, obteniendo los siguientes resultados:
+
+\begin{figure}[H]
+  \centering
+      \includegraphics[width=\textwidth]{SIR_prueba_basica.png}
+ 		\caption{Prueba inicial del sistema.}
+\end{figure}
+
+Como vemos, el sistema funciona como esperabamos, al inicio con un único infectado y mucha población supceptible la curva de infectados crece de forma exponencial, sin embargo, la población al ser constante llega un punto en que la población supceptible es mucho menor ya que la mayoría ya están infectados o recuperados, por lo que la curva de infectados decae, hasta llegar a cero, momento en el que toda la población ha pasado la enfermedad y se ha recuperado.
 
 \subsection{Modificaciones de individuos supceptibles iniciales en función de b/a}
 
+\subsubsection{Individuos supceptibles iniciales menor que b/a}
+
+
+\subsubsection{Individuos supceptibles iniciales mayor que b/a}
 
 
 
@@ -227,7 +243,7 @@ Una vez realizada la entrada de datos, el modelo tendrá un único método publi
 
 \section{Modificación del número inicial de infectados o inmunes: Inmunidad de grupo}
 
-\section{Comparación entre el método de Euler y el de Runge-Kutta}
+\section{Comparación entre el método de Euler y el método de Runge-Kutta}
 
 
 % \begin{thebibliography}{9}
