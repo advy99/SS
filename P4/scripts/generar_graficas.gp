@@ -50,7 +50,15 @@ set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999 y R
 
 plot '../datos/tarea_4_3.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_4_3.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_4_3.dat' using 1:4 w lines title 'Recuperados'
 
+do for [r=50:900:50] {
+	set output "SIR_inmunidad_".r.".png"
+	s=999-r
+	set title 'Ejecución del sistema con a = 0.001, b = 0.125, I0 = 1, S0 = '.s.' y R0 = '.r
 
+	plot '../datos/tarea_5_'.s.'_'.r.'.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_5_'.s.'_'.r.'.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_5_'.s.'_'.r.'.dat' using 1:4 w lines title 'Recuperados'
+
+	
+}
 
 
 

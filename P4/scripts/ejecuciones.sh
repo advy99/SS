@@ -33,7 +33,12 @@ mkdir -p ../datos
 
 # apartado 5
 
-../bin/practica4 0.001 0.125 0.1 0.1 1 100 1 799 200 runge > ../datos/tarea_5_1.dat
+diferencia=50
+
+for r in $(seq 50 $diferencia 900); do
+	s0=$((999 - $r))
+	../bin/practica4 0.001 0.125 0.1 0.1 1 100 1 $s0 $r runge > ../datos/tarea_5_${s0}_${r}.dat
+done
 
 
 # apartado 6
