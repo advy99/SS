@@ -223,9 +223,9 @@ Como vemos, el sistema funciona como esperabamos, al inicio con un único infect
 
 \subsection{Modificaciones de individuos supceptibles iniciales en función de b/a}
 
-Como se nos comenta en el guión, la constante $a$ está relacionada con la capacidad de infección de la enfermedad, mientras que $b$ está relacionada con el tiempo que dura la infección, en concreto, si la enfermedad dura $d$ días, $b = 1/d$ (para el apartado anterior, la enfermedad dura ocho días). 
+Como se nos comenta en el guión, la constante $a$ está relacionada con la capacidad de infección de la enfermedad, mientras que $b$ está relacionada con el tiempo que dura la infección, en concreto, si la enfermedad dura $d$ días, $b = 1/d$ (para el apartado anterior, la enfermedad dura ocho días).
 
-De forma que lo que nos pide en concreto este apartado es comprobar la relación que existe entre el tiempo que dura la infección con la capacidad de infección de la enfermedad. 
+De forma que lo que nos pide en concreto este apartado es comprobar la relación que existe entre el tiempo que dura la infección con la capacidad de infección de la enfermedad.
 
 Para realizar este apartado he mantenido el número de invididuos de la prueba inicial, y modificaré los valores de $a$ y $b$.
 
@@ -242,6 +242,17 @@ En este apartado concreto, si tenemos un número de individuos supceptibles meno
 Observamos como el haber obligado a que la duración de la enfermedad sea tan baja hace que el tiempo en la que se puede propagar por la población están bajo, que los infectados se recuperan antes de infectar a la población supceptible, haciendo que la enfermedad desaparezca por no expandirse.
 
 \subsubsection{Individuos supceptibles iniciales mayor que b/a}
+
+En este apartado, si tenemos un número de individuos supceptibles mayor que $b/a$ queremos que $1000 > b/a$, de forma que si mantenemos $a$ constante a $0.001$ tenemos que $b < 1$, y como $b = 1/d$, la duración de la enfermedad, $d$ ha de ser más alta. Este caso es el caso de la prueba inicial que hemos realizado, donde $b$ era mucho menor que uno, y al tener una duración de enfermedad más alta y manteniendo $a$, la constante asociada a la tasa de infección, es de esperar que se infecte un número mucho mayor de la población. Para esta prueba, aunque nos vale con el apartado inicial, por probar con otros valores he probado con $b = 0.5$, es decir, la duración de la enfermedad será de dos días:
+
+\begin{figure}[H]
+  \centering
+      \includegraphics[width=\textwidth]{SIR_s0_mayor.png}
+ 		\caption{Prueba del sistema con $S_0 > b/a$.}
+\end{figure}
+
+Vemos como en este caso si se llega a infectar una mayor parte de la población, ya que tiene un periodo de dos días para infectar, sin embargo no llegamos a infectar a la población completa como en la primera prueba, ya que esta tenia un periodo de enfermedad de 8 días, cuatro veces el que hemos introducido en este ejemplo. Aun así, como comparación podemos concluir que esta relación entre $a$ y $b$ es muy importante de cara a la capacidad de infección de una persona y el tiempo que puede infectar, ya que es la que permite a la enfermedad propagarse.
+
 
 
 
