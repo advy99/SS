@@ -11,13 +11,13 @@ mkdir -p ../datos
 # b / a es 125
 
 # S0 menor a b/a
-../bin/practica4 0.001 0.125 0.1 0.1 1 1000 1 80 0 runge > ../datos/tarea_2_2_menor.dat
+../bin/practica4 0.001 1.1 0.1 0.1 1 1000 1 999 0 runge > ../datos/tarea_2_2_menor.dat
 
 # S0 mayor a b/a
-../bin/practica4 0.001 0.125 0.1 0.1 1 1000 1 200 0 runge > ../datos/tarea_2_2_mayor.dat
+../bin/practica4 0.001 0.125 0.1 0.1 1 1000 1 999 0 runge > ../datos/tarea_2_2_mayor.dat
 
 # S0 igual a b/a
-../bin/practica4 0.001 0.125 0.1 0.1 1 1000 1 125 0 runge > ../datos/tarea_2_2_igual.dat
+../bin/practica4 0.001 0.125 0.1 0.1 1 1000 1 999 0 runge > ../datos/tarea_2_2_igual.dat
 
 
 # apartado 4: distintos parámetros
