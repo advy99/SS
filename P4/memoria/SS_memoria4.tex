@@ -13,6 +13,8 @@
 \usepackage{float}
 \usepackage{chngpage}
 \usepackage{enumitem}
+\usepackage{forloop}
+
 
 \usepackage{amsfonts}
 
@@ -314,6 +316,18 @@ Como suponiamos, la enfermedad tarda mucho más en crecer con el tiempo siendo e
 
 
 \section{Modificación del número inicial de infectados o inmunes: Inmunidad de grupo}
+
+En apartados anteriores hemos visto como en ocasiones parte de la población supceptible nunca se llegaba a contagiar debido a que la enfermedad desaparecía antes de infectar a parte de la población, sin embargo, ¿que porcentaje de la población es necesario que sea inmune para que pueda existir un grupo supceptible y que desaparezca la enfermedad? En este apartado buscaremos ese porcentaje aumentando progresivamente la cantidad de población recuperada inicial, pero manteniendo el mismo tamaño de población en todos los casos. Tras ejecutar con distintos valores, obtenemos lo siguiente:
+
+\newcounter{recuperados}
+\forloop[50]{recuperados}{50}{\value{recuperados} < 901}{
+	\begin{figure}[H]
+	\centering
+			\includegraphics[width=\textwidth]{SIR_inmunidad_\therecuperados.png}
+			\caption{Simulación con $R_0 =$ \therecuperados.}
+	\end{figure}
+}
+
 
 
 \section{Comparación entre el método de Euler y el método de Runge-Kutta}
