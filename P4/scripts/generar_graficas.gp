@@ -28,7 +28,27 @@ set title 'Ejecución del sistema con a = 0.001, b = 0.125, I0 = 1, S0 = 999 y R
 set xlabel "Individuos Supceptibles"
 set ylabel "Individuos Infectados"
 
-plot '../datos/tarea_2_1.dat' using 3:2 w lines title 'Individuos supceptibles en funcion de los infectados'
+plot '../datos/tarea_2_1.dat' using 3:2 w lines
+
+
+set output "SIR_menor_a.png"
+
+set title 'Ejecución del sistema con a = 0.0005, b = 0.125, I0 = 1, S0 = 999 y R0 = 0'
+
+plot '../datos/tarea_4_1.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_4_1.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_4_1.dat' using 1:4 w lines title 'Recuperados'
+
+set output "SIR_mayor_b.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999 y R0 = 0'
+
+plot '../datos/tarea_4_2.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_4_2.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_4_2.dat' using 1:4 w lines title 'Recuperados'
+
+
+set output "SIR_menor_a_mayor_b.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999 y R0 = 0'
+
+plot '../datos/tarea_4_3.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_4_3.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_4_3.dat' using 1:4 w lines title 'Recuperados'
 
 
 

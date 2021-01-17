@@ -33,7 +33,7 @@ mkdir -p ../datos
 
 # apartado 5
 
-../bin/practica4 0.001 0.250 0.1 0.1 1 100 1 799 200 runge > ../datos/tarea_5_1.dat
+../bin/practica4 0.001 0.125 0.1 0.1 1 100 1 799 200 runge > ../datos/tarea_5_1.dat
 
 
 # apartado 6
