@@ -174,10 +174,36 @@ Modelos de Simulación Dinámicos Continuaos.\hspace{0.05cm} }
 
 \section*{Introducción}
 
+En esta práctica estudiaremos un modelo de proparación de una enfermedad infecciosa, denominado modelo SIR.
+
+Este modelo tendrá una población de cierto número de individuos, y podemos dividir los individuos en tres grupos:
+
+\begin{enumerate}
+	\item Supceptibles (S): No tienen la enfermedad, pero pueden contraerla.
+	\item Infectados (I): Tienen la enfermedad y pueden contagiarla.
+	\item Retirados (R): Han superado la enfermedad, no la contagian y no pueden volver a infectarse ya que o se han hecho inmunes o han muerto.
+\end{enumerate}
+
+Para esta práctica también haremos las siguientes suposiciones:
+
+\begin{itemize}
+	\item La población se mantiene constante, no se tienen en cuenta los nacimientos y muertes que se producen durante la simulación.
+	\item La enfermedad no tiene periodo de incubación y se transmite por contacto directo. Si un individuo se infecta pasa del grupo S al grupo I automaticamente.
+	\item La inmunidad es permanente, cuando un individuo pasa del grupo I al R ya no puede volver contraer la enfermedad.
+	\item La tasa de infección depende del número de contactos entre individuos, es proporcional a $S(t) * I(t)$.
+	\item Los individuos infectados mantendrán la enfermedad durante un periodo de tiempo determinado proporcional a $I(t)$.
+\end{itemize}
+
+Como nos comenta el guión, todas estas condiciones nos generan un sistema de tres ecuaciones diferenciales no lineales. El objetivo de esta práctica será simular este sistema partiendo de unas condiciones iniciales $S_0$, $I_0$ y $R_0$ que representen el valor inicial de individuos supceptibles, infectados y recuperados.
 
 \section{Creación del modelo de simulación para el sistema}
 
+Para la implementación del sistema he utilizado C++ basandome en el pseudocódigo dado. He decidido encapsular el modelo en una clase de C++ ya que muchos parámetros se conocen entre si y las funciones a implementar forman parte del modelo, además de que esta encapsulación nos permite una forma facil de modificar y adaptar el modelo a nuevas versiones más complejas y detalladas manteniendo su uso.
 
+El modelo tendrá un constructor al que se le pasarán los parámetros necesarios, así como una implementación del operador de entrada que nos permitirá leer los parámetros desde fichero, entrada estandar o cualquier otro flujo de datos.
+
+
+Una vez realizada la entrada de datos, el modelo tendrá un único método publico \texttt{simular}, con el que comenzaremos la simulación con los parámetros dados. Esta simulación simplemente modificará el estado actual del sistema (las variables I, S y R) mientras que el tiempo de simulación sea menor al tiempo de fin. Esta actualización del estado se podrá hacer tanto por el método de Runge Kutta como por el método de Euler. La implementación de estos métodos es como la dada en el pseudocódigo.
 
 \section{Pruebas del sistema}
 
