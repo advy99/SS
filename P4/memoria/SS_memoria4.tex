@@ -223,8 +223,23 @@ Como vemos, el sistema funciona como esperabamos, al inicio con un único infect
 
 \subsection{Modificaciones de individuos supceptibles iniciales en función de b/a}
 
+Como se nos comenta en el guión, la constante $a$ está relacionada con la capacidad de infección de la enfermedad, mientras que $b$ está relacionada con el tiempo que dura la infección, en concreto, si la enfermedad dura $d$ días, $b = 1/d$ (para el apartado anterior, la enfermedad dura ocho días). 
+
+De forma que lo que nos pide en concreto este apartado es comprobar la relación que existe entre el tiempo que dura la infección con la capacidad de infección de la enfermedad. 
+
+Para realizar este apartado he mantenido el número de invididuos de la prueba inicial, y modificaré los valores de $a$ y $b$.
+
 \subsubsection{Individuos supceptibles iniciales menor que b/a}
 
+En este apartado concreto, si tenemos un número de individuos supceptibles menor que $b/a$ queremos que $1000 < b/a$, de forma que si mantenemos $a$ constante a $0.001$ tenemos que $b > 1$, y como $b = 1/d$, la duración de la enfermedad, $d$ ha de ser muy baja. Para la prueba usaré $b = 1.1$, de forma que $S_0 = 999 < 1.1/0.001$.
+
+\begin{figure}[H]
+  \centering
+      \includegraphics[width=\textwidth]{SIR_s0_menor.png}
+ 		\caption{Prueba del sistema con $S_0 < b/a$.}
+\end{figure}
+
+Observamos como el haber obligado a que la duración de la enfermedad sea tan baja hace que el tiempo en la que se puede propagar por la población están bajo, que los infectados se recuperan antes de infectar a la población supceptible, haciendo que la enfermedad desaparezca por no expandirse.
 
 \subsubsection{Individuos supceptibles iniciales mayor que b/a}
 
