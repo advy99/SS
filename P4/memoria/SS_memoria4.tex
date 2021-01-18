@@ -335,6 +335,13 @@ Aunque con $R_0 = 350$ se pueda observar que parte de la población se mantiene 
 
 \section{Comparación entre el método de Euler y el método de Runge-Kutta}
 
+Como hemos visto en teoría, existen varios algoritmos de integración numérica para evaluar las variables del estado actual en el siguiente intervalo de cálculo. Todas las pruebas de esta práctica las hemos desarrollado con el método de Runge-Kutta, aunque en este apartado vamos a comparar el método usado hasta ahora con el método de Euler.
+
+Ya comprobamos en teoría que a pesar de que el método de Euler es el más sencillo, es el menos recomendable debido a la poca precisión que obtenemos al calcular el estado actual en el siguiente intervalo de cálculo, sumado a que esos errores de precisión se irán sumando según avancemos la simulación.
+
+El método de Runge-Kutta consigue evitar la derivación sucesiva y al mismo tiempo preservar la precisión reemplazando la parte de derivadas de mayor orden en la serie de Taylor por ciertos coeficientes y varias evaluaciones de la primera derivada en un intervalo entre el tiempo actual y el siguiente paso.
+
+En resumen, la principal diferencia entre ambos métodos es el error de precisión a la hora de calcular el siguiente estado, por lo tanto para comprobar las diferencias entre estos dos métodos probaremos a ejecutar el sistema con distintos valores para el intervalo de cálculo y comparar las salidas.
 
 % \begin{thebibliography}{9}
 %
