@@ -341,7 +341,50 @@ Ya comprobamos en teoría que a pesar de que el método de Euler es el más senc
 
 El método de Runge-Kutta consigue evitar la derivación sucesiva y al mismo tiempo preservar la precisión reemplazando la parte de derivadas de mayor orden en la serie de Taylor por ciertos coeficientes y varias evaluaciones de la primera derivada en un intervalo entre el tiempo actual y el siguiente paso.
 
-En resumen, la principal diferencia entre ambos métodos es el error de precisión a la hora de calcular el siguiente estado, por lo tanto para comprobar las diferencias entre estos dos métodos probaremos a ejecutar el sistema con distintos valores para el intervalo de cálculo y comparar las salidas.
+En resumen, la principal diferencia entre ambos métodos es el error de precisión a la hora de calcular el siguiente estado, por lo tanto para comprobar las diferencias entre estos dos métodos probaremos a ejecutar el sistema con distintos valores para el intervalo de cálculo y comparar las salidas. En concreto probaré con un intervalo de cálculo de $0.1$, $0.05$ y $0.01$:
+
+\begin{figure}[H]
+	\centering
+			\includegraphics[width=\textwidth]{SIR_01_euler.png}
+			\caption{Ejecución con intervalo de cálculo $= 0.1$ con el método de Euler.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+			\includegraphics[width=\textwidth]{SIR_01_runge.png}
+			\caption{Ejecución con intervalo de cálculo $= 0.1$ con el método de Runge-Kutta.}
+\end{figure}
+
+
+
+\begin{figure}[H]
+	\centering
+			\includegraphics[width=\textwidth]{SIR_005_euler.png}
+			\caption{Ejecución con intervalo de cálculo $= 0.05$ con el método de Euler.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+			\includegraphics[width=\textwidth]{SIR_005_runge.png}
+			\caption{Ejecución con intervalo de cálculo $= 0.05$ con el método de Runge-Kutta.}
+\end{figure}
+
+
+
+\begin{figure}[H]
+	\centering
+			\includegraphics[width=\textwidth]{SIR_001_euler.png}
+			\caption{Ejecución con intervalo de cálculo $= 0.01$ con el método de Euler.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+			\includegraphics[width=\textwidth]{SIR_001_runge.png}
+			\caption{Ejecución con intervalo de cálculo $= 0.01$ con el método de Runge-Kutta.}
+\end{figure}
+
+
+
 
 % \begin{thebibliography}{9}
 %
