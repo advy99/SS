@@ -106,5 +106,18 @@ set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999, R0
 
 plot '../datos/tarea_6_001_runge.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_6_001_runge.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_6_001_runge.dat' using 1:4 w lines title 'Recuperados'
 
+set output "SIR_2_euler.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999, R0 = 0 e intervalo de cálculo = 2 con método de Euler'
+
+plot '../datos/tarea_6_2_euler.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_6_2_euler.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_6_2_euler.dat' using 1:4 w lines title 'Recuperados'
+
+
+set output "SIR_2_runge.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999, R0 = 0 e intervalo de cálculo = 2 con método de Runge-Kutta'
+
+plot '../datos/tarea_6_2_runge.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_6_2_runge.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_6_2_runge.dat' using 1:4 w lines title 'Recuperados'
+
 
 

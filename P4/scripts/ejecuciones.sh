@@ -52,3 +52,6 @@ done
 ../bin/practica4 0.001 0.125 0.01 0.1 1 100 1 999 0 runge > ../datos/tarea_6_001_runge.dat
 ../bin/practica4 0.001 0.125 0.01 0.1 1 100 1 999 0 euler > ../datos/tarea_6_001_euler.dat
 
+../bin/practica4 0.001 0.125 2 0.1 1 100 1 999 0 runge > ../datos/tarea_6_2_runge.dat
+../bin/practica4 0.001 0.125 2 0.1 1 100 1 999 0 euler > ../datos/tarea_6_2_euler.dat
+
