@@ -43,12 +43,12 @@ done
 
 # apartado 6
 
-../bin/practica4 0.001 0.250 0.1 0.1 1 100 1 999 0 runge > ../datos/tarea_6_01_runge.dat
-../bin/practica4 0.001 0.250 0.1 0.1 1 100 1 999 0 euler > ../datos/tarea_6_01_euler.dat
+../bin/practica4 0.001 0.125 0.1 0.1 1 100 1 999 0 runge > ../datos/tarea_6_01_runge.dat
+../bin/practica4 0.001 0.125 0.1 0.1 1 100 1 999 0 euler > ../datos/tarea_6_01_euler.dat
 
-../bin/practica4 0.001 0.250 0.05 0.1 1 100 1 999 0 runge > ../datos/tarea_6_005_runge.dat
-../bin/practica4 0.001 0.250 0.05 0.1 1 100 1 999 0 euler > ../datos/tarea_6_005_euler.dat
+../bin/practica4 0.001 0.125 0.05 0.1 1 100 1 999 0 runge > ../datos/tarea_6_005_runge.dat
+../bin/practica4 0.001 0.125 0.05 0.1 1 100 1 999 0 euler > ../datos/tarea_6_005_euler.dat
 
-../bin/practica4 0.001 0.250 0.01 0.1 1 100 1 999 0 runge > ../datos/tarea_6_001_runge.dat
-../bin/practica4 0.001 0.250 0.01 0.1 1 100 1 999 0 euler > ../datos/tarea_6_001_euler.dat
+../bin/practica4 0.001 0.125 0.01 0.1 1 100 1 999 0 runge > ../datos/tarea_6_001_runge.dat
+../bin/practica4 0.001 0.125 0.01 0.1 1 100 1 999 0 euler > ../datos/tarea_6_001_euler.dat
 
