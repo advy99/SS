@@ -60,6 +60,51 @@ do for [r=50:900:50] {
 	
 }
 
+set output "SIR_01_euler.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999, R0 = 0 e intervalo de cálculo = 0.1 con método de Euler'
+
+plot '../datos/tarea_6_01_euler.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_6_01_euler.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_6_01_euler.dat' using 1:4 w lines title 'Recuperados'
+
+
+set output "SIR_01_runge.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999, R0 = 0 e intervalo de cálculo = 0.1 con método de Runge-Kutta'
+
+plot '../datos/tarea_6_01_runge.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_6_01_runge.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_6_01_runge.dat' using 1:4 w lines title 'Recuperados'
+
+
+
+
+set output "SIR_005_euler.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999, R0 = 0 e intervalo de cálculo = 0.05 con método de Euler'
+
+plot '../datos/tarea_6_005_euler.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_6_005_euler.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_6_005_euler.dat' using 1:4 w lines title 'Recuperados'
+
+
+set output "SIR_005_runge.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999, R0 = 0 e intervalo de cálculo = 0.05 con método de Runge-Kutta'
+
+plot '../datos/tarea_6_005_runge.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_6_005_runge.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_6_005_runge.dat' using 1:4 w lines title 'Recuperados'
+
+
+
+
+
+set output "SIR_001_euler.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999, R0 = 0 e intervalo de cálculo = 0.01 con método de Euler'
+
+plot '../datos/tarea_6_001_euler.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_6_001_euler.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_6_001_euler.dat' using 1:4 w lines title 'Recuperados'
+
+
+set output "SIR_001_runge.png"
+
+set title 'Ejecución del sistema con a = 0.001, b = 0.250, I0 = 1, S0 = 999, R0 = 0 e intervalo de cálculo = 0.01 con método de Runge-Kutta'
+
+plot '../datos/tarea_6_001_runge.dat' using 1:2 w lines title 'Infectados', '../datos/tarea_6_001_runge.dat' using 1:3 w lines title 'Supceptibles', '../datos/tarea_6_001_runge.dat' using 1:4 w lines title 'Recuperados'
 
 
 
