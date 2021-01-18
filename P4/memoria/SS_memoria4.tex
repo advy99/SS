@@ -383,8 +383,23 @@ En resumen, la principal diferencia entre ambos métodos es el error de precisi�
 			\caption{Ejecución con intervalo de cálculo $= 0.01$ con el método de Runge-Kutta.}
 \end{figure}
 
+Vemos como las diferencias apenas son notables debido a que los intervalos de cálculo son muy pequeños y no se acumula suficiente error como para que exista dicho error, por este motivo, voy a realizar otra prueba con un intervalo de cálculo de dos.
 
+\begin{figure}[H]
+	\centering
+			\includegraphics[width=\textwidth]{SIR_2_euler.png}
+			\caption{Ejecución con intervalo de cálculo $= 2$ con el método de Euler.}
+\end{figure}
 
+\begin{figure}[H]
+	\centering
+			\includegraphics[width=\textwidth]{SIR_2_runge.png}
+			\caption{Ejecución con intervalo de cálculo $= 2$ con el método de Runge-Kutta.}
+\end{figure}
+
+En este caso si que podemos ver más claramente las diferencias. Aunque las gráficas no sean tan suaves ya que el intervalo de cálculo es demasiado grande, vemos como en el método de Runge-Kutta simplemente no se aprecia esa suavidad, mientras que en el método de Euler se aprecian valores muy distintos, incluso un valor imposible en la curva de supceptibles por culpa de dicho error.
+
+Como conclusión, este apartado nos demuestra lo importante que es escoger un buen método de integración numérica de cara al correcto funcionamiento del sistema, ya que este puede añadir un error que no sea aceptable.
 
 % \begin{thebibliography}{9}
 %
