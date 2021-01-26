@@ -9,15 +9,15 @@ class PlantaReciclaje {
 		int dias_simulacion;
 		int dia_actual;
 
-		double contenedor_rojo = 300;
-		double contenedor_verde = 0;
+		double contenedor_rojo = 300.0;
+		double contenedor_verde = 0.0;
 
-		double papel_recicla_dia = 300;
+		double papel_recicla_dia = 300.0;
 
-		const double MAX_ROJO = 1000;
-		const double MAX_VERDE = 300;
+		const double MAX_ROJO = 1000.0;
+		const double MAX_VERDE = 300.0;
 
-		const double KG_NECESARIOS_RECICLAR_1KG = 3;
+		const double KG_NECESARIOS_RECICLAR_1KG = 3.0;
 
 		void procesar_manana();
 		void procesar_tarde();
@@ -30,8 +30,8 @@ class PlantaReciclaje {
 
 	public:
 		PlantaReciclaje(const int num_dias, const double kg_rojo,
-							const double kg_verde, const double papel_dia, const double T_ROJO = 1000,
-							const double T_VERDE = 300, const double KG_RECICLAR = 3);
+							const double kg_verde, const double papel_dia, const double T_ROJO = 1000.0,
+							const double T_VERDE = 300.0, const double KG_RECICLAR = 3.0);
 		void simular();
 
 
