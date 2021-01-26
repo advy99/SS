@@ -7,6 +7,7 @@ int main(int argc, char ** argv) {
 		std::cerr << "ERROR: \n"
 					 << "Uso: " << argv[0] << " <num_dias> <kg_rojo> <kg_verde> <kg_reciclado_dia>"
 					 << std::endl;
+		exit(-1);
 	}
 
 	int num_dias = atoi(argv[1]);
