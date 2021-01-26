@@ -30,7 +30,7 @@ class PlantaReciclaje {
 
 	public:
 		PlantaReciclaje(const int num_dias, const double kg_rojo,
-							const double kg_verde, const double T_ROJO = 1000,
+							const double kg_verde, const double papel_dia, const double T_ROJO = 1000,
 							const double T_VERDE = 300, const double KG_RECICLAR = 3);
 		void simular();
 
