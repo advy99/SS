@@ -6,7 +6,7 @@
 
 
 PlantaReciclaje::PlantaReciclaje(const int num_dias, const double kg_rojo,
-											const double kg_verde, const double T_ROJO,
+											const double kg_verde, const double papel_dia, const double T_ROJO,
 											const double T_VERDE, const double KG_RECICLAR)
 											:MAX_ROJO(T_ROJO), MAX_VERDE(T_VERDE),
 											KG_NECESARIOS_RECICLAR_1KG(KG_RECICLAR) {
@@ -15,6 +15,8 @@ PlantaReciclaje::PlantaReciclaje(const int num_dias, const double kg_rojo,
 
 	contenedor_rojo = kg_rojo;
 	contenedor_verde = kg_verde;
+
+	papel_recicla_dia = papel_dia;
 
 }
 
