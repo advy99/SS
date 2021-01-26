@@ -18,6 +18,8 @@ class PlantaReciclaje {
 		double papel_reciclado_perdido = 0.0;
 		double falta_papel_reciclado_vender = 0.0;
 
+		bool avisos = true;
+
 		const double MAX_ROJO = 1000.0;
 		const double MAX_VERDE = 300.0;
 
@@ -36,7 +38,7 @@ class PlantaReciclaje {
 		PlantaReciclaje(const int num_dias, const double kg_rojo,
 							const double kg_verde, const double papel_dia, const double T_ROJO = 1000.0,
 							const double T_VERDE = 300.0, const double KG_RECICLAR = 3.0);
-		void simular();
+		void simular(const bool mensajes_aviso = false, const bool salida_info = false);
 
 
 		friend std::ostream & operator << (std::ostream & os, const PlantaReciclaje & planta);
