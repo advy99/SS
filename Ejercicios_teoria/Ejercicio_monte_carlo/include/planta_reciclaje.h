@@ -1,8 +1,13 @@
 #ifndef PLANTA_RECICLAJE
 #define PLANTA_RECICLAJE
 
+#include <iostream>
+
 class PlantaReciclaje {
 	private:
+
+		int dias_simulacion;
+		int dia_actual;
 
 		double contenedor_rojo = 300;
 		double contenedor_verde = 0;
@@ -24,8 +29,11 @@ class PlantaReciclaje {
 		double uniforme();
 
 	public:
-
+		PlantaReciclaje(const int dias_simulacion);
 		void simular();
+
+
+		friend std::ostream & operator << (std::ostream & os, const PlantaReciclaje & planta);
 
 };
 
