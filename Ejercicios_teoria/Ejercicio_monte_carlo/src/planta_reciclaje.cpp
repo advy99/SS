@@ -4,6 +4,24 @@
 #include <cmath>
 #include <algorithm>
 
+
+PlantaReciclaje::PlantaReciclaje(const int num_dias, const double kg_rojo,
+											const double kg_verde, const double T_ROJO,
+											const double T_VERDE, const double KG_RECICLAR)
+											:MAX_ROJO(T_ROJO), MAX_VERDE(T_VERDE),
+											KG_NECESARIOS_RECICLAR_1KG(KG_RECICLAR) {
+	dias_simulacion = num_dias;
+	dia_actual = 0;
+
+	contenedor_rojo = kg_rojo;
+	contenedor_verde = kg_verde;
+
+}
+
+
+
+
+
 // generar un número aleatorio uniforme en el
 // intervalo [0,1)
 double PlantaReciclaje::uniforme() {
