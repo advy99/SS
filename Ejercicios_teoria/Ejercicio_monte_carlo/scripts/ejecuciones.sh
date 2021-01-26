@@ -5,7 +5,7 @@ mkdir -p ../datos
 DIAS=365
 C_ROJO=300
 C_VERDE=0
-KG_PARA_RECICLAR_1=300
+KG_PARA_RECICLAR_1=3
 
 # Ejecución por defecto, sacamos la salida a un fichero de datos
 # y la salida de error nos mostrará en la terminal si hay algún punto
