@@ -14,6 +14,10 @@ class PlantaReciclaje {
 
 		double papel_recicla_dia = 300.0;
 
+		double papel_sin_reciclar_perdido = 0.0;
+		double papel_reciclado_perdido = 0.0;
+		double falta_papel_reciclado_vender = 0.0;
+
 		const double MAX_ROJO = 1000.0;
 		const double MAX_VERDE = 300.0;
 

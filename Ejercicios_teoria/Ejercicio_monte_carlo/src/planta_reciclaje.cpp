@@ -43,6 +43,8 @@ void PlantaReciclaje::procesar_papel(const double kg_reciclar){
 		std::cerr << "AVISO: El contenedor VERDE no tiene capacidad suficiente. \n"
 					 << "\t Dia: " << dia_actual << ". Capacidad contenedor verde: "
 					 << MAX_VERDE << ". Intentando tamaño total de: " << contenedor_verde + papel_reciclado << std::endl;
+
+		papel_reciclado_perdido += contenedor_verde + papel_reciclado - MAX_VERDE;
 	}
 
 	// sumamos el papel reciclado, teniendo en cuenta que no nos podemos
@@ -70,6 +72,8 @@ void PlantaReciclaje::almacenar_nuevo_papel_usado() {
 		std::cerr << "AVISO: El contenedor ROJO no tiene capacidad suficiente. \n"
 					 << "\t Dia: " << dia_actual << ". Capacidad contenedor rojo: "
 					 << MAX_ROJO << ". Intentando tamaño total de: " << contenedor_rojo + papel_usado_recibido << std::endl;
+
+		papel_sin_reciclar_perdido += contenedor_rojo + papel_usado_recibido - MAX_ROJO;
 	}
 
 	// actualizamos el contador de papel utilizado
@@ -89,6 +93,10 @@ void PlantaReciclaje::vender_papel_reciclado(){
 	while ( num_uniforme > PROB_SIGUIENTE_NIVEL ) {
 		papel_vendido += INCREMENTO_PAPEL;
 		num_uniforme -= PROB_SIGUIENTE_NIVEL;
+	}
+
+	if ( papel_vendido > contenedor_verde ) {
+		falta_papel_reciclado_vender += papel_vendido - contenedor_verde;
 	}
 
 	// actualizamos el contenedor_verde, que se queda a 0 como mínimo
@@ -135,7 +143,9 @@ void PlantaReciclaje::simular() {
 
 std::ostream & operator << (std::ostream & os, const PlantaReciclaje & planta) {
 
-	os << planta.dia_actual << "\t" << planta.contenedor_rojo << "\t" << planta.contenedor_verde << std::endl;
+	os << planta.dia_actual << "\t" << planta.contenedor_rojo << "\t" << planta.contenedor_verde
+		<< "\t" << planta.papel_sin_reciclar_perdido << "\t" << planta.papel_reciclado_perdido
+		<< "\t" << planta.falta_papel_reciclado_vender << std::endl;
 
 	return os;
 }
