@@ -94,3 +94,24 @@ void PlantaReciclaje::procesar_tarde(){
 	vender_papel_reciclado();
 
 }
+
+
+void PlantaReciclaje::simular() {
+	dia_actual = 0;
+
+	for (dia_actual = 0; dia_actual < dias_simulacion; dia_actual++){
+		procesar_manana();
+		procesar_tarde();
+
+		std::cout << (*this);
+	}
+
+}
+
+
+std::ostream & operator << (std::ostream & os, const PlantaReciclaje & planta) {
+
+	os << planta.dia_actual << "\t" << planta.contenedor_rojo << "\t" << planta.contenedor_verde << std::endl;
+
+	return os;
+}
