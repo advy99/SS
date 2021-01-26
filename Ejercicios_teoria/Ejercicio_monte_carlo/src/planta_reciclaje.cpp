@@ -40,7 +40,9 @@ void PlantaReciclaje::procesar_papel(const double kg_reciclar){
 	double papel_reciclado = kg_reciclar / KG_NECESARIOS_RECICLAR_1KG;
 
 	if ( contenedor_verde + papel_reciclado > MAX_VERDE ) {
-		std::cerr << "AVISO: El contenedor VERDE no tiene capacidad suficiente" << std::endl;
+		std::cerr << "AVISO: El contenedor VERDE no tiene capacidad suficiente. \n"
+					 << "\t Dia: " << dia_actual << ". Capacidad contenedor verde: "
+					 << MAX_VERDE << ". Intentando tamaño total de: " << contenedor_verde + papel_reciclado << std::endl;
 	}
 
 	// sumamos el papel reciclado, teniendo en cuenta que no nos podemos
@@ -65,7 +67,9 @@ void PlantaReciclaje::almacenar_nuevo_papel_usado() {
 	}
 
 	if ( contenedor_rojo + papel_usado_recibido > MAX_ROJO ) {
-		std::cerr << "AVISO: El contenedor ROJO no tiene capacidad suficiente" << std::endl;
+		std::cerr << "AVISO: El contenedor ROJO no tiene capacidad suficiente. \n"
+					 << "\t Dia: " << dia_actual << ". Capacidad contenedor rojo: "
+					 << MAX_ROJO << ". Intentando tamaño total de: " << contenedor_rojo + papel_usado_recibido << std::endl;
 	}
 
 	// actualizamos el contador de papel utilizado
