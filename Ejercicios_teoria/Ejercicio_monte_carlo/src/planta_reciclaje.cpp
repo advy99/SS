@@ -75,7 +75,7 @@ void PlantaReciclaje::almacenar_nuevo_papel_usado() {
 
 
 void PlantaReciclaje::vender_papel_reciclado(){
-	double papel_vendido = 150;
+	double papel_vendido = 30;
 
 	double num_uniforme = uniforme();
 
