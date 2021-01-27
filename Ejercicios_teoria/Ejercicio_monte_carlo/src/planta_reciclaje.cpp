@@ -101,10 +101,13 @@ void PlantaReciclaje::vender_papel_reciclado(){
 
 	if ( papel_vendido > contenedor_verde ) {
 		falta_papel_reciclado_vender += papel_vendido - contenedor_verde;
+		papel_vendido = contenedor_verde;
 	}
 
+	papel_total_vendido += papel_vendido;
+
 	// actualizamos el contenedor_verde, que se queda a 0 como mínimo
-	contenedor_verde = std::max(0.0, contenedor_verde - papel_vendido);
+	contenedor_verde -= papel_vendido;
 
 
 }
@@ -134,6 +137,7 @@ void PlantaReciclaje::procesar_tarde(){
 
 void PlantaReciclaje::simular(const bool mensajes_aviso, const bool con_info) {
 	dia_actual = 0;
+	papel_total_vendido = 0;
 	avisos = mensajes_aviso;
 
 	bool salida_info = con_info;
@@ -148,6 +152,23 @@ void PlantaReciclaje::simular(const bool mensajes_aviso, const bool con_info) {
 	}
 
 }
+
+double PlantaReciclaje::vendido() {
+	return papel_total_vendido;
+}
+
+double PlantaReciclaje::falta_reciclado() {
+	return falta_papel_reciclado_vender;
+}
+
+double PlantaReciclaje::reciclado_perdido() {
+	return papel_reciclado_perdido;
+}
+
+double PlantaReciclaje::usado_perdido() {
+	return papel_sin_reciclar_perdido;
+}
+
 
 
 std::ostream & operator << (std::ostream & os, const PlantaReciclaje & planta) {
