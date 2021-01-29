@@ -5,8 +5,8 @@
 #include <algorithm>
 
 
-PlantaReciclaje::PlantaReciclaje(const double papel_dia, const double T_ROJO,
-											const double T_VERDE, const double KG_RECICLAR)
+PlantaReciclaje::PlantaReciclaje(const double papel_dia, const double KG_RECICLAR,
+	 										const double T_ROJO, const double T_VERDE)
 											:MAX_ROJO(T_ROJO), MAX_VERDE(T_VERDE),
 											KG_NECESARIOS_RECICLAR_1KG(KG_RECICLAR) {
 	dias_simulacion = 0;
