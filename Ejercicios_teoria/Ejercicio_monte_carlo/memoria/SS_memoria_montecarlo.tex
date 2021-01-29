@@ -50,7 +50,7 @@
 \definecolor{listing-javadoc-comment}{HTML}{006CA9}
 
 \lstdefinestyle{eisvogel_listing_style}{
-  language         = python,
+  language         = c++,
 %$if(listings-disable-line-numbers)$
 %  xleftmargin      = 0.6em,
 %  framexleftmargin = 0.4em,
@@ -210,9 +210,62 @@ Además, para crear 1Kg de papel reciclado serán necesarios 3Kg de papel usado.
 
 \section{Planteamiento de la solución al problema}
 
+Para resolver el problema se ha creado un código en C++ que simule este sistema. Se ha implementado la clase \texttt{PlantaReciclaje} que contendrá todas las variables necesarias, tanto estadísticas (papel vendido, papel reciclado perdido, etc) como de la simulación (tamaño de los contenedores, cantidad almacenada en cada momento, cuantos Kg son necesarios para producir un kilo de papel reciclado, etc) así como distintos métodos para realizar la simulación. He decido implementarlo en una clase ya que de esta forma encapsulamos todo el código necesario para el sistema, de forma que modificar, adaptar o actualizar el sistema en un futuro será mucho más sencillo.
+
+Para empezar encontramos el método \texttt{simular} que realiza las siguientes tareas:
+
+\begin{lstlisting}
+RECIBE: kg iniciales en el contenedor rojo
+		  kg iniciales en el contenedor verde
+		  numero de días a simular
+		  (otras varibles para el control de salida si lo deseamos)
+//Inicializar todas las variables estadisticas y de control a 0.
+contenedor_rojo = kg_iniciales_rojo
+contenedor_verde = kg_inicales_verde
+
+Para dia entre 0 y NUM_DIAS:
+	procesar_manana()
+	procesar_tarde()
+\end{lstlisting}
+
+
+De esta forma, simulará la cantidad de días que queramos. El método \texttt{procesar\_manana} contiene:
+
+\begin{lstlisting}
+//Inicializar todas las variables estadisticas y de control a 0.
+a_procesar = min(papel_a_reciclar_1_dia, contenedor_rojo)
+
+contenedor_rojo -= a_procesar
+
+procesar_papel(a_procesar)
+\end{lstlisting}
+
+Vaciando en la cantidad necesaria el contenedor rojo y tras eso procesando el papel con el método \texttt{procesar\_papel}. Este método simplemente suma al contenedor verde la cantidad a procesar dividido de los kilogramos necesarios para obtener un kilo de papel reciclado.
+
+
+Por otro lado, el método \texttt{procesar\_tarde} realiza las siguientes operaciones:
+
+\begin{lstlisting}
+almacenar_nuevo_papel_usado()
+vender_papel_reciclado()
+\end{lstlisting}
+
+El método \texttt{almacenar\_nuevo\_papel\_usado} simplemente obtendrá de forma uniforme un número aleatorio entre 0 y 1, y dependiendo de su valor sumará al contenedor rojo el papel recibido en ese día. De forma similar, \texttt{vender\_papel\_reciclado} generará otro número aleatorio uniforme entre 0 y 1, y acorde a su valor venderá una cantidad de papel reciclado ese día. Además estos métodos también controlarán las variables estadisticas de la cantidad de papel vendido, si hace falta espacio en alguno de los contenedores, o si hay más demanda de papel reciclado del disponible.
+
+
+Finalmente, nuestro archivo principal recibirá por parámetro los distintos valores de ejecución del sistema así como el número de simulaciones a hacer y ejecutará el sistema, almacenando las variables estadísticas para realizar la correspondiente media y poder observar el funcionamiento del sistema.
+
+
 \section{Cuestiones sobre el sistema con los parámetros pedidos}
 
+Tras implementar el sistema he realizado distintas pruebas para responder a las preguntas planteadas. Tanto las ejecuciones como la generación de la gráfica se pueden hacer tras compilar el código utilizando el fichero Makefile de la raíz y utilizando los scripts de la carpeta \texttt{scripts} de la entrega.
+
+Para las pruebas he simulado el sistema con los parámetros pedidos, es decir, un valor inicial de 300Kg en el contenedor rojo, 0Kg en el verde, procesando 300Kg de papel utilizado al día y generando 1Kg de papel reciclado por cada 3Kg de papel usado. Además, como nos pide los valores sobre un año, el tiempo de simulación es de 365 días.
+
+De cara a obtener resultados fiables he ejecutado un millon de veces la simulación de un año completa, y tras eso he obtenido las variables estadísticas en media resultantes.
+
 \subsection{Capacidad del contenedor rojo}
+
 
 \subsection{Capacidad del contenedor verde}
 
