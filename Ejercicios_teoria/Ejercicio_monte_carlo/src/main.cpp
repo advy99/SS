@@ -3,9 +3,9 @@
 
 int main(int argc, char ** argv) {
 
-	if ( argc != 6 ) {
+	if ( argc != 6 && argc != 7) {
 		std::cerr << "ERROR: \n"
-					 << "Uso: " << argv[0] << " <num_dias> <kg_rojo> <kg_verde> <kg_reciclado_dia> <n_veces>"
+					 << "Uso: " << argv[0] << " <num_dias> <kg_rojo> <kg_verde> <kg_reciclado_dia> <n_veces> [KG para generar 1Kg reciclado] = 3"
 					 << std::endl;
 		exit(-1);
 	}
@@ -14,10 +14,16 @@ int main(int argc, char ** argv) {
 	double kg_rojo = atof(argv[2]);
 	double kg_verde = atof(argv[3]);
 	double kg_reciclado_dia = atof(argv[4]);
-
 	int n_veces = atoi(argv[5]);
 
-	PlantaReciclaje planta( kg_reciclado_dia);
+	double kg_generar_1kg = 3.0;
+
+	if ( argc == 7 ) {
+		kg_generar_1kg = atof(argv[6]);
+	}
+
+
+	PlantaReciclaje planta( kg_reciclado_dia, kg_generar_1kg);
 
 	double media_papel_vendido = 0.0;
 	double media_papel_reciclado_perdido = 0.0;
