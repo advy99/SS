@@ -5,16 +5,15 @@
 #include <algorithm>
 
 
-PlantaReciclaje::PlantaReciclaje(const int num_dias, const double kg_rojo,
-											const double kg_verde, const double papel_dia, const double T_ROJO,
+PlantaReciclaje::PlantaReciclaje(const double papel_dia, const double T_ROJO,
 											const double T_VERDE, const double KG_RECICLAR)
 											:MAX_ROJO(T_ROJO), MAX_VERDE(T_VERDE),
 											KG_NECESARIOS_RECICLAR_1KG(KG_RECICLAR) {
-	dias_simulacion = num_dias;
+	dias_simulacion = 0;
 	dia_actual = 0;
 
-	contenedor_rojo = kg_rojo;
-	contenedor_verde = kg_verde;
+	contenedor_rojo = 300;
+	contenedor_verde = 0;
 
 	papel_recicla_dia = papel_dia;
 
@@ -135,14 +134,21 @@ void PlantaReciclaje::procesar_tarde(){
 }
 
 
-void PlantaReciclaje::simular(const bool mensajes_aviso, const bool con_info) {
+void PlantaReciclaje::simular(const bool mensajes_aviso, const bool con_info,
+										const int c_rojo, const int c_verde, const int num_dias) {
 	dia_actual = 0;
-	papel_total_vendido = 0;
+	papel_total_vendido = 0.0;
+	papel_sin_reciclar_perdido = 0.0;
+	papel_reciclado_perdido = 0.0;
+	falta_papel_reciclado_vender = 0.0;
+
+	contenedor_rojo = c_rojo;
+	contenedor_verde = c_verde;
 	avisos = mensajes_aviso;
 
 	bool salida_info = con_info;
 
-	for (dia_actual = 0; dia_actual < dias_simulacion; dia_actual++){
+	for (dia_actual = 0; dia_actual < num_dias; dia_actual++){
 		procesar_manana();
 		procesar_tarde();
 

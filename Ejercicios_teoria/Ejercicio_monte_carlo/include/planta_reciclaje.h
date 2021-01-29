@@ -37,10 +37,10 @@ class PlantaReciclaje {
 		double uniforme();
 
 	public:
-		PlantaReciclaje(const int num_dias, const double kg_rojo,
-							const double kg_verde, const double papel_dia, const double T_ROJO = 1000.0,
+		PlantaReciclaje(const double papel_dia, const double T_ROJO = 1000.0,
 							const double T_VERDE = 300.0, const double KG_RECICLAR = 3.0);
-		void simular(const bool mensajes_aviso = false, const bool salida_info = false);
+		void simular(const bool mensajes_aviso = false, const bool salida_info = false,
+			 			 const int c_rojo = 300, const int c_verde = 0, const int num_dias = 365);
 		double vendido();
 		double falta_reciclado();
 		double reciclado_perdido();
