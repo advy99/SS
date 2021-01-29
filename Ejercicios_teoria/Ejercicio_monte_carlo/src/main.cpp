@@ -24,7 +24,11 @@ int main(int argc, char ** argv) {
 	double media_papel_usado_perdido = 0.0;
 	double media_falta_papel_reciclado = 0.0;
 
+	// ponemos la semilla del generador a un número aleatorio
+	srand(time(NULL));
+
 	for ( int i = 0; i < n_veces; i++ ) {
+		// al simular le pasamos la cantidad inicial de cada contenedor
 		planta.simular(false, false, kg_rojo, kg_verde, num_dias);
 
 		media_papel_vendido += planta.vendido();
