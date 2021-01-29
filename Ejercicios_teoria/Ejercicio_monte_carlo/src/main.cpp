@@ -17,11 +17,7 @@ int main(int argc, char ** argv) {
 
 	int n_veces = atoi(argv[5]);
 
-	PlantaReciclaje planta(num_dias, kg_rojo, kg_verde, kg_reciclado_dia);
-
-	// con mensajes de aviso y salida de ejecucion para la ejecucion de prueba
-	planta.simular(true, true);
-
+	PlantaReciclaje planta( kg_reciclado_dia);
 
 	double media_papel_vendido = 0.0;
 	double media_papel_reciclado_perdido = 0.0;
@@ -29,7 +25,7 @@ int main(int argc, char ** argv) {
 	double media_falta_papel_reciclado = 0.0;
 
 	for ( int i = 0; i < n_veces; i++ ) {
-		planta.simular(false, false);
+		planta.simular(false, false, kg_rojo, kg_verde, num_dias);
 
 		media_papel_vendido += planta.vendido();
 		media_papel_reciclado_perdido += planta.reciclado_perdido();
@@ -41,6 +37,12 @@ int main(int argc, char ** argv) {
 	media_papel_reciclado_perdido /= n_veces;
 	media_papel_usado_perdido /= n_veces;
 	media_falta_papel_reciclado /= n_veces;
+
+
+	std::cout << "Media de papel vendido: " << media_papel_vendido << std::endl
+				 << "Media de papel reciclado perdido (falta espacio en verde): " << media_papel_reciclado_perdido << std::endl
+				 << "Media falta de papel usado perdido (falta espacio en rojo): " << media_papel_usado_perdido << std::endl
+				 << "Media falta de papel reciclado (falta papel reciclado para vender): " << media_falta_papel_reciclado << std::endl;
 
 
 }
