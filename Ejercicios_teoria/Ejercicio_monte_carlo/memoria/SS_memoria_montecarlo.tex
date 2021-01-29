@@ -208,6 +208,9 @@ Se venderán 30Kg, 60Kg, 90Kg, 120Kg, 150Kg o 180Kg de papel reciclado al día. 
 
 Además, para crear 1Kg de papel reciclado serán necesarios 3Kg de papel usado.
 
+
+De cara a la implementación he tomado la decisión de que si hay 300Kg en el contenedor rojo, se procesan 300Kg aunque no puedan ser almacenados en el contenedor verde por falta de espacio, ya que en el enunciado del ejercicio dice que por una parte se extraen, y por otra se procesan e insertan en el verde, es decir, son procesos independientes y al extraer el papel no se sabrá si habrá espacio suficiente al procesarlo.
+
 \section{Planteamiento de la solución al problema}
 
 Para resolver el problema se ha creado un código en C++ que simule este sistema. Se ha implementado la clase \texttt{PlantaReciclaje} que contendrá todas las variables necesarias, tanto estadísticas (papel vendido, papel reciclado perdido, etc) como de la simulación (tamaño de los contenedores, cantidad almacenada en cada momento, cuantos Kg son necesarios para producir un kilo de papel reciclado, etc) así como distintos métodos para realizar la simulación. He decido implementarlo en una clase ya que de esta forma encapsulamos todo el código necesario para el sistema, de forma que modificar, adaptar o actualizar el sistema en un futuro será mucho más sencillo.
@@ -262,14 +265,48 @@ Tras implementar el sistema he realizado distintas pruebas para responder a las 
 
 Para las pruebas he simulado el sistema con los parámetros pedidos, es decir, un valor inicial de 300Kg en el contenedor rojo, 0Kg en el verde, procesando 300Kg de papel utilizado al día y generando 1Kg de papel reciclado por cada 3Kg de papel usado. Además, como nos pide los valores sobre un año, el tiempo de simulación es de 365 días.
 
-De cara a obtener resultados fiables he ejecutado un millon de veces la simulación de un año completa, y tras eso he obtenido las variables estadísticas en media resultantes.
+De cara a obtener resultados fiables he ejecutado un millon de veces la simulación de un año completa, y tras eso he obtenido las variables estadísticas en media resultantes, obteniendo los siguientes resultados:
+
+\begin{itemize}
+	\item Media de papel vendido: $32868.6$ Kg
+	\item Media de papel reciclado perdido (falta espacio en verde): $493.018$ Kg
+	\item Media falta de papel usado perdido (falta espacio en rojo): $30.8603$ Kg
+	\item Media falta de papel reciclado (falta papel reciclado para vender): $5455.88$ Kg
+\end{itemize}
 
 \subsection{Capacidad del contenedor rojo}
 
+Se nos pide saber si la capacidad del contenedor rojo es necesaria para almacenar todo el papel recibido en un año, y como vemos en los resultados de la ejecución la respuesta es no. Tras ejecutar un año del sistema con los parámetros dados un millon de veces vemos como, de media, se pierden unos $30.86$ Kg al año. Como vemos, en un contenedor de $1000$ Kg el valor perdido no es muy alto, pero si existe, e incrementando simplemente en $50$ Kg la capacidad de este contenedor o procesando más papel al día podríamos resolver el problema.
 
 \subsection{Capacidad del contenedor verde}
 
-\subsection{Necesidad de cambiar la cantidad de papel reciclado en un día}
+También se nos pregunta si la capacidad del contenedor verde es suficiente, y como vemos, tampoco lo es. En este caso perdemos unos $493.018$ Kg de papel reciclado al año. De nuevo es un valor bajo con respecto a las ventas totales, pero sigue siendo un material que desperdicia el sistema. También comentar que, aunque falta espacio para el contenedor verde, podemos observar que hay falta de papel reciclado para su demanda. Esto se debe a que estos valores son en media y entra en juego la aleatoriedad del sistema, puede que un día apenas se venda papel y se produzca mucho, sobrecargando el contenedor verde, o puede que varios días se venda mucho papel y se reciba poco, haciendo que no se pueda suplir la demanda de papel reciclado.
+
+\subsection{Necesidad de aumentar la cantidad de papel a reciclar en un día para sarisfacer la demanda}
+
+Como vemos, si es necesario aumentar la cantidad de papel a reciclar en un día. Aunque actualmente se esté perdidendo papel reciclado ya que se llena el contenedor verde, hay muchos días en los que no se llega a cubrir toda la demanda, haciendo que de media en un año no se vendan $5455.88$ Kg, es decir, se podría aumentar la venta de papel reciclado en un año alrededor de un $16.69\%$ en media.
+
+Para estudiar como suplir esta falta de papel y cuanto papel más deberíamos procesar al día de papel usado, he ejecutado el sistema con distintos valores de papel a reciclar por día, llegando como máximo a 900 Kg, ya que aunque procesemos más no se llega a introducir en el contenedor verde por falta de espacio:
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=\textwidth]{falta_papel_cambiando_kg_procesados.png}
+	\caption{Modificando el número de Kg procesados cada día.}
+\end{figure}
+
+
+Como vemos no se llega a solucionar e incluso llega a empeorar, ya que es posible que muchos días la cantidad de papel en el contenedor rojo sea baja (si procesamos más papel en un día es mucho más probable que esto ocurra), haciendo que si un día llega poco papel, pero la demanda es alta, se sigue sin cubrir toda la demanda de papel reciclado, por ejemplo, si inicialmente tenemos 300Kg en el contenedor rojo, los procesamos teniendo 100Kg en el contenedor verde, si vendemos más de 100Kg (150 por ejemplo) y al siguiente día nos llegan tan solo 150Kg generando 50Kg, ya estaríamos perdiendo el primer día 50Kg y el segundo día, con suerte mantendríamos 20Kg, pero en cualquier otro caso perderíamos otros 10Kg en el mejor de los casos.
+
+Por este motivo, para mejorar la falta de papel lo que habría que hacer es mejorar el método por el que se obtiene el papel reciclado, haciendo que se obtenga más papel reciclado con menos papel utilizado:
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=\textwidth]{falta_papel_cambiando_proporcion_generacion.png}
+	\caption{Modificando el número de Kg necesarios para obtener un Kg de papel reciclado.}
+\end{figure}
+
+
+En este caso vemos como si llegamos a suplir siempre la demanda ya que si hacemos el método de reciclaje muy optimo y aprovechamos casi todo el papel, aunque obtengamos pocos kilogramos de papel usado seremos capaces de mantener el papel reciclado que generamos.
 
 
 
