@@ -173,6 +173,52 @@ Planta de reciclaje.\hspace{0.05cm} }
 
 \section*{Introducción}
 
+En este problema nos piden simular el funcionamiento de una planta de reciclaje. Este problema lo solucionaremos enfocandolo como un problema con un enfoque de Montecarlo ya que entrará en juego la aleatoriedad del sistema, de forma que ejecutaremos el sistema múltiples veces de cara a obtener los valores en media que se consiguen. De esta forma podremos determinar el funcionamiento del sistema sin que se trate de un caso puntual debido a la aleatoriedad.
+
+\section{Descripción del problema}
+
+El problema se trata de simular el funcionamiento de una planta de reciclaje de cara a observar su comportamiento para abrir una nueva planta que funcione de forma óptima. En dicha planta de reciclaje existen dos depósitos:
+
+\begin{itemize}
+	\item Deposito rojo: En este deposito se almacenará el papel usado recibido que se reciclará. Este deposito tendrá una capacidad máxima de 1000 Kg.
+	\item Deposito verde: En este deposito se almacenará el papel reciclado resultante del papel usado y que se venderá. Este deposito tendrá una capacidad máxima de 300 Kg.
+\end{itemize}
+
+De esta forma, cada día la planta hará distintas tareas ya sea por la mañana o por la tarde:
+
+\begin{itemize}
+	\item Por la mañana:
+		\begin{enumerate}
+			\item Se extrae el papel usado del deposito rojo para procesarlo. En principio se utilizarán 300 Kg o lo que quede disponible en el deposito si no se llegan a dichos kilos.
+			\item Se procesa el papel utilizado y el papel reciclado resultante se almacena en el deposito verde.
+		\end{enumerate}
+
+	\item Por la tarde:
+		\begin{enumerate}
+			\item Se almacena en el deposito rojo la cantidad de papel usado que ha llegado durante el día.
+			\item Se vende a los clientes cierta cantidad de papel reciclado.
+		\end{enumerate}
+\end{itemize}
+
+La cantidad de papel utilizado que llega cada día y la cantidad de papel vendido cada día serán variables aleatorias.
+
+Se recibirá 150Kg, 200Kg, 250Kg, 300Kg, 350Kg o 400Kg de papel usado al día. Cada uno de estos valores aparecerán con una probabilidad de $1/6$.
+
+Se venderán 30Kg, 60Kg, 90Kg, 120Kg, 150Kg o 180Kg de papel reciclado al día. Cada uno de estos valores aparecerán con una probabilidad de $1/6$.
+
+Además, para crear 1Kg de papel reciclado serán necesarios 3Kg de papel usado.
+
+\section{Planteamiento de la solución al problema}
+
+\section{Cuestiones sobre el sistema con los parámetros pedidos}
+
+\subsection{Capacidad del contenedor rojo}
+
+\subsection{Capacidad del contenedor verde}
+
+\subsection{Necesidad de cambiar la cantidad de papel reciclado en un día}
+
+
 
 % \begin{thebibliography}{9}
 %
