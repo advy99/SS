@@ -4,15 +4,14 @@
 #include <iostream>
 #include <list>
 
-typedef struct {
-	int tipo;
-	float tiempo;
-} registro;
+#define SUCESO_DEMANDA 0
+#define SUCESO_EVALUACION_INVENTARIO 1
+#define SUCESO_LLEGADA_PEDIDO 2
+#define SUCESO_FIN_SIMULACION 3
 
 typedef struct {
 	int suceso;
-	float tiempo;
-	registro reg_cola;
+	double tiempo;
 } suc;
 
 class SistemaInventario {
@@ -32,6 +31,9 @@ class SistemaInventario {
 		void demanda();
 		void evaluacion();
 		void llegapedido();
+
+		double generador_exponencial(const double media);
+		double uniforme();
 
 
 	public:

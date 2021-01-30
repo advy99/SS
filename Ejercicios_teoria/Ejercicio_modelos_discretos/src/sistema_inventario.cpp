@@ -1,4 +1,5 @@
 #include "sistema_inventario.h"
+#include <cmath>
 
 
 void SistemaInventario::demanda() {
@@ -39,4 +40,21 @@ void SistemaInventario::llegapedido() {
 	nivel += pedido;
 	pedido = 0;
 
+}
+
+
+double SistemaInventario::generador_exponencial(const double media) {
+	double u;
+	u = (double) random();
+	u = u/(double)(RAND_MAX+1.0);
+
+	return(-media*log(1-u));
+}
+
+double SistemaInventario::uniforme() {
+	int t = random();
+
+	double f = ((double)RAND_MAX+1.0);
+
+	return (double)t/f;
 }
