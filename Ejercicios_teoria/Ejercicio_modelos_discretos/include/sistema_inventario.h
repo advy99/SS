@@ -34,6 +34,9 @@ class SistemaInventario {
 
 		void insertar_lsuc(const Suceso suce, const double tiempo);
 
+		double genera_demanda(const double media);
+		int genera_tamano();
+
 
 	public:
 		void simula();

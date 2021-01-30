@@ -26,11 +26,11 @@ void SistemaInventario::demanda() {
 
 	t_ult_suc = reloj;
 
-	tam = genera_tamano();
+	int tam = genera_tamano();
 
 	nivel -= tam;
 
-	insertar_lsuc(suc_demanda, reloj + gendem(0.1) );
+	insertar_lsuc(Suceso::SUCESO_DEMANDA, reloj + genera_demanda(0.1) );
 
 }
 
@@ -72,4 +72,30 @@ double SistemaInventario::uniforme() {
 	double f = ((double)RAND_MAX+1.0);
 
 	return (double)t/f;
+}
+
+double SistemaInventario::genera_demanda(const double media) {
+	return generador_exponencial(media);
+}
+
+
+int SistemaInventario::genera_tamano(){
+	double num_aleatorio = uniforme();
+
+	int resultado = 1;
+
+	if ( num_aleatorio < 1.0/6.0) {
+		resultado = 1;
+	} else if (num_aleatorio < 3.0/6.0 ) {
+		// 1/6 + 1/3 = 3/6
+		resultado = 2;
+	} else if ( num_aleatorio < 5.0/6.0) {
+		// 3/6 + 1/3 = 5/6
+		resultado = 3;
+	} else {
+		resultado = 4;
+	}
+
+	return resultado;
+
 }
