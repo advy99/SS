@@ -107,3 +107,56 @@ int SistemaInventario::genera_tamano(){
 double SistemaInventario::genera_pedido(const double inferior, const double superior) {
 	return uniforme(inferior, superior);
 }
+
+void SistemaInventario::suceso(const suc nodo) {
+	if ( nodo.suceso == Suceso::SUCESO_DEMANDA) {
+		demanda();
+	} else if ( nodo.suceso == Suceso::SUCESO_EVALUACION_INVENTARIO) {
+		evaluacion();
+	} else if ( nodo.suceso == Suceso::SUCESO_LLEGADA_PEDIDO ) {
+		llega_pedido();
+	} else if ( nodo.suceso == Suceso::SUCESO_FIN_SIMULACION ) {
+		fin_simulacion();
+	}
+}
+
+
+void SistemaInventario::fin_simulacion() {
+	parar = true;
+}
+
+
+void SistemaInventario::simula(const double t_final, const int nivel_inicial, const int s_p, const int s_g) {
+	nivel = nivel_inicial;
+	pedido = 0;
+	acum_mas = 0;
+	acum_menos = 0;
+	acum_pedido = 0;
+
+	reloj = 0.0;
+
+	s_pequena = s_p;
+	s_grande = s_g;
+
+	while ( !l_suc.empty() ) {
+		l_suc.pop_front();
+	}
+
+	suc suceso_fin;
+
+	suceso_fin.suceso = Suceso::SUCESO_FIN_SIMULACION;
+	suceso_fin.tiempo = reloj + t_final;
+
+	parar = false;
+
+	// simulamos
+	while ( !parar ){
+		suc nodo = l_suc.front();
+		l_suc.pop_front();
+
+		reloj = nodo.tiempo;
+
+		suceso(nodo);
+	}
+
+}

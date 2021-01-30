@@ -30,6 +30,7 @@ class SistemaInventario {
 		int s_grande;
 
 		double reloj;
+		bool parar;
 
 		std::list<suc> l_suc;
 
@@ -49,10 +50,12 @@ class SistemaInventario {
 		int genera_tamano();
 
 		double genera_pedido(const double inf, const double sup);
+		void suceso(const suc nodo);
+		void fin_simulacion();
 
 
 	public:
-		void simula();
+		void simula(const double t_final, const int nivel_inicial, const int s_p, const int s_g);
 };
 
 
