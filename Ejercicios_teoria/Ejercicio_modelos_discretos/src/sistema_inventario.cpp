@@ -38,13 +38,13 @@ void SistemaInventario::evaluacion() {
 	if ( nivel < s_pequena && pedido == 0 ) {
 		pedido = s_grande - nivel;
 		acum_pedido += k + i * pedido;
-		insertar_lsuc ( suc_llega_pedido, reloj + gen_pedido(0.5, 1));
+		insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
 	}
 
-	insertar_lsuc( suc_evaluacion, reloj + 1);
+	insertar_lsuc( Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
 }
 
-void SistemaInventario::llegapedido() {
+void SistemaInventario::llega_pedido() {
 	if ( nivel > 0 ) {
 		acum_mas += (reloj - t_ult_suc) * nivel;
 	} else {
@@ -74,6 +74,10 @@ double SistemaInventario::uniforme() {
 	return (double)t/f;
 }
 
+double SistemaInventario::uniforme(const double superior, const double inferior) {
+	return (inferior + (superior-inferior) * uniforme());
+}
+
 double SistemaInventario::genera_demanda(const double media) {
 	return generador_exponencial(media);
 }
@@ -98,4 +102,8 @@ int SistemaInventario::genera_tamano(){
 
 	return resultado;
 
+}
+
+double SistemaInventario::genera_pedido(const double inferior, const double superior) {
+	return uniforme(inferior, superior);
 }

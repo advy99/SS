@@ -27,15 +27,20 @@ class SistemaInventario {
 
 		void demanda();
 		void evaluacion();
-		void llegapedido();
+		void llega_pedido();
 
 		double generador_exponencial(const double media);
 		double uniforme();
+		// uniforme entre un rango
+		double uniforme(const double superior, const double inferior);
+
 
 		void insertar_lsuc(const Suceso suce, const double tiempo);
 
 		double genera_demanda(const double media);
 		int genera_tamano();
+
+		double genera_pedido(const double inf, const double sup);
 
 
 	public:
