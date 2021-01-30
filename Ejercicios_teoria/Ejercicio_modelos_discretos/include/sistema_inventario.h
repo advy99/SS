@@ -4,13 +4,10 @@
 #include <iostream>
 #include <list>
 
-#define SUCESO_DEMANDA 0
-#define SUCESO_EVALUACION_INVENTARIO 1
-#define SUCESO_LLEGADA_PEDIDO 2
-#define SUCESO_FIN_SIMULACION 3
+enum class Suceso {SUCESO_DEMANDA, SUCESO_EVALUACION_INVENTARIO, SUCESO_LLEGADA_PEDIDO, SUCESO_FIN_SIMULACION};
 
 typedef struct {
-	int suceso;
+	Suceso suceso;
 	double tiempo;
 } suc;
 
@@ -34,6 +31,8 @@ class SistemaInventario {
 
 		double generador_exponencial(const double media);
 		double uniforme();
+
+		void insertar_lsuc(const Suceso suce, const double tiempo);
 
 
 	public:

@@ -1,6 +1,21 @@
 #include "sistema_inventario.h"
 #include <cmath>
 
+bool compare(const suc & s1, const suc & s2) {
+	return s1.tiempo < s2.tiempo;
+}
+
+
+void SistemaInventario::insertar_lsuc(const Suceso suceso, const double tiempo) {
+	suc nuevo_suceso;
+	nuevo_suceso.suceso = suceso;
+	nuevo_suceso.tiempo = tiempo;
+
+	l_suc.push_back(nuevo_suceso);
+
+	l_suc.sort(compare);
+
+}
 
 void SistemaInventario::demanda() {
 	if ( nivel > 0 ) {
