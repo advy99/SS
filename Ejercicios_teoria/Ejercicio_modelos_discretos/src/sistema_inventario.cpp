@@ -37,7 +37,7 @@ void SistemaInventario::demanda() {
 void SistemaInventario::evaluacion() {
 	if ( nivel < s_pequena && pedido == 0 ) {
 		pedido = s_grande - nivel;
-		acum_pedido += k + i * pedido;
+		acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
 		insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
 	}
 

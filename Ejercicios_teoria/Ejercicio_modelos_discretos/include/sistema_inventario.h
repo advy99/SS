@@ -21,6 +21,14 @@ class SistemaInventario {
 		int acum_menos;
 		int acum_pedido;
 
+		// k
+		int costo_hacer_pedido;
+		// i
+		int costo_por_unidad;
+
+		int s_pequena;
+		int s_grande;
+
 		double reloj;
 
 		std::list<suc> l_suc;
