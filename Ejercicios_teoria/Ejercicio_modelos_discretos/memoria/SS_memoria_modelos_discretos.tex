@@ -174,7 +174,14 @@ Sistema de inventario.\hspace{0.05cm} }
 \section*{Introducción}
 
 
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=\textwidth]{grafo_sucesos_original.png}
+	\caption{Grafo de estados del sistema original.}
+\end{figure}
+
 \begin{table}[H]
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
 \textbf{Modificacion} & \textbf{Política} & \textbf{Costo total} & \textbf{Costo de pedido} & \textbf{Costo de mantenimiento} & \textbf{Costo de déficit} \\ \hline
@@ -192,39 +199,55 @@ Sistema de inventario.\hspace{0.05cm} }
 0                     & (60, 80)          & 143.831              & 98.8766                  & 44.8827                         & 0.0718687                 \\ \hline
 0                     & (60, 100)         & 144.145              & 89.6238                  & 54.4677                         & 0.0530768                 \\ \hline
 \end{tabular}
+}
 \end{table}
 
 La mejor politica con la modificación 0 es la política: (20, 60) con un costo total de 118.946
 
 
 
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=\textwidth]{grafo_sucesos_mod1.png}
+	\caption{Grafo de estados del sistema con la primera modificación.}
+\end{figure}
 
 \begin{table}[H]
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
 \textbf{Modificacion} & \textbf{Política} & \textbf{Costo total} & \textbf{Costo de pedido} & \textbf{Costo de mantenimiento} & \textbf{Costo de déficit} \\ \hline
-1                     & (0,40)            & 240.058              & 103.764                  & 0.652275                        & 135.642                   \\ \hline
-1                     & (0,60)            & 239.808              & 103.787                  & 0.652935                        & 135.369                   \\ \hline
-1                     & (0,80)            & 240.01               & 103.794                  & 0.65402                         & 135.562                   \\ \hline
-1                     & (0,100)           & 240.081              & 103.827                  & 0.653425                        & 135.6                     \\ \hline
-1                     & (20,40)           & 154.695              & 104.473                  & 2.59165                         & 47.6308                   \\ \hline
-1                     & (20,60)           & 155.052              & 104.512                  & 2.56332                         & 47.9772                   \\ \hline
-1                     & (20,80)           & 155.005              & 104.528                  & 2.5721                          & 47.9046                   \\ \hline
-1                     & (20,100)          & 154.941              & 104.488                  & 2.57105                         & 47.8816                   \\ \hline
-1                     & (40,60)           & 125.836              & 105.19                   & 13.7428                         & 6.9026                    \\ \hline
-1                     & (40,80)           & 125.856              & 105.206                  & 13.7174                         & 6.9328                    \\ \hline
-1                     & (40,100)          & 125.891              & 105.238                  & 13.7187                         & 6.93503                   \\ \hline
-1                     & (60,80)           & 135.548              & 106                      & 29.0593                         & 0.488747                  \\ \hline
-1                     & (60,100)          & 135.52               & 105.961                  & 29.0749                         & 0.483234                  \\ \hline
+1    &    (0, 40)    &    135.554    &    106.013    &    29.0519    &    0.48888                  \\ \hline
+1    &    (0, 60)    &    135.555    &    106.012    &    29.0596    &    0.483654                  \\ \hline
+1    &    (0, 80)    &    135.555    &    106.019    &    29.0522    &    0.483913                  \\ \hline
+1    &    (0, 100)    &    135.559    &    106.015    &    29.0598    &    0.48414                 \\ \hline
+1    &    (20, 40)    &    135.547    &    105.99    &    29.0676    &    0.48974                 \\ \hline
+1    &    (20, 60)    &    135.548    &    105.999    &    29.0621    &    0.487301                 \\ \hline
+1    &    (20, 80)    &    135.576    &    106.038    &    29.0457    &    0.492535                 \\ \hline
+1    &    (20, 100)    &    135.541    &    105.995    &    29.0598    &    0.487079                 \\ \hline
+1    &    (40, 60)    &    135.509    &    105.955    &    29.0734    &    0.480824                 \\ \hline
+1    &    (40, 80)    &    135.56    &    106.014    &    29.0521    &    0.493923                 \\ \hline
+1    &    (40, 100)    &    135.555    &    106.006    &    29.0538    &    0.495418                 \\ \hline
+1    &    (60, 80)    &    135.552    &    106.005    &    29.0624    &    0.485406                 \\ \hline
+1    &    (60, 100)    &    135.528    &    105.975    &    29.0676    &    0.485268                 \\ \hline
 \end{tabular}
+}
 \end{table}
-La mejor politica con la modificación 1 es la política: (40, 60) con un costo total de 125.836
+La mejor politica con la modificación 1 es la política: (40, 60) con un costo total de 135.509
 
 
 
 
+
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=\textwidth]{grafo_sucesos_mod2.png}
+	\caption{Grafo de estados del sistema con la segunda modificación.}
+\end{figure}
 
 \begin{table}[H]
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
 \textbf{Modificacion} & \textbf{Política} & \textbf{Costo total} & \textbf{Costo de pedido} & \textbf{Costo de mantenimiento} & \textbf{Costo de déficit} \\ \hline
@@ -242,6 +265,7 @@ La mejor politica con la modificación 1 es la política: (40, 60) con un costo 
 2                     & (60,80)           & 157.186              & 107.487                  & 49.6953                         & 0.00380315                \\ \hline
 2                     & (60,100)          & 156.27               & 94.6649                  & 61.6051                         & 5.55898e-05               \\ \hline
 \end{tabular}
+}
 \end{table}
 
 La mejor politica con la modificación 2 es la política: (20, 60) con un costo total de 117.751
