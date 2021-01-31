@@ -148,10 +148,6 @@ void SistemaInventario::genera_informe(const int num_simul) {
 
 	std::vector<double> informe_media = informe;
 
-	for (unsigned i = 0; i < informe_media.size(); i++) {
-		informe_media[i] /= (double)num_simul;
-	}
-
 	std::cout << "Modificacion " << "\t"
 			 	 << "Política" << "\t"
 				 << "Costo total" << "\t"
@@ -177,14 +173,8 @@ void SistemaInventario::simula(const double t_final, const int nivel_inicial,
 	 									 const int s_p, const int s_g, const int n_veces,
 									 	 const int mod) {
 
-	acum_mas = 0;
-	acum_menos = 0;
-	acum_pedido = 0;
-
 	s_pequena = s_p;
 	s_grande = s_g;
-
-	informe.clear();
 
 	modificacion = mod;
 
@@ -195,10 +185,15 @@ void SistemaInventario::simula(const double t_final, const int nivel_inicial,
 		reloj = 0.0;
 		t_ult_suc = reloj;
 
+		acum_mas = 0;
+		acum_menos = 0;
+		acum_pedido = 0;
+
+		informe.clear();
+
+
 		// vaciamos la lista de sucesos
-		while ( !l_suc.empty() ) {
-			l_suc.pop_front();
-		}
+		l_suc.clear();
 
 		insertar_lsuc(Suceso::SUCESO_FIN_SIMULACION, reloj + t_final);
 		insertar_lsuc(Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
