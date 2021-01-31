@@ -13,18 +13,18 @@ typedef struct {
 
 class SistemaInventario {
 	private:
-		int nivel;
+		double nivel;
 		int pedido;
-		int t_ult_suc;
+		double t_ult_suc;
 
 		double acum_mas;
 		double acum_menos;
 		double acum_pedido;
 
 		// k
-		int costo_hacer_pedido;
+		double costo_hacer_pedido;
 		// i
-		int costo_por_unidad;
+		double costo_por_unidad;
 
 		int s_pequena;
 		int s_grande;
@@ -39,8 +39,8 @@ class SistemaInventario {
 
 		int modificacion;
 
-		const int H = 1;
-		const int PI = 5;
+		const double H = 1.0;
+		const double PI = 5.0;
 
 		void demanda();
 		void evaluacion();
@@ -65,7 +65,7 @@ class SistemaInventario {
 
 
 	public:
-		void simula(const double t_final, const int nivel_inicial, const int s_p,
+		void simula(const double t_final, const double nivel_inicial, const int s_p,
 						const int s_g, const int n_veces, const int mod);
 };
 

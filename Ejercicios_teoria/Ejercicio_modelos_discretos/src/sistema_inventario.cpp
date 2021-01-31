@@ -90,12 +90,12 @@ int SistemaInventario::genera_tamano(){
 
 	int resultado = 1;
 
-	if ( num_aleatorio < 1.0/6.0) {
+	if ( num_aleatorio <= 1.0/6.0) {
 		resultado = 1;
-	} else if (num_aleatorio < 3.0/6.0 ) {
+	} else if (num_aleatorio <= 3.0/6.0 ) {
 		// 1/6 + 1/3 = 3/6
 		resultado = 2;
-	} else if ( num_aleatorio < 5.0/6.0) {
+	} else if ( num_aleatorio <= 5.0/6.0) {
 		// 3/6 + 1/3 = 5/6
 		resultado = 3;
 	} else {
@@ -130,7 +130,7 @@ void SistemaInventario::fin_simulacion() {
 	acum_mas *= H;
 	acum_menos *= PI;
 
-	std::vector<double> informe_ejecucion = { (acum_pedido + acum_mas + acum_menos) / reloj, acum_pedido / reloj, acum_mas / reloj, acum_menos / reloj};
+	std::vector<double> informe_ejecucion = { (acum_pedido + acum_mas + acum_menos) / (reloj * 1.0), acum_pedido / (reloj * 1.0) , acum_mas / (reloj * 1.0) , acum_menos / (reloj * 1.0)};
 
 	// si el informe esta vacio, es la primera ejecucion
 	if ( informe.size() == 0) {
@@ -169,7 +169,7 @@ void SistemaInventario::genera_informe(const int num_simul) {
 }
 
 
-void SistemaInventario::simula(const double t_final, const int nivel_inicial,
+void SistemaInventario::simula(const double t_final, const double nivel_inicial,
 	 									 const int s_p, const int s_g, const int n_veces,
 									 	 const int mod) {
 
@@ -178,6 +178,14 @@ void SistemaInventario::simula(const double t_final, const int nivel_inicial,
 
 	modificacion = mod;
 
+	// k e i sacados del guion, se podría parametrizar
+	costo_hacer_pedido = 32.0;
+
+	costo_por_unidad = 3.0;
+
+	informe.clear();
+
+
 	for ( int i = 0; i < n_veces; i++ ) {
 		nivel = nivel_inicial;
 		pedido = 0;
@@ -185,12 +193,9 @@ void SistemaInventario::simula(const double t_final, const int nivel_inicial,
 		reloj = 0.0;
 		t_ult_suc = reloj;
 
-		acum_mas = 0;
-		acum_menos = 0;
-		acum_pedido = 0;
-
-		informe.clear();
-
+		acum_mas = 0.0;
+		acum_menos = 0.0;
+		acum_pedido = 0.0;
 
 		// vaciamos la lista de sucesos
 		l_suc.clear();
