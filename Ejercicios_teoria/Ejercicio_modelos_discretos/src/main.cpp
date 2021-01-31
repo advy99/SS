@@ -5,12 +5,14 @@
 
 int main(int argc, char ** argv) {
 
-	if ( argc != 5 ) {
+	if ( argc != 3 ) {
 		std::cerr << "ERROR: Número erroneo de parámetros" << std::endl
-					 << "\tUso: " << argv[0] << " <s> <S> <n_simulaciones> <mod>";
+					 << "\tUso: " << argv[0] << " <n_simulaciones> <mod>";
+		exit(-1);
 	}
 
-
+	int n_veces = atoi(argv[1]);
+	int mod = atoi(argv[2]);
 
 	int nivel_inicial = 60;
 	double tiempo_ej = 120;
@@ -19,7 +21,7 @@ int main(int argc, char ** argv) {
 
 	for ( unsigned i = 0; i <= 60; i += 20 ) {
 		for ( unsigned j = 40; j <= 100; j += 20) {
-			sistema.simula(tiempo_ej, nivel_inicial, i, j, 10000, 0);
+			sistema.simula(tiempo_ej, nivel_inicial, i, j, n_veces, mod);
 		}
 	}
 
