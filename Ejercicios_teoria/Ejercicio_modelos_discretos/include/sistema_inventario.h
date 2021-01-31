@@ -15,6 +15,7 @@ class SistemaInventario {
 	private:
 		double nivel;
 		int pedido;
+		int pedido_mes_anterior;
 		double t_ult_suc;
 
 		double acum_mas;
@@ -38,6 +39,8 @@ class SistemaInventario {
 		std::vector<double> informe;
 
 		int modificacion;
+
+		bool hay_pedido_en_curso;
 
 		const double H = 1.0;
 		const double PI = 5.0;

@@ -34,6 +34,16 @@ void SistemaInventario::demanda() {
 
 	// primera mod
 	// almaceno el tamaño vendido al mes
+	if ( modificacion == 1) {
+		pedido_mes_anterior += tam;
+	} else if ( modificacion == 2) {
+		if ( nivel < s_pequena && !hay_pedido_en_curso ) {
+			pedido = s_grande - nivel;
+			acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
+			insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
+			hay_pedido_en_curso = true;
+		}
+	}
 
 	insertar_lsuc(Suceso::SUCESO_DEMANDA, reloj + genera_demanda(0.1) );
 
@@ -41,13 +51,23 @@ void SistemaInventario::demanda() {
 
 void SistemaInventario::evaluacion() {
 	if ( nivel < s_pequena && pedido == 0 ) {
-		pedido = s_grande - nivel;
 
-		// primera mod
-		// pedido = almacenado en demanda
+		if ( modificacion == 0) {
+			pedido = s_grande - nivel;
+		} else if ( modificacion == 1) {
+			// primera mod
+			// pedido = almacenado en demanda
+			pedido = pedido_mes_anterior;
+
+		}
 
 		acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
 		insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
+	}
+
+	// todos los meses, vaciamos lo pedido en este mes, aunque no se llegue a pedir
+	if ( modificacion == 1){
+		pedido_mes_anterior = 0;
 	}
 
 	insertar_lsuc( Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
@@ -63,6 +83,10 @@ void SistemaInventario::llega_pedido() {
 	t_ult_suc = reloj;
 	nivel += pedido;
 	pedido = 0;
+
+	if ( modificacion == 2) {
+		hay_pedido_en_curso = false;
+	}
 
 }
 
@@ -206,11 +230,18 @@ double SistemaInventario::simula(const double t_final, const double nivel_inicia
 		acum_menos = 0.0;
 		acum_pedido = 0.0;
 
+		pedido_mes_anterior = 0;
+		hay_pedido_en_curso = false;
+
 		// vaciamos la lista de sucesos
 		l_suc.clear();
 
 		insertar_lsuc(Suceso::SUCESO_FIN_SIMULACION, reloj + t_final);
-		insertar_lsuc(Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
+
+		if ( modificacion != 2 ){
+			insertar_lsuc(Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
+		}
+
 		insertar_lsuc(Suceso::SUCESO_DEMANDA, reloj + genera_demanda(0.1));
 
 		parar = false;
