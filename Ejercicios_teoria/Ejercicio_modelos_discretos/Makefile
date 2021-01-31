@@ -4,7 +4,7 @@ BIN  = $(HOME)/bin
 OBJ  = $(HOME)/obj
 INC  = $(HOME)/include
 
-CXXFLAGS = -O3 -std=c++17 -I$(INC)
+CXXFLAGS = -O2 -std=c++17 -I$(INC)
 
 .PHONY: all clean crear_carpetas
 
