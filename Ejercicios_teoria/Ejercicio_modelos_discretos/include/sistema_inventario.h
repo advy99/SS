@@ -60,12 +60,12 @@ class SistemaInventario {
 		double genera_pedido(const double inf, const double sup);
 		void suceso(const suc nodo);
 		void fin_simulacion();
-		void genera_informe(const int n_veces);
+		double genera_informe(const int n_veces);
 
 
 
 	public:
-		void simula(const double t_final, const double nivel_inicial, const int s_p,
+		double simula(const double t_final, const double nivel_inicial, const int s_p,
 						const int s_g, const int n_veces, const int mod);
 };
 

@@ -32,6 +32,9 @@ void SistemaInventario::demanda() {
 
 	nivel -= tam;
 
+	// primera mod
+	// almaceno el tamaño vendido al mes
+
 	insertar_lsuc(Suceso::SUCESO_DEMANDA, reloj + genera_demanda(0.1) );
 
 }
@@ -39,6 +42,10 @@ void SistemaInventario::demanda() {
 void SistemaInventario::evaluacion() {
 	if ( nivel < s_pequena && pedido == 0 ) {
 		pedido = s_grande - nivel;
+
+		// primera mod
+		// pedido = almacenado en demanda
+
 		acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
 		insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
 	}
@@ -144,7 +151,7 @@ void SistemaInventario::fin_simulacion() {
 }
 
 
-void SistemaInventario::genera_informe(const int num_simul) {
+double SistemaInventario::genera_informe(const int num_simul) {
 
 	std::vector<double> informe_media = informe;
 
@@ -166,10 +173,12 @@ void SistemaInventario::genera_informe(const int num_simul) {
 
 	std::cout << std::endl;
 
+	return informe_media[0];
+
 }
 
 
-void SistemaInventario::simula(const double t_final, const double nivel_inicial,
+double SistemaInventario::simula(const double t_final, const double nivel_inicial,
 	 									 const int s_p, const int s_g, const int n_veces,
 									 	 const int mod) {
 
@@ -217,6 +226,8 @@ void SistemaInventario::simula(const double t_final, const double nivel_inicial,
 		}
 	}
 
-	genera_informe(n_veces);
+	double costo_total = genera_informe(n_veces);
+
+	return costo_total;
 
 }
