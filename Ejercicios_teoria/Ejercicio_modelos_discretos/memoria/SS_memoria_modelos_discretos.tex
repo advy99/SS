@@ -1,0 +1,261 @@
+\documentclass[12pt, spanish]{article}
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{chngpage}
+
+\usepackage{amsfonts}
+
+\usepackage{subcaption}
+
+\usepackage{hyperref}
+\usepackage[
+    type={CC},
+    modifier={by-nc-sa},
+    version={4.0},
+]{doclicense}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+
+% para codigo
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+
+%% configuración de listings
+
+\definecolor{listing-background}{HTML}{F7F7F7}
+\definecolor{listing-rule}{HTML}{B3B2B3}
+\definecolor{listing-numbers}{HTML}{B3B2B3}
+\definecolor{listing-text-color}{HTML}{000000}
+\definecolor{listing-keyword}{HTML}{435489}
+\definecolor{listing-identifier}{HTML}{435489}
+\definecolor{listing-string}{HTML}{00999A}
+\definecolor{listing-comment}{HTML}{8E8E8E}
+\definecolor{listing-javadoc-comment}{HTML}{006CA9}
+
+\lstdefinestyle{eisvogel_listing_style}{
+  language         = c++,
+%$if(listings-disable-line-numbers)$
+%  xleftmargin      = 0.6em,
+%  framexleftmargin = 0.4em,
+%$else$
+  numbers          = left,
+  xleftmargin      = 0em,
+ framexleftmargin = 0em,
+%$endif$
+  backgroundcolor  = \color{listing-background},
+  basicstyle       = \color{listing-text-color}\small\ttfamily{}\linespread{1.15}, % print whole listing small
+  breaklines       = true,
+  frame            = single,
+  framesep         = 0.19em,
+  rulecolor        = \color{listing-rule},
+  frameround       = ffff,
+  tabsize          = 4,
+  numberstyle      = \color{listing-numbers},
+  aboveskip        = 1.0em,
+  belowskip        = 0.1em,
+  abovecaptionskip = 0em,
+  belowcaptionskip = 1.0em,
+  keywordstyle     = \color{listing-keyword}\bfseries,
+  classoffset      = 0,
+  sensitive        = true,
+  identifierstyle  = \color{listing-identifier},
+  commentstyle     = \color{listing-comment},
+  morecomment      = [s][\color{listing-javadoc-comment}]{/**}{*/},
+  stringstyle      = \color{listing-string},
+  showstringspaces = false,
+  escapeinside     = {/*@}{@*/}, % Allow LaTeX inside these special comments
+  literate         =
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\'e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+  {…}{{\ldots}}1 {≥}{{>=}}1 {≤}{{<=}}1 {„}{{\glqq}}1 {“}{{\grqq}}1
+  {”}{{''}}1
+}
+\lstset{style=eisvogel_listing_style}
+
+
+\usepackage[default]{sourcesanspro}
+
+\setmarginsrb{2 cm}{1 cm}{2 cm}{2 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Ejercicio 2:\\
+Sistema de inventario.\hspace{0.05cm} }
+\author{Antonio David Villegas Yeguas}
+\date{\today}
+
+\renewcommand*\contentsname{hola}
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+    \centering
+    \vspace*{0.3 cm}
+    \includegraphics[scale = 0.50]{ugr.png}\\[0.7 cm]
+    %\textsc{\LARGE Universidad de Granada}\\[2.0 cm]
+    \textsc{\large 4º CSI 2020/21 - Grupo 1}\\[0.5 cm]
+    \textsc{\large Grado en Ingeniería Informática}\\[0.5 cm]
+    \rule{\linewidth}{0.2 mm} \\[0.2 cm]
+    { \huge \bfseries \thetitle}\\
+    \rule{\linewidth}{0.2 mm} \\[1 cm]
+
+    \begin{minipage}{0.4\textwidth}
+        \begin{flushleft} \large
+            \emph{Autor:}\\
+            \theauthor\\
+			 \emph{DNI:}\\
+            77021623-M
+            \end{flushleft}
+            \end{minipage}~
+            \begin{minipage}{0.4\textwidth}
+            \begin{flushright} \large
+            \emph{Asignatura: \\
+            Simulación de Sistemas}   \\
+            \emph{Correo:}\\
+            advy99@correo.ugr.es
+        \end{flushright}
+    \end{minipage}\\[0.5cm]
+
+    {\large \thedate}\\[0.5cm]
+    %{\url{https://github.com/advy99/AA/}}
+    {\doclicenseThis}
+
+    \vfill
+
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section*{Introducción}
+
+
+\begin{table}[H]
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Modificacion} & \textbf{Política} & \textbf{Costo total} & \textbf{Costo de pedido} & \textbf{Costo de mantenimiento} & \textbf{Costo de déficit} \\ \hline
+0                     & (0, 40)           & 146.069              & 87.8906                  & 5.818                           & 52.3599                   \\ \hline
+0                     & (0, 60)           & 135.798              & 84.3302                  & 12.9894                         & 38.4786                   \\ \hline
+0                     & (0, 80)           & 134.081              & 82.3902                  & 21.2874                         & 30.4028                   \\ \hline
+0                     & (0, 100)          & 136.563              & 81.2397                  & 30.1069                         & 25.2168                   \\ \hline
+0                     & (20, 40)          & 124.954              & 97.5676                  & 9.12249                         & 18.2638                   \\ \hline
+0                     & (20, 60)          & 118.946              & 88.5286                  & 17.4971                         & 12.9206                   \\ \hline
+0                     & (20, 80)          & 121.262              & 84.8902                  & 26.875                          & 9.49655                   \\ \hline
+0                     & (20, 100)         & 126.882              & 82.9485                  & 36.4578                         & 7.4752                    \\ \hline
+0                     & (40, 60)          & 125.698              & 98.3373                  & 25.5159                         & 1.84459                   \\ \hline
+0                     & (40, 80)          & 125.475              & 89.1619                  & 34.9504                         & 1.36322                   \\ \hline
+0                     & (40, 100)         & 131.512              & 85.5084                  & 44.9817                         & 1.02162                   \\ \hline
+0                     & (60, 80)          & 143.831              & 98.8766                  & 44.8827                         & 0.0718687                 \\ \hline
+0                     & (60, 100)         & 144.145              & 89.6238                  & 54.4677                         & 0.0530768                 \\ \hline
+\end{tabular}
+\end{table}
+
+La mejor politica con la modificación 0 es la política: (20, 60) con un costo total de 118.946
+
+
+
+
+\begin{table}[H]
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Modificacion} & \textbf{Política} & \textbf{Costo total} & \textbf{Costo de pedido} & \textbf{Costo de mantenimiento} & \textbf{Costo de déficit} \\ \hline
+1                     & (0,40)            & 240.058              & 103.764                  & 0.652275                        & 135.642                   \\ \hline
+1                     & (0,60)            & 239.808              & 103.787                  & 0.652935                        & 135.369                   \\ \hline
+1                     & (0,80)            & 240.01               & 103.794                  & 0.65402                         & 135.562                   \\ \hline
+1                     & (0,100)           & 240.081              & 103.827                  & 0.653425                        & 135.6                     \\ \hline
+1                     & (20,40)           & 154.695              & 104.473                  & 2.59165                         & 47.6308                   \\ \hline
+1                     & (20,60)           & 155.052              & 104.512                  & 2.56332                         & 47.9772                   \\ \hline
+1                     & (20,80)           & 155.005              & 104.528                  & 2.5721                          & 47.9046                   \\ \hline
+1                     & (20,100)          & 154.941              & 104.488                  & 2.57105                         & 47.8816                   \\ \hline
+1                     & (40,60)           & 125.836              & 105.19                   & 13.7428                         & 6.9026                    \\ \hline
+1                     & (40,80)           & 125.856              & 105.206                  & 13.7174                         & 6.9328                    \\ \hline
+1                     & (40,100)          & 125.891              & 105.238                  & 13.7187                         & 6.93503                   \\ \hline
+1                     & (60,80)           & 135.548              & 106                      & 29.0593                         & 0.488747                  \\ \hline
+1                     & (60,100)          & 135.52               & 105.961                  & 29.0749                         & 0.483234                  \\ \hline
+\end{tabular}
+\end{table}
+La mejor politica con la modificación 1 es la política: (40, 60) con un costo total de 125.836
+
+
+
+
+
+\begin{table}[H]
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Modificacion} & \textbf{Política} & \textbf{Costo total} & \textbf{Costo de pedido} & \textbf{Costo de mantenimiento} & \textbf{Costo de déficit} \\ \hline
+2                     & (0,40)            & 125.858              & 92.8172                  & 7.37356                         & 25.6674                   \\ \hline
+2                     & (0,60)            & 119.998              & 87.0855                  & 15.5162                         & 17.3962                   \\ \hline
+2                     & (0,80)            & 121.88               & 84.2024                  & 24.4991                         & 13.179                    \\ \hline
+2                     & (0,100)           & 127.009              & 82.5815                  & 33.8                            & 10.6271                   \\ \hline
+2                     & (20,40)           & 124.725              & 106.047                  & 11.5856                         & 7.09213                   \\ \hline
+2                     & (20,60)           & 117.751              & 93.4749                  & 22.2932                         & 1.98309                   \\ \hline
+2                     & (20,80)           & 121.021              & 87.6426                  & 32.0481                         & 1.32992                   \\ \hline
+2                     & (20,100)          & 127.622              & 84.7731                  & 41.842                          & 1.0068                    \\ \hline
+2                     & (40,60)           & 136.932              & 106.743                  & 29.928                          & 0.261081                  \\ \hline
+2                     & (40,80)           & 135.806              & 94.1011                  & 41.6824                         & 0.0224374                 \\ \hline
+2                     & (40,100)          & 139.864              & 88.2214                  & 51.6284                         & 0.0146204                 \\ \hline
+2                     & (60,80)           & 157.186              & 107.487                  & 49.6953                         & 0.00380315                \\ \hline
+2                     & (60,100)          & 156.27               & 94.6649                  & 61.6051                         & 5.55898e-05               \\ \hline
+\end{tabular}
+\end{table}
+
+La mejor politica con la modificación 2 es la política: (20, 60) con un costo total de 117.751
+
+
+
+
+
+
+
+
+% \begin{thebibliography}{9}
+%
+%
+% \end{thebibliography}
+
+\end{document}
