@@ -123,40 +123,58 @@ void SistemaInventario::suceso(const suc nodo) {
 
 void SistemaInventario::fin_simulacion() {
 	parar = true;
+
+	std::vector<double> informe_ejecucion = { (acum_pedido + acum_mas + acum_menos) / reloj, acum_pedido / reloj, acum_mas / reloj, acum_menos / reloj};
+
+	// si el informe esta vacio, es la primera ejecucion
+	if ( informe.size() == 0) {
+		informe = informe_ejecucion;
+	} else {
+		for ( unsigned i = 0; i < informe.size(); i++ ) {
+			informe[i] += informe_ejecucion[i];
+		}
+	}
+
 }
 
 
-void SistemaInventario::simula(const double t_final, const int nivel_inicial, const int s_p, const int s_g) {
-	nivel = nivel_inicial;
-	pedido = 0;
+void SistemaInventario::simula(const double t_final, const int nivel_inicial, const int s_p, const int s_g, const int n_veces) {
+
 	acum_mas = 0;
 	acum_menos = 0;
 	acum_pedido = 0;
 
-	reloj = 0.0;
-
 	s_pequena = s_p;
 	s_grande = s_g;
 
-	while ( !l_suc.empty() ) {
-		l_suc.pop_front();
+	for ( int i = 0; i < n_veces; i++ ) {
+		nivel = nivel_inicial;
+		pedido = 0;
+
+		reloj = 0.0;
+
+		// vaciamos la lista de sucesos
+		while ( !l_suc.empty() ) {
+			l_suc.pop_front();
+		}
+
+		insertar_lsuc(Suceso::SUCESO_FIN_SIMULACION, reloj + t_final);
+		insertar_lsuc(Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
+		insertar_lsuc(Suceso::SUCESO_DEMANDA, reloj + genera_demanda(0.1));
+
+		parar = false;
+
+		// simulamos
+		while ( !parar ){
+			suc nodo = l_suc.front();
+			l_suc.pop_front();
+
+			reloj = nodo.tiempo;
+
+			suceso(nodo);
+		}
 	}
 
-	suc suceso_fin;
-
-	suceso_fin.suceso = Suceso::SUCESO_FIN_SIMULACION;
-	suceso_fin.tiempo = reloj + t_final;
-
-	parar = false;
-
-	// simulamos
-	while ( !parar ){
-		suc nodo = l_suc.front();
-		l_suc.pop_front();
-
-		reloj = nodo.tiempo;
-
-		suceso(nodo);
-	}
+	genera_informe();
 
 }

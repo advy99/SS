@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <list>
+#include <vector>
 
 enum class Suceso {SUCESO_DEMANDA, SUCESO_EVALUACION_INVENTARIO, SUCESO_LLEGADA_PEDIDO, SUCESO_FIN_SIMULACION};
 
@@ -17,9 +18,9 @@ class SistemaInventario {
 		int pedido;
 		int t_ult_suc;
 
-		int acum_mas;
-		int acum_menos;
-		int acum_pedido;
+		double acum_mas;
+		double acum_menos;
+		double acum_pedido;
 
 		// k
 		int costo_hacer_pedido;
@@ -33,6 +34,9 @@ class SistemaInventario {
 		bool parar;
 
 		std::list<suc> l_suc;
+
+		// matriz para almacenar informe de cada simulación
+		std::vector<double> informe;
 
 		void demanda();
 		void evaluacion();
@@ -52,10 +56,12 @@ class SistemaInventario {
 		double genera_pedido(const double inf, const double sup);
 		void suceso(const suc nodo);
 		void fin_simulacion();
+		void genera_informe();
 
 
 	public:
-		void simula(const double t_final, const int nivel_inicial, const int s_p, const int s_g);
+		void simula(const double t_final, const int nivel_inicial, const int s_p,
+						const int s_g, const int n_veces);
 };
 
 
