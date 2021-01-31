@@ -193,6 +193,7 @@ void SistemaInventario::simula(const double t_final, const int nivel_inicial,
 		pedido = 0;
 
 		reloj = 0.0;
+		t_ult_suc = reloj;
 
 		// vaciamos la lista de sucesos
 		while ( !l_suc.empty() ) {
