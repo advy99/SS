@@ -1,5 +1,7 @@
 #include "sistema_inventario.h"
 #include <cmath>
+#include <iostream>
+
 
 bool compare(const suc & s1, const suc & s2) {
 	return s1.tiempo < s2.tiempo;
@@ -124,6 +126,10 @@ void SistemaInventario::suceso(const suc nodo) {
 void SistemaInventario::fin_simulacion() {
 	parar = true;
 
+	// multiplicamos por H y por PI acum_mas y acum_menos
+	acum_mas *= H;
+	acum_menos *= PI;
+
 	std::vector<double> informe_ejecucion = { (acum_pedido + acum_mas + acum_menos) / reloj, acum_pedido / reloj, acum_mas / reloj, acum_menos / reloj};
 
 	// si el informe esta vacio, es la primera ejecucion
@@ -138,7 +144,38 @@ void SistemaInventario::fin_simulacion() {
 }
 
 
-void SistemaInventario::simula(const double t_final, const int nivel_inicial, const int s_p, const int s_g, const int n_veces) {
+void SistemaInventario::genera_informe(const int num_simul) {
+
+	std::vector<double> informe_media = informe;
+
+	for (unsigned i = 0; i < informe_media.size(); i++) {
+		informe_media[i] /= (double)num_simul;
+	}
+
+	std::cout << "Modificacion " << "\t"
+			 	 << "Política" << "\t"
+				 << "Costo total" << "\t"
+				 << "Costo de pedido" << "\t"
+				 << "Costo de mantenimiento" << "\t"
+				 << "Costo de déficit" << std::endl;
+
+	std::cout << modificacion << "\t"
+				 << "(" << s_pequena << ", " << s_grande << ") \t";
+
+	for (unsigned i = 0; i < informe_media.size(); i++) {
+		informe_media[i] /= (double)num_simul;
+
+		std::cout << informe_media[i] << "\t";
+	}
+
+	std::cout << std::endl;
+
+}
+
+
+void SistemaInventario::simula(const double t_final, const int nivel_inicial,
+	 									 const int s_p, const int s_g, const int n_veces,
+									 	 const int mod) {
 
 	acum_mas = 0;
 	acum_menos = 0;
@@ -146,6 +183,10 @@ void SistemaInventario::simula(const double t_final, const int nivel_inicial, co
 
 	s_pequena = s_p;
 	s_grande = s_g;
+
+	informe.clear();
+
+	modificacion = mod;
 
 	for ( int i = 0; i < n_veces; i++ ) {
 		nivel = nivel_inicial;
@@ -175,6 +216,6 @@ void SistemaInventario::simula(const double t_final, const int nivel_inicial, co
 		}
 	}
 
-	genera_informe();
+	genera_informe(n_veces);
 
 }

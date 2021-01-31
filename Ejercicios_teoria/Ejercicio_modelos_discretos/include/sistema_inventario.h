@@ -1,7 +1,6 @@
 #ifndef SISTEMA_INVENTARIO
 #define SISTEMA_INVENTARIO
 
-#include <iostream>
 #include <list>
 #include <vector>
 
@@ -38,6 +37,11 @@ class SistemaInventario {
 		// matriz para almacenar informe de cada simulación
 		std::vector<double> informe;
 
+		int modificacion;
+
+		const int H = 1;
+		const int PI = 5;
+
 		void demanda();
 		void evaluacion();
 		void llega_pedido();
@@ -56,12 +60,13 @@ class SistemaInventario {
 		double genera_pedido(const double inf, const double sup);
 		void suceso(const suc nodo);
 		void fin_simulacion();
-		void genera_informe();
+		void genera_informe(const int n_veces);
+
 
 
 	public:
 		void simula(const double t_final, const int nivel_inicial, const int s_p,
-						const int s_g, const int n_veces);
+						const int s_g, const int n_veces, const int mod);
 };
 
 
