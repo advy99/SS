@@ -50,20 +50,22 @@ void SistemaInventario::demanda() {
 }
 
 void SistemaInventario::evaluacion() {
-	if ( nivel < s_pequena && pedido == 0 ) {
-
-		if ( modificacion == 0) {
+	if ( modificacion == 0 ){
+		if ( nivel < s_pequena && pedido == 0 ) {
 			pedido = s_grande - nivel;
-		} else if ( modificacion == 1) {
-			// primera mod
-			// pedido = almacenado en demanda
-			pedido = pedido_mes_anterior;
 
+			acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
+			insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
 		}
+	} else if ( modificacion == 1 ) {
+		// primera mod
+		// pedido = almacenado en demanda
+		pedido = pedido_mes_anterior;
 
 		acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
 		insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
 	}
+
 
 	// todos los meses, vaciamos lo pedido en este mes, aunque no se llegue a pedir
 	if ( modificacion == 1){
