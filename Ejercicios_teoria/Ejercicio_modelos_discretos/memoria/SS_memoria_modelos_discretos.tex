@@ -460,16 +460,72 @@ El fichero principal de ejecución simplemente comprobará que la entrada de dat
 
 Tras esto ejecutará para todas las políticas que nos pide el guión el sistema y almacenará la mejor de ellas.
 
-\subsection{Primera modificación}
 
 
+\section{Primera modificación}
 
-\subsubsection{Nuevas variables de interes}
+La primera modificación que nos piden se trata de, en lugar de realizar los pedidos acorde a la política estacionaria, realizar un pedido de tantos elementos como se hayan vendido el mes anterior.
 
-\subsubsection{Modificaciones a los sucesos}
+\subsection{Nuevas variables de interes}
 
-\subsubsection{Grafo de sucesos}
+Para realizar esta modificacion hay que añadir dos variables de interes:
 
+\begin{itemize}
+	\item \texttt{modificacion}: Variable donde almacenaremos si estamos ejecutando el sistema original o una modificacion.
+	\item \texttt{ventas\_mes\_anterior}: Variable donde almacenaremos las ventas de cada mes.
+\end{itemize}
+
+\subsection{Modificaciones a los sucesos}
+
+Para hacer funcionar esta modificación hay que hacer dos modificaciones, la primera en el suceso demanda y la segunda en el suceso evaluación de inventario. En estas modificaciones solo mostraré el código modificado, el resto de código de los sucesos es igual.
+
+\subsubsection{Modificación en el suceso demanda}
+
+Este suceso, además de realizar la misma tarea que en el sistema original se le ha añadido la condicion de que si estamos en la modificación uno, almacene en la variable \texttt{ventas\_mes\_anterior} el tamaño de demanda generado.
+
+\begin{lstlisting}
+if ( modificacion == 1) {
+	ventas_mes_anterior += tam;
+}
+\end{lstlisting}
+
+De esta forma, almacenamos la demanda generada en el mes.
+
+\subsubsection{Modificación en el suceso evaluación de inventario}
+
+En este suceso se han separado la modificación 0 (sistema original) y la modificación 1, de forma que el pedido de items sea lo almacenado en la variable \texttt{ventas\_mes\_anterior}. Además, como es el principio de mes, una vez realizado el pedido (si procede), se establecerá esta variable a cero.
+
+\begin{lstlisting}
+if ( modificacion == 0 ){
+	if ( nivel < s_pequena && pedido == 0 ) {
+		pedido = s_grande - nivel;
+
+		acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
+		insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
+	}
+} else if ( modificacion == 1 ) {
+	// primera mod
+	// pedido = almacenado en demanda
+	pedido = ventas_mes_anterior;
+
+	if ( ventas_mes_anterior != 0){
+		acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
+		insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
+	}
+}
+
+
+// todos los meses, vaciamos lo pedido en este mes, aunque no se llegue a pedir
+if ( modificacion == 1){
+	ventas_mes_anterior = 0;
+}
+\end{lstlisting}
+
+\newpage
+
+\subsection{Grafo de sucesos}
+
+Con estas modificaciones, el grafo de sucesos queda así:
 
 \begin{figure}[H]
   \centering
@@ -477,14 +533,15 @@ Tras esto ejecutará para todas las políticas que nos pide el guión el sistema
 	\caption{Grafo de estados del sistema con la primera modificación.}
 \end{figure}
 
+Como vemos, la diferencia es que para realizar el pedído no se necesita que $I < s$, directamente pedimos la cantidad del mes anterior.
 
-\subsection{Segunda modificación}
+\section{Segunda modificación}
 
-\subsubsection{Nuevas variables de interes}
+\subsection{Nuevas variables de interes}
 
-\subsubsection{Modificaciones a los sucesos}
+\subsection{Modificaciones a los sucesos}
 
-\subsubsection{Grafo de sucesos}
+\subsection{Grafo de sucesos}
 
 \begin{figure}[H]
   \centering
