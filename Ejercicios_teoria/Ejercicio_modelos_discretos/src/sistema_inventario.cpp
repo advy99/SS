@@ -62,8 +62,10 @@ void SistemaInventario::evaluacion() {
 		// pedido = almacenado en demanda
 		pedido = pedido_mes_anterior;
 
-		acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
-		insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
+		if ( pedido_mes_anterior != 0){
+			acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
+			insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
+		}
 	}
 
 
