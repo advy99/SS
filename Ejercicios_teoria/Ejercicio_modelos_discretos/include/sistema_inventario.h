@@ -64,7 +64,7 @@ class SistemaInventario {
 		void suceso(const suc nodo);
 		void fin_simulacion();
 		double genera_informe(const int n_veces);
-
+		void inicializar(const int nivel_ini, const double t_final);
 
 
 	public:

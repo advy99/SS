@@ -206,6 +206,36 @@ double SistemaInventario::genera_informe(const int num_simul) {
 }
 
 
+void SistemaInventario::inicializar(const int nivel_inicial, const double t_final) {
+	nivel = nivel_inicial;
+	pedido = 0;
+
+	reloj = 0.0;
+	t_ult_suc = reloj;
+
+	acum_mas = 0.0;
+	acum_menos = 0.0;
+	acum_pedido = 0.0;
+
+	pedido_mes_anterior = 0;
+	hay_pedido_en_curso = false;
+
+	// vaciamos la lista de sucesos
+	l_suc.clear();
+
+	insertar_lsuc(Suceso::SUCESO_FIN_SIMULACION, reloj + t_final);
+
+	if ( modificacion != 2 ){
+		insertar_lsuc(Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
+	}
+
+	insertar_lsuc(Suceso::SUCESO_DEMANDA, reloj + genera_demanda(0.1));
+
+	parar = false;
+
+}
+
+
 double SistemaInventario::simula(const double t_final, const double nivel_inicial,
 	 									 const int s_p, const int s_g, const int n_veces,
 									 	 const int mod) {
@@ -224,32 +254,8 @@ double SistemaInventario::simula(const double t_final, const double nivel_inicia
 
 
 	for ( int i = 0; i < n_veces; i++ ) {
-		nivel = nivel_inicial;
-		pedido = 0;
 
-		reloj = 0.0;
-		t_ult_suc = reloj;
-
-		acum_mas = 0.0;
-		acum_menos = 0.0;
-		acum_pedido = 0.0;
-
-		pedido_mes_anterior = 0;
-		hay_pedido_en_curso = false;
-
-		// vaciamos la lista de sucesos
-		l_suc.clear();
-
-		insertar_lsuc(Suceso::SUCESO_FIN_SIMULACION, reloj + t_final);
-
-		if ( modificacion != 2 ){
-			insertar_lsuc(Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
-		}
-
-		insertar_lsuc(Suceso::SUCESO_DEMANDA, reloj + genera_demanda(0.1));
-
-		parar = false;
-
+		inicializar(nivel_inicial, t_final);
 		// simulamos
 		while ( !parar ){
 			suc nodo = l_suc.front();
