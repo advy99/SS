@@ -221,7 +221,72 @@ En concreto a nosotros se nos pide trabajar con un sistema donde $I(0) = 60$, es
 
 \section{Planteamiento de la solución al problema}
 
-\subsection{Sistema original}
+De cara a resolver el problema he implementado una clase en C++ llamada \texttt{SistemaInventario} que contendrá todas las variables y métodos necesarios para simular el sistema. De esta forma podremos ampliar y modificar el funcionamiento del sistema con mucha facilidad.
+
+\subsection{Variables de interes}
+
+Como variables de interes entontramos tres tipos:
+
+\begin{enumerate}
+	\item Variables del problema (independientes a la implementación):
+		\begin{itemize}
+			\item \texttt{nivel}: Nivel de inventario.
+			\item \texttt{pedido}: Número de items a pedir en un mes.
+			\item \texttt{costo_hacer_pedido}: Variable K en la descripción del problema.
+			\item \texttt{costo_por_unidad}: Variable i en la descripción del problema.
+			\item \texttt{s_pequena}: Junto a \texttt{s_grande}, política de pedido.
+			\item \texttt{s_grande}: Junto a \texttt{s_pequena}, política de pedido.
+		\end{itemize}
+
+	\item Variables estadísticas (para realizar el informe):
+		\begin{itemize}
+			\item \texttt{acum_mas}: Acumulador del area bajo $I^+(t)$.
+			\item \texttt{acum_menos}: Acumulador del area bajo $I^+(t)$.
+			\item \texttt{acum_pedido}: Acumulador del costo del pedido.
+		\end{itemize}
+
+	\item Variables de la implementación del sistema:
+		\begin{itemize}
+			\item \texttt{reloj}: Contador del reloj sobre el mes actual para realizar los sucesos.
+			\item \texttt{parar}: Booleano que nos dice cuando hemos llegado al fin de la simulación.
+			\item \texttt{informe}: Vector donde almacenaremos las variables estadísticas para generar el informe entre simulaciones.
+			\item \texttt{l_suc}: Lista de sucesos.
+		\end{itemize}
+\end{enumerate}
+
+La lista de sucesos será una lista que siempre tendremos ordenada, y contendrá elementos de la siguiente estructura:
+
+\begin{lstlisting}
+typedef struct {
+	Suceso suceso;
+	double tiempo;
+} suc;
+\end{lstlisting}
+
+En la que almacenaremos el tipo de suceso y el lugar de tiempo donde se dará dicho suceso. Esta lista estará siempre ordenada y los posibles sucesos los he definido de la siguiente forma:
+
+\begin{lstlisting}
+enum class Suceso {SUCESO_DEMANDA, SUCESO_EVALUACION_INVENTARIO, SUCESO_LLEGADA_PEDIDO, SUCESO_FIN_SIMULACION};
+\end{lstlisting}
+
+Estos sucesos representan lo siguiente:
+
+\begin{itemize}
+	\item \texttt{SUCESO\_DEMANDA}: Se produce una demanda de items en el sistema.
+	\item \texttt{SUCESO\_EVALUACION\_INVENTARIO}: Se produce una evaluación del inventario de cara a pedir más items si es necesario.
+	\item \texttt{SUCESO\_LLEGADA\_PEDIDO}: Ha llegado un pedido realizado en la evaluación del inventario.
+	\item \texttt{SUCESO\_FIN\_SIMULACION}: Se ha llegado al final de la simulación.
+\end{itemize}
+
+De esta forma tendremos una función \texttt{insertar_lsuc} para insertar un suceso en la lista de sucesos, a la que se le pasan dos parámetros, el tipo de suceso del enum \texttt{Suceso} y el tiempo donde corresponde dicho suceso. Esta función insertará dicho suceso y ordenará la lista de sucesos de cara a que cada uno se ejecute en su correspondiente orden.
+
+\subsection{Inicialización del sistema}
+
+
+\subsection{Sucesos}
+
+
+\subsection{Grafo de sucesos}
 
 \begin{figure}[H]
   \centering
