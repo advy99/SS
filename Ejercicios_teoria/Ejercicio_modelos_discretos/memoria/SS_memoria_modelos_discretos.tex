@@ -173,8 +173,50 @@ Sistema de inventario.\hspace{0.05cm} }
 
 \section*{Introducción}
 
+Para este ejercicio se nos pide simular el funcionamiento de un sistema de inventario que venderá un único objeto. Para implementar este sismtema utilizaremos un modelo discreto y en este documento explicaré como se ha implementado, así como los sucesos, el grafo de sucesos, las variables de interés y experimentación.
 
 \section{Descripción del problema}
+
+El problema se basa en simular el trabajo de una compañia que vende un único producto y se quiere decidir cuantos items mantener en inventario durante una cierta cantidad de meses.
+
+Los tiempos enter demanda del producto serán variables aleatorias independientes e identicamente distribuidas, exponenciales con media 0.1 por mes, es decir, una demanda cada tres días de media. El tamaño de las demandas es una variable aleatoria con la siguiente distribución:
+
+\begin{itemize}
+	\item $D = 1$ con probabilidad $1/6$
+	\item $D = 2$ con probabilidad $1/3$
+	\item $D = 3$ con probabilidad $1/3$
+	\item $D = 4$ con probabilidad $1/6$
+\end{itemize}
+
+
+Al inicio de cada més la compañia decidirá cuantos objetos pedir, utilizando la siguiente política estacionaria (s, S):
+
+\begin{itemize}
+	\item $Z = S - I$ si $I < s$
+	\item $Z = 0$ si $I \geq s$
+\end{itemize}
+
+Donde I es el nivel de inventario antes de hacer el pedido.
+
+Tras saber cuantos items pedir, el costo será de $K + iZ$, donde $K = 32$ y será el costo de hacer el pedido e $i = 3$ y se trata de el costo por item. Si Z es cero, no se gastará nada.
+
+Cuando se hace el pedido este llegará en un periodo que será una variable aleatoria uniformemente distribuida entre 0.5 y 1 mes.
+
+Además del costo de pedido, existe el costo de mantenimiento y de déficit.
+
+El costo medio de mantenimiento de los items para los n meses es:
+
+\[ h \frac{\int_0^n I^+ (t) dt}{n} \]
+
+Donde $h = 1$ por item y por mes, y $\frac{\int_0^n I^+ (t) dt}{n}$ el numero medio real de items en el inventario. Este coste tiene en cuenta alguileres, seguros, tasas, etc.
+
+El costo medio de déficit para los n meses es:
+
+\[ \pi \frac{\int_0^n I^- (t) dt}{n} \]
+
+Donde $\pi = 5$ por item y por mes, y $\frac{\int_0^n I^- (t) dt}{n}$ el numero medio de items vendidos pero no vendidos. Esto incluye pérdidas de confianza de clientes entre otros.
+
+En concreto a nosotros se nos pide trabajar con un sistema donde $I(0) = 60$, es decir al inicio tendremos 60 items y no habrá ningún pedido en curso. También nos piden que la simulación se haga para 10 años completos, en nuestra unidad de trabajo, 120 meses.
 
 
 \section{Planteamiento de la solución al problema}
