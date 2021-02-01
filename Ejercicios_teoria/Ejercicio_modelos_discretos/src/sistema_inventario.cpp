@@ -35,7 +35,7 @@ void SistemaInventario::demanda() {
 	// primera mod
 	// almaceno el tamaño vendido al mes
 	if ( modificacion == 1) {
-		pedido_mes_anterior += tam;
+		ventas_mes_anterior += tam;
 	} else if ( modificacion == 2) {
 		if ( nivel < s_pequena && !hay_pedido_en_curso ) {
 			pedido = s_grande - nivel;
@@ -60,9 +60,9 @@ void SistemaInventario::evaluacion() {
 	} else if ( modificacion == 1 ) {
 		// primera mod
 		// pedido = almacenado en demanda
-		pedido = pedido_mes_anterior;
+		pedido = ventas_mes_anterior;
 
-		if ( pedido_mes_anterior != 0){
+		if ( ventas_mes_anterior != 0){
 			acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
 			insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
 		}
@@ -71,7 +71,7 @@ void SistemaInventario::evaluacion() {
 
 	// todos los meses, vaciamos lo pedido en este mes, aunque no se llegue a pedir
 	if ( modificacion == 1){
-		pedido_mes_anterior = 0;
+		ventas_mes_anterior = 0;
 	}
 
 	insertar_lsuc( Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
@@ -217,7 +217,7 @@ void SistemaInventario::inicializar(const int nivel_inicial, const double t_fina
 	acum_menos = 0.0;
 	acum_pedido = 0.0;
 
-	pedido_mes_anterior = 0;
+	ventas_mes_anterior = 0;
 	hay_pedido_en_curso = false;
 
 	// vaciamos la lista de sucesos

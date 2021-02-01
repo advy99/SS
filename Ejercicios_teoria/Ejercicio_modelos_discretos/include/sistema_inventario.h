@@ -15,7 +15,7 @@ class SistemaInventario {
 	private:
 		double nivel;
 		int pedido;
-		int pedido_mes_anterior;
+		int ventas_mes_anterior;
 		double t_ult_suc;
 
 		double acum_mas;
