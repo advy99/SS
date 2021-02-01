@@ -232,17 +232,17 @@ Como variables de interes entontramos tres tipos:
 		\begin{itemize}
 			\item \texttt{nivel}: Nivel de inventario.
 			\item \texttt{pedido}: Número de items a pedir en un mes.
-			\item \texttt{costo_hacer_pedido}: Variable K en la descripción del problema.
-			\item \texttt{costo_por_unidad}: Variable i en la descripción del problema.
-			\item \texttt{s_pequena}: Junto a \texttt{s_grande}, política de pedido.
-			\item \texttt{s_grande}: Junto a \texttt{s_pequena}, política de pedido.
+			\item \texttt{costo\_hacer\_pedido}: Variable K en la descripción del problema.
+			\item \texttt{costo\_por\_unidad}: Variable i en la descripción del problema.
+			\item \texttt{s\_pequena}: Junto a \texttt{s\_grande}, política de pedido.
+			\item \texttt{s\_grande}: Junto a \texttt{s\_pequena}, política de pedido.
 		\end{itemize}
 
 	\item Variables estadísticas (para realizar el informe):
 		\begin{itemize}
-			\item \texttt{acum_mas}: Acumulador del area bajo $I^+(t)$.
-			\item \texttt{acum_menos}: Acumulador del area bajo $I^+(t)$.
-			\item \texttt{acum_pedido}: Acumulador del costo del pedido.
+			\item \texttt{acum\_mas}: Acumulador del area bajo $I^+(t)$.
+			\item \texttt{acum\_menos}: Acumulador del area bajo $I^+(t)$.
+			\item \texttt{acum\_pedido}: Acumulador del costo del pedido.
 		\end{itemize}
 
 	\item Variables de la implementación del sistema:
@@ -250,7 +250,7 @@ Como variables de interes entontramos tres tipos:
 			\item \texttt{reloj}: Contador del reloj sobre el mes actual para realizar los sucesos.
 			\item \texttt{parar}: Booleano que nos dice cuando hemos llegado al fin de la simulación.
 			\item \texttt{informe}: Vector donde almacenaremos las variables estadísticas para generar el informe entre simulaciones.
-			\item \texttt{l_suc}: Lista de sucesos.
+			\item \texttt{l\_suc}: Lista de sucesos.
 		\end{itemize}
 \end{enumerate}
 
@@ -278,7 +278,7 @@ Estos sucesos representan lo siguiente:
 	\item \texttt{SUCESO\_FIN\_SIMULACION}: Se ha llegado al final de la simulación.
 \end{itemize}
 
-De esta forma tendremos una función \texttt{insertar_lsuc} para insertar un suceso en la lista de sucesos, a la que se le pasan dos parámetros, el tipo de suceso del enum \texttt{Suceso} y el tiempo donde corresponde dicho suceso. Esta función insertará dicho suceso y ordenará la lista de sucesos de cara a que cada uno se ejecute en su correspondiente orden.
+De esta forma tendremos una función \texttt{insertar\_lsuc} para insertar un suceso en la lista de sucesos, a la que se le pasan dos parámetros, el tipo de suceso del enum \texttt{Suceso} y el tiempo donde corresponde dicho suceso. Esta función insertará dicho suceso y ordenará la lista de sucesos de cara a que cada uno se ejecute en su correspondiente orden.
 
 \subsection{Inicialización del sistema}
 
