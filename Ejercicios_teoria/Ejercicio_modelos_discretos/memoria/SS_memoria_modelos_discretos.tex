@@ -292,6 +292,34 @@ De cara a inicializar las variables cada vez que comencemos una simulación exis
 	\item Suceso evaluación de inventario: Se insertará el suceso \texttt{SUCESO\_EVALUACION\_INVENTARIO} un mes despues del estado actual del reloj, ya que se evaluará el inventario todos los meses. Este suceso insertará cuando corresponda los pedidos.
 \end{itemize}
 
+\begin{lstlisting}
+nivel = nivel_inicial;
+pedido = 0;
+
+reloj = 0.0;
+t_ult_suc = reloj;
+
+acum_mas = 0.0;
+acum_menos = 0.0;
+acum_pedido = 0.0;
+
+ventas_mes_anterior = 0;
+hay_pedido_en_curso = false;
+
+// vaciamos la lista de sucesos
+l_suc.clear();
+
+insertar_lsuc(Suceso::SUCESO_FIN_SIMULACION, reloj + t_final);
+
+if ( modificacion != 2 ){
+	insertar_lsuc(Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
+}
+
+insertar_lsuc(Suceso::SUCESO_DEMANDA, reloj + genera_demanda(0.1));
+
+parar = false;
+\end{lstlisting}
+
 \subsection{Sucesos}
 
 Como he comentado, contaremos con cuatro sucesos, los cuales describiré ahora.
@@ -537,11 +565,63 @@ Como vemos, la diferencia es que para realizar el pedído no se necesita que $I 
 
 \section{Segunda modificación}
 
+La segunda modificación se basa en utulizar una política de gestión del inventario más dinámica, de forma que en lugar de hacer pedidos mensuales, en cualquier momento en el que $I < s$ se hace un pedido de $S - I$ unidades.
+
 \subsection{Nuevas variables de interes}
+
+Para realizar esta modificacion he añadido una variable de interes:
+
+\begin{itemize}
+	\item \texttt{hay\_pedido\_en\_curso}: Booleano que nos dice si hay un pedido en curso actualmente. La utilizaremos para saber cuando hay un pedido en curso y no podemos realizar otro.
+\end{itemize}
+
 
 \subsection{Modificaciones a los sucesos}
 
+Como vemos, esta modificación hace que dejemos de utilizar el suceso de evaluación de inventario, ya que no necesitamos revisar el inventario, en cualquier momento de demanda si es necesario se realiza un pedido. Por lo tanto, las modificaciones son las siguientes.
+
+\subsubsection{Modificación en el método inicializar}
+
+Ahora en este método solo se incluirá el suceso de evaluación de inventario si no estamos en la modificación dos, ya que en esta no es necesario:
+
+\begin{lstlisting}
+if ( modificacion != 2 ){
+	insertar_lsuc(Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
+}
+\end{lstlisting}
+
+\subsubsection{Modificación en el suceso demanda}
+
+En este suceso se añadirá otra comprobación de la modificación, de forma que si estamos en la modificación dos comprobamos el nivel de inventario y si no hay pedido en curso, y si es necesario realizamos el pedido, marcando que hay un nuevo pedido en curso:
+
+
+\begin{lstlisting}
+if ( modificacion == 1) {
+	ventas_mes_anterior += tam;
+} else if ( modificacion == 2) {
+	if ( nivel < s_pequena && !hay_pedido_en_curso ) {
+		pedido = s_grande - nivel;
+		acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
+		insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
+		hay_pedido_en_curso = true;
+	}
+}
+\end{lstlisting}
+
+
+\subsubsection{Modificación en el suceso llegada de pedido}
+
+La modificación de este suceso es simple, cuando lleguemos a este suceso, si estamos en la modificación dos, marcamos que ya no hay un pedido en curso puesto que ha llegado el pedido en curso actual.
+
+\begin{lstlisting}
+if ( modificacion == 2) {
+	hay_pedido_en_curso = false;
+}
+\end{lstlisting}
+
 \subsection{Grafo de sucesos}
+
+Con estas modificaciones el grafo de sucesos sería el siguiente:
 
 \begin{figure}[H]
   \centering
@@ -549,16 +629,15 @@ Como vemos, la diferencia es que para realizar el pedído no se necesita que $I 
 	\caption{Grafo de estados del sistema con la segunda modificación.}
 \end{figure}
 
+Como vemos, se ha eliminado el suceso de evaluación de inventario y es el suceso de demanda quien generará el suceso de llegada de pedido, con las mismas condiciones que antes pero añadiendo la comprobación de que no hay pedido en curso.
 
 
 
 \section{Experimentos}
 
+Una vez tenemos los tres sistemas, se pueden probar ejecutando el script de bash disponible en la carpeta \texttt{scripts} tras compilar el programa con el fichero Makefile de la raíz de la enterga.
 
 \subsection{Sistema original}
-
-
-
 
 
 \begin{table}[H]
@@ -589,11 +668,6 @@ La mejor politica con la modificación 0 es la política: (20, 60) con un costo 
 
 \subsection{Primera modificación}
 
-
-
-
-
-
 \begin{table}[H]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -622,10 +696,6 @@ La mejor politica con la modificación 1 es la política: (40, 60) con un costo 
 
 \subsection{Segunda modificación}
 
-
-
-
-
 \begin{table}[H]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{|c|c|c|c|c|c|}
@@ -651,8 +721,10 @@ La mejor politica con la modificación 1 es la política: (40, 60) con un costo 
 La mejor politica con la modificación 2 es la política: (20, 60) con un costo total de 117.751
 
 
+\subsection{Conclusiones}
 
 
+Como conclusión, vemos como el sistema con la segunda modificación es el mejor de todos, ya que permite una política de pedidos mucho más dinámica, seguido del sistema original, y por último del sistema con la primera modificación. Vemos como el sistema con la primera modificación no es muy recomendable y esto puede deberse a que al basarse en los pedidos del mes anterior no se adapta a la falta de items en el inventario, como si que hace la segunda modificación, aunque el sistema original si que es capaz de encontrar un punto donde no ocurre este problema.
 
 
 
