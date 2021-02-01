@@ -282,11 +282,100 @@ De esta forma tendremos una función \texttt{insertar\_lsuc} para insertar un su
 
 \subsection{Inicialización del sistema}
 
+En una simulación del sistema ejecutaremos tantas simulaciones como nos pasen por parámetro, cada simulación de un tiempo también dado por parámetro. Una simulación (y su respectivo informe) serán siempre de una política concreta de pedidos, por lo que para ir variando la política $(s, S)$ en nuestro fichero de ejecución principal llamaremos multiples veces a la función simula de nuestra clase, de forma que ejecute cada simulación con distintas políticas.
+
+De cara a inicializar las variables cada vez que comencemos una simulación existe el método \texttt{inicializar}. Este método inicializará el nivel de inventario inical, el pedido, reloj, tiempo de último suceso y variables estadísticas a cero, establecerá parar a falso, vaciará la lista de sucesos (por si tiene algo) y añadirá los tres sucesos iniciales a la lista de sucesos:
+
+\begin{itemize}
+	\item Suceso fin de simulación: Se insertará el suceso \texttt{SUCESO\_FIN\_SIMULACION} con un tiempo de reloj actual (cero) más el tiempo que queremos simular en total.
+	\item Suceso demanda: Se insertará el suceso \texttt{SUCESO\_DEMANDA}. Inicialmente se generará una demanda como se ha descrito en la descripción del problema, que generará más demanda de la misma forma cuando acabe dicho suceso.
+	\item Suceso evaluación de inventario: Se insertará el suceso \texttt{SUCESO\_EVALUACION\_INVENTARIO} un mes despues del estado actual del reloj, ya que se evaluará el inventario todos los meses. Este suceso insertará cuando corresponda los pedidos.
+\end{itemize}
 
 \subsection{Sucesos}
 
+Como he comentado, contaremos con cuatro sucesos, los cuales describiré ahora.
+
+\subsubsection{Suceso demanda}
+
+Este suceso será el encargado de generar una demanda y restar la demanda al nivel de inventario actual, insertando también el siguiente suceso de demanda. Además actualizará las viariables estadísticas acorde al nivel de inventario:
+
+\begin{lstlisting}
+if ( nivel > 0 ) {
+	acum_mas += ( reloj - t_ult_suc ) * nivel;
+} else {
+	acum_menos += ( reloj - t_ult_suc ) * ( -nivel );
+}
+
+t_ult_suc = reloj;
+
+int tam = genera_tamano();
+
+nivel -= tam;
+
+insertar_lsuc(Suceso::SUCESO_DEMANDA, reloj + genera_demanda(0.1) );
+\end{lstlisting}
+
+\subsubsection{Suceso evaluación de inventario}
+
+Este suceso comprobará el nivel de inventario acorde a la política de pedidos para, si es necesario, realizar un pedido de inventario. Además introducirá el suceso de evaluación de inventario para el siguiente mes.
+
+\begin{lstlisting}
+if ( nivel < s_pequena && pedido == 0 ) {
+	pedido = s_grande - nivel;
+
+	acum_pedido += costo_hacer_pedido + costo_por_unidad * pedido;
+	insertar_lsuc ( Suceso::SUCESO_LLEGADA_PEDIDO, reloj + genera_pedido(0.5, 1));
+}
+
+insertar_lsuc( Suceso::SUCESO_EVALUACION_INVENTARIO, reloj + 1);
+\end{lstlisting}
+
+\subsubsection{Suceso llegada pedido}
+
+Este suceso sumará al nivel de inventario el pedido realizado, una vez ocurre el suceso. También actualizará las variables estadisticas con respecto al nivel de inventario:
+
+\begin{lstlisting}
+if ( nivel > 0 ) {
+	acum_mas += (reloj - t_ult_suc) * nivel;
+} else {
+	acum_menos += (reloj - t_ult_suc) * (-nivel);
+}
+
+t_ult_suc = reloj;
+nivel += pedido;
+pedido = 0;
+\end{lstlisting}
+
+\subsubsection{Suceso fin de simulación}
+
+Este suceso se ejecutará una única vez en toda la simulación. Será el encargado de avisar al método \texttt{simula} que pare la simulación actual y comience la siguiente. También almacenará las variables estadisticas en el informe, multiplicando el costo de mantenimiento y de déficit por $h$ y $\pi$ respectivamente, dividiendo por el tiempo de simulación y almacenando el resultado en el vector de informe. Este vector de informe lo utilizaremos más adelante una vez ejecutemos todas las simulaciones de una política.
+
+
+\begin{lstlisting}
+parar = true;
+
+// multiplicamos por H y por PI acum_mas y acum_menos
+acum_mas *= H;
+acum_menos *= PI;
+
+std::vector<double> informe_ejecucion = { (acum_pedido + acum_mas + acum_menos) / (reloj * 1.0), acum_pedido / (reloj * 1.0) , acum_mas / (reloj * 1.0) , acum_menos / (reloj * 1.0)};
+
+// si el informe esta vacio, es la primera ejecucion
+if ( informe.size() == 0) {
+	informe = informe_ejecucion;
+} else {
+	for ( unsigned i = 0; i < informe.size(); i++ ) {
+		informe[i] += informe_ejecucion[i];
+	}
+}
+\end{lstlisting}
+
+
 
 \subsection{Grafo de sucesos}
+
+Con todos estos sucesos y condiciones necesarias para que se den dichos sucesos tenemos el siguiente grafo de sucesos:
 
 \begin{figure}[H]
   \centering
@@ -295,7 +384,92 @@ De esta forma tendremos una función \texttt{insertar\_lsuc} para insertar un su
 \end{figure}
 
 
+\subsection{Generación del informe}
+
+Una vez ejecutamos todas las simulaciones de una política, generamos el informe para dicha política. Esto lo hacemos haciendo la media los componenetes almacenados en \texttt{informe} (costo total, de pedido, de mantenimiento y de déficit) con el número de simulaciones ejecutadas y mostramos por pantalla el resultado:
+
+\begin{lstlisting}
+std::vector<double> informe_media = informe;
+
+std::cout << "Modificacion " << "\t"
+			 << "Política" << "\t"
+			 << "Costo total" << "\t"
+			 << "Costo de pedido" << "\t"
+			 << "Costo de mantenimiento" << "\t"
+			 << "Costo de déficit" << std::endl;
+
+std::cout << modificacion << "\t"
+			 << "(" << s_pequena << ", " << s_grande << ") \t";
+
+for (unsigned i = 0; i < informe_media.size(); i++) {
+	informe_media[i] /= (double)num_simul;
+
+	std::cout << informe_media[i] << "\t";
+}
+
+std::cout << std::endl;
+
+return informe_media[0];
+\end{lstlisting}
+
+
+\subsubsection{Método simula}
+
+Con todos estos detalles, el método simula queda de la siguiente forma:
+
+\begin{lstlisting}
+s_pequena = s_p;
+s_grande = s_g;
+
+modificacion = mod;
+
+// k e i sacados del guion, se podría parametrizar
+costo_hacer_pedido = 32.0;
+
+costo_por_unidad = 3.0;
+
+informe.clear();
+
+
+for ( int i = 0; i < n_veces; i++ ) {
+
+	inicializar(nivel_inicial, t_final);
+	// simulamos
+	while ( !parar ){
+		suc nodo = l_suc.front();
+		l_suc.pop_front();
+
+		reloj = nodo.tiempo;
+
+		suceso(nodo);
+	}
+}
+
+double costo_total = genera_informe(n_veces);
+
+return costo_total;
+\end{lstlisting}
+
+Como vemos, inicializa las variables comunes y que no serán modificadas con respecto a las simulaciones, y tras eso realizará \texttt{n\_veces} simulaciones, donde en cada una se inicializa el sistema, y hasta que no paremos (lleguemos al suceso de fin de simulación), ejecutará cada suceso.
+
+Tras realizar todas las simulaciones, se generará el informe, que devolverá el coste total y será devuelto por la función \texttt{simula} para obtener la mejor política en nuestro fichero principal de ejecución.
+
+\subsubsection{Fichero principal de ejecución}
+
+El fichero principal de ejecución simplemente comprobará que la entrada de datos es correcta, y tras esto declarará una variable de la clase \texttt{SistemaInventario} y otra para almacenar la mejor política.
+
+Tras esto ejecutará para todas las políticas que nos pide el guión el sistema y almacenará la mejor de ellas.
+
 \subsection{Primera modificación}
+
+
+
+\subsubsection{Nuevas variables de interes}
+
+\subsubsection{Modificaciones a los sucesos}
+
+\subsubsection{Grafo de sucesos}
+
 
 \begin{figure}[H]
   \centering
@@ -305,6 +479,12 @@ De esta forma tendremos una función \texttt{insertar\_lsuc} para insertar un su
 
 
 \subsection{Segunda modificación}
+
+\subsubsection{Nuevas variables de interes}
+
+\subsubsection{Modificaciones a los sucesos}
+
+\subsubsection{Grafo de sucesos}
 
 \begin{figure}[H]
   \centering
